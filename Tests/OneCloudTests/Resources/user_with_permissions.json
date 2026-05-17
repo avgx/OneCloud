@@ -1,0 +1,9 @@
+{
+  "user": {
+    "userId": 7,
+    "login": "root",
+    "name": "Administrator",
+    "enabled2FA": false
+  },
+  "permission": "eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJjYW5GYWNlIjp0cnVlfQ."
+}

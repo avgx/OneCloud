@@ -1,0 +1,8 @@
+[
+  {
+    "domainId": 42,
+    "domainName": "Lab",
+    "domainType": "vms",
+    "vmsVersion": "2.0.0.1234"
+  }
+]

@@ -1,0 +1,21 @@
+{
+  "domains": [
+    {
+      "domain": {
+        "domainId": 1,
+        "name": "D1",
+        "status": "offline"
+      }
+    }
+  ],
+  "domainGroups": [
+    {
+      "id": 10,
+      "name": "Group A",
+      "path": "/a",
+      "domainsCount": 5,
+      "onlineDomainsCount": 3,
+      "offlineDomainsCount": 2
+    }
+  ]
+}

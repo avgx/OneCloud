@@ -1,0 +1,6 @@
+{
+  "installationType": "cloud",
+  "isLicenseEnable": true,
+  "webclientAutoLogoutTTLMin": 30,
+  "cloudUIAutoLogoutTTLMin": 60
+}

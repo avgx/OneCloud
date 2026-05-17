@@ -1,0 +1,1112 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  description: Provides an API for interaction with AxxonCloud
+  title: AxxonCloud
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+host: "axxonnet.com"
+
+produces:
+  - "application/json"
+consumes:
+  - "application/json"
+
+paths:
+  /api/v1/auth/introspect:
+    post:
+      summary: Introspect JWT
+      description: Performs JWT introspection and validation
+      tags:
+        - AxxonNet
+      operationId: introspectJWT
+      parameters:
+        - in: body
+          name: token
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+            required:
+              - token
+          description: token to introspect
+      responses:
+        200:
+          description: "JWT introspection result"
+          schema:
+            type: object
+            properties:
+              statusCode:
+                type: integer
+              result:
+                type: string
+              resultObject:
+                type: object
+                properties:
+                  active:
+                    type: boolean
+                  UserID:
+                    type: integer
+                    format: int64
+                  UserName:
+                    type: string
+                  DomainID:
+                    type: integer
+                    format: int64
+                  OrganizationID:
+                    type: integer
+                    format: int64
+                  OrganizationName:
+                    type: string
+                  TokenType:
+                    type: string
+                  permissions:
+                    description: "User permissions for GUI objects"
+                    type: object
+                    properties:
+                      canReports:
+                        type: boolean
+                      canViewDashboards:
+                        type: boolean
+                      canCreateDashboards:
+                        type: boolean
+                      canLoadDashboards:
+                        type: boolean
+                      canEditDashboards:
+                        type: boolean
+                      canExportDashboards:
+                        type: boolean
+                      canImportDashboards:
+                        type: boolean
+                      canShareDashboards:
+                        type: boolean
+                      canViewDashboardsInMarketplace:
+                        type: boolean
+                      canEditDashboardsInMarketplace:
+                        type: boolean
+                      canViewMonitoring:
+                        type: boolean
+                      canEditMonitoring:
+                        type: boolean
+                      canViewFullAudit:
+                        type: boolean
+                      canViewRecognitionLog:
+                        type: boolean
+                required:
+                  - active
+            required:
+              - statusCode
+              - result
+        400:
+          $ref: "#/responses/badRequestError"
+        500:
+          $ref: "#/responses/internalServerError"
+
+  /ac/v1/shared/token/{userId}:
+    get:
+      summary: Get shared token
+      description: Get shared token
+      tags:
+        - AxxonNet
+      operationId: getSharedToken
+      parameters:
+        - in: path
+          name: userId
+          type: integer
+          required: true
+          description: user id for token creation
+      responses:
+        200:
+          description: "shared token result"
+          schema:
+            type: object
+            properties:
+              shareToken:
+                type: string
+            required:
+              - shareToken
+        400:
+          $ref: "#/responses/badRequestError"
+        500:
+          $ref: "#/responses/internalServerError"
+
+  /api/v1/domains/{domainId}/user:
+    get:
+      summary: Get id of a user who created domain in AxxonNet
+      description: Returns id of a user who created domain in AxxonNet
+      tags:
+        - AxxonNet
+      operationId: getUserIDByDomainID
+      parameters:
+        - in: path
+          name: domainId
+          type: integer
+          format: int64
+          required: true
+          description: domain id from AxxonNet
+      responses:
+        200:
+          $ref: "#/responses/domainUserResponse"
+        404:
+          $ref: "#/responses/notFoundError"
+        500:
+          $ref: "#/responses/internalServerError"
+
+  /api/v1/faceLists:
+    get:
+      summary: Get user faces lists
+      description: Returns faces lists by user token
+      tags:
+        - AxxonNet
+      operationId: getFacesLists
+      security:
+        - AuthToken: []
+      responses:
+        200:
+          description: "Faces lists result"
+          schema:
+            type: object
+            properties:
+              statusCode:
+                type: integer
+              result:
+                type: string
+              resultObject:
+                type: array
+                items:
+                  $ref: "#/definitions/facesList"
+            required:
+              - statusCode
+              - result
+        401:
+          description: "Request was not authorized"
+        400:
+          $ref: "#/responses/badRequestError"
+        500:
+          $ref: "#/responses/internalServerError"
+
+  /api/v3/ac-backend/lpr/list:
+    get:
+      description: get LPR lists by user
+      operationId: getLPRListsByUser
+      consumes:
+        - application/json
+      tags:
+        - lpr
+      security:
+        - AuthToken: [ ]
+      parameters:
+        - name: page[limit]
+          in: query
+          type: integer
+          maximum: 1000
+        - name: page[offset]
+          in: query
+          type: integer
+      responses:
+        200:
+          description: ok
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/LPRList"
+        400:
+          description: Indicates that error occurred during request validation
+        403:
+          description: Indicates that request was not authorized
+
+  /ac/v1/axxondata/domains:
+    get:
+      summary: get domains linked to user by user id
+      description: Returns all domains (id and name) that are linked to the user by user id
+      tags:
+        - AxxonNet
+      operationId: getDomainsByUserID
+      parameters:
+        - name: userId
+          in: query
+          type: integer
+          required: true
+          description: user id to get domains for
+      responses:
+        200:
+          description: list of domains and groups
+          schema:
+            $ref: "#/definitions/domainsWithGroups"
+        400:
+          $ref: "#/responses/badRequestError"
+        404:
+          $ref: "#/responses/notFoundError"
+        500:
+          $ref: "#/responses/internalServerError"
+    post:
+      summary: get domains linked to user ids
+      description: returns all domains (id and name) that are linked to the user ids
+      tags:
+        - AxxonNet
+      operationId: getDomainsByUserIds
+      parameters:
+        - name: userIds
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              userIds:
+                type: array
+                items:
+                  type: integer
+            required:
+              - userIds
+      responses:
+        200:
+          description: list of domains and groups
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/domainsWithGroupsByUser"
+        400:
+          $ref: "#/responses/badRequestError"
+        404:
+          $ref: "#/responses/notFoundError"
+        500:
+          $ref: "#/responses/internalServerError"
+
+  /ac/v1/axxondata/users:
+    get:
+      tags:
+        - AxxonNet
+      summary: List internal users
+      description: Returns internal user records for back-office integrations. Supports pagination, optional e-mail search, and filtering to online users only.
+      operationId: getUsersInfo
+      parameters:
+        - name: pageLimit
+          in: query
+          description: Maximum number of users to return (defaults to 10).
+          required: false
+          type: integer
+          format: int64
+        - name: pageOffset
+          in: query
+          description: 0-based index of the first record to return (defaults to 0).
+          required: false
+          type: integer
+          format: int64
+        - name: sortBy
+          in: query
+          description: Field name to sort by (e.g. `email`, `lastActivityTime`).
+          required: false
+          type: string
+        - name: orderBy
+          in: query
+          description: Sort order direction.
+          required: false
+          type: string
+          enum: [asc, desc]
+        - name: searchByEmail
+          in: query
+          description: Case-insensitive substring filter applied to user e-mail addresses.
+          required: false
+          type: string
+        - name: onlineOnly
+          in: query
+          description: When true, restricts the result set to users with active sessions.
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: User list retrieved successfully.
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/S2sUserInfoExtended"
+        '400':
+          description: Validation error (missing or invalid query parameter).
+          schema:
+            $ref: "#/responses/badRequestError"
+        '500':
+          description: Unexpected server-side error.
+          schema:
+            $ref: "#/responses/internalServerError"
+
+  /api/v3/ac-backend/domains:
+    get:
+      summary: Get user cloud domains list
+      description: Returns user cloud domains list
+      tags:
+        - AxxonNet
+      operationId: getDomains
+      parameters:
+        - name: page[limit]
+          in: query
+          type: integer
+          required: false
+        - name: type
+          in: query
+          description: comma-separated array of domain types. Empty by default
+          type: array
+          collectionFormat: csv
+          items:
+            type: string
+            enum:
+              - on-site
+              - managed
+              - tunnel
+          required: false
+        - name: excludeDomainInfo
+          in: query
+          type: array
+          description: Fields to exclude from domain info
+          collectionFormat: multi
+          items:
+            type: string
+            enum:
+              - managedFields
+              - securitySyncedStatus
+              - userDomainPermissions
+              - arpInfo
+          required: false
+      security:
+        - AuthToken: []
+      responses:
+        200:
+          description: "Domains list result"
+          schema:
+            type: object
+            properties:
+              domains:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    domain:
+                      $ref: "#/definitions/domain"
+                  required:
+                    - domain
+            required:
+              - statusCode
+              - result
+        401:
+          description: "Request was not authorized"
+        500:
+          $ref: "#/responses/internalServerError"
+
+  /ac/v1/user/{userId}/sites/count:
+    get:
+      summary: Get sites count for all user domains
+      description: Returns sites count list for all user domains
+      tags:
+        - AxxonNet
+      operationId: getDomainsSitesCount
+      parameters:
+        - name: userId
+          in: path
+          type: integer
+          required: true
+      responses:
+        200:
+          description: "Sites count list for all user domains"
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                DomainID:
+                  type: integer
+                SitesCount:
+                  type: integer
+              required:
+                - DomainID
+                - SitesCount
+        400:
+          $ref: "#/responses/badRequestError"
+        404:
+          $ref: "#/responses/notFoundError"
+        500:
+          $ref: "#/responses/internalServerError"
+
+  /ac/v1/domains/{domainId}/containers:
+    get:
+      summary: Get resource containers info by domain id and node name
+      description: Get resource containers info by domain id and node name
+      tags:
+        - AxxonNet
+      operationId: getDomainContainers
+      parameters:
+        - name: domainId
+          in: path
+          type: integer
+          format: int64
+          required: true
+        - name: nodeName
+          in: query
+          type: string
+          required: false
+      responses:
+        200:
+          description: "Resource containers list for domain and node"
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+                vmsNodeName:
+                  type: string
+              required:
+                - id
+                - name
+        400:
+          $ref: "#/responses/badRequestError"
+        500:
+          $ref: "#/responses/internalServerError"
+
+  /ac/v1/lprLists:
+    get:
+      description: get LPR lists by user id
+      operationId: getLPRListsByUserId
+      consumes:
+        - application/json
+      tags:
+        - lpr
+      parameters:
+        - name: userId
+          in: query
+          type: integer
+          required: true
+        - name: page[limit]
+          in: query
+          type: integer
+          maximum: 1000
+        - name: page[offset]
+          in: query
+          type: integer
+      responses:
+        200:
+          description: ok
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/LPRList"
+        400:
+          description: Indicates that error occurred during request validation
+  /ac/v1/faceLists:
+    get:
+      summary: Get user faces lists
+      description: Returns faces lists by user id
+      tags:
+        - AxxonNet
+      operationId: getFacesListsByUserId
+      parameters:
+        - name: userId
+          in: query
+          type: integer
+          required: true
+      responses:
+        200:
+          description: "Faces lists result"
+          schema:
+            type: object
+            properties:
+              statusCode:
+                type: integer
+              result:
+                type: string
+              resultObject:
+                type: array
+                items:
+                  $ref: "#/definitions/facesList"
+            required:
+              - statusCode
+              - result
+        400:
+          $ref: "#/responses/badRequestError"
+        500:
+          $ref: "#/responses/internalServerError"
+  /ac/v1/faces/previews:
+    post:
+      summary: Get preview links of faces by vms id
+      description: Get preview links of faces by vms id
+      tags:
+        - AxxonNet
+      operationId: getFacesPreviews
+      parameters:
+        - in: body
+          name: facePreviewParams
+          schema:
+            type: object
+            $ref: '#/definitions/faceIDList'
+          required: true
+      responses:
+        200:
+          description: "Faces previews"
+          schema:
+            type: object
+            properties:
+              facePreviews:
+                type: array
+                items:
+                  $ref: "#/definitions/facePreview"
+        500:
+          $ref: "#/responses/internalServerError"
+  /ac/v1/lpr/info:
+    post:
+      summary: Get lpr number info by vms id
+      description: Get lpr number info by vms id
+      tags:
+        - AxxonNet
+      operationId: getLprNumberInfo
+      parameters:
+        - in: body
+          name: lprNumberParams
+          schema:
+            type: object
+            $ref: '#/definitions/numberIDList'
+          required: true
+      responses:
+        200:
+          description: "LPR number info"
+          schema:
+            type: object
+            properties:
+              numberInfo:
+                type: array
+                items:
+                  $ref: "#/definitions/numberInfo"
+        500:
+          $ref: "#/responses/internalServerError"
+  /api/v3/ac-backend/domains/{domainId}/cameras:
+    get:
+      summary: Get user domain cameras list
+      description: Returns user cloud domain cameras list
+      tags:
+        - AxxonNet
+      operationId: getDomainCameras
+      parameters:
+        - in: path
+          name: domainId
+          type: integer
+          format: int64
+          required: true
+      security:
+        - AuthToken: []
+      responses:
+        200:
+          description: "Domain cameras list result"
+          schema:
+            type: object
+            properties:
+              domainCameras:
+                type: array
+                items:
+                  $ref: "#/definitions/domainCamera"
+            required:
+              - statusCode
+              - result
+        401:
+          description: "Request was not authorized"
+        500:
+          $ref: "#/responses/internalServerError"
+  /ac/v1/domains/{domainId}/fields:
+    get:
+      summary: Get domains fields
+      description: Returns domain's fields and values
+      tags:
+        - AxxonNet
+      operationId: getDomainFields
+      parameters:
+        - name: domainId
+          in: path
+          type: integer
+          required: true
+      responses:
+        200:
+          $ref: "#/responses/domainFieldsResponse"
+
+  /ac/v1/domains/conn-info:
+    post:
+      summary: Get domains conn info
+      description: Returns domain's conn info
+      tags:
+        - AxxonNet
+      operationId: getDomainConnInfo
+      parameters:
+        - in: body
+          name: domainIds
+          schema:
+            type: object
+            $ref: '#/definitions/domainIds'
+          required: true
+          description: domain ids to get connections for
+      responses:
+        200:
+          $ref: "#/responses/domainConnInfoResponse"
+        400:
+          $ref: "#/responses/badRequestError"
+        404:
+          $ref: "#/responses/notFoundError"
+        500:
+          $ref: "#/responses/internalServerError"
+
+  /ac/v1/users/domains/permissions:
+    get:
+      summary: Get domain permissions by user
+      description: Returns domain permissions by user
+      tags:
+        - AxxonNet
+      operationId: getDomainPermissions
+      parameters:
+        - name: userId
+          in: query
+          type: integer
+          required: true
+      responses:
+        200:
+          $ref: "#/responses/domainPermissionsResponse"
+
+  /ac/v1/uploader/uploadReport:
+    post:
+      summary: Upload file
+      description: Upload file
+      tags:
+        - AxxonNet
+      operationId: uploadFile
+      parameters:
+        - in: query
+          name: fileSize
+          type: integer
+          required: true
+        - in: query
+          name: userId
+          type: string
+          required: true
+        - in: query
+          name: expireTime
+          type: string
+          required: true
+        - in: query
+          name: name
+          type: string
+          required: true
+        - in: body
+          name: file
+          schema:
+            type: string
+            format: binary
+          required: true
+          description: file to upload
+      produces:
+        - "application/json"
+      consumes:
+        - "application/octet-stream"
+      responses:
+        200:
+          $ref: "#/responses/uploadFileResponse"
+        400:
+          $ref: "#/responses/badRequestError"
+        500:
+          $ref: "#/responses/internalServerError"
+
+definitions:
+  faceIDList:
+    description: "Face id list"
+    type: object
+    properties:
+      vmsIDs:
+        type: array
+        items:
+          type: string
+  numberIDList:
+    description: "Number id list"
+    type: object
+    properties:
+      vmsIDs:
+        type: array
+        items:
+          type: string
+  facesList:
+    description: "Faces list"
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      owner_id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      vms_id:
+        type: string
+      description:
+        type: string
+      score:
+        type: number
+        format: double
+
+  LPRList:
+    description: LPR list
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      ownerId:
+        type: integer
+        format: int64
+      name:
+        type: string
+      vmsId:
+        type: string
+      description:
+        type: string
+      score:
+        type: number
+        format: double
+
+  facePreview:
+    description: "Faces previews list"
+    type: object
+    properties:
+      vmsID:
+        type: string
+      previewLink:
+        type: string
+      name:
+        type: string
+      surname:
+        type: string
+      age:
+        type: integer
+      comment:
+        type: string
+      additionalComment:
+        type: string
+      gender:
+        type: string
+      title:
+        type: string
+      department:
+        type: string
+    required:
+      - vmsID
+      - previewLink
+      - name
+      - comment
+  
+  numberInfo:
+    description: "Number info"
+    type: object
+    properties:
+      vmsID:
+        type: string
+      comment:
+        type: string
+    required:
+      - vmsID
+      - comment
+
+  domainBasicData:
+    description: "Domain with basic data"
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      status:
+        type: string
+    required:
+      - id
+      - name
+      - status
+
+  domain:
+    description: "Cloud domain"
+    type: object
+    properties:
+      domainId:
+        type: integer
+        format: int64
+      name:
+        type: string
+      status:
+        type: string
+    required:
+      - domainId
+      - name
+      - status
+  
+  domainsWithGroups:
+    description: "Domains and groups data"
+    type: object
+    properties:
+      domains:
+        type: array
+        items:
+          $ref: "#/definitions/domainBasicData"
+      groups:
+        type: array
+        items:
+          $ref: "#/definitions/group"
+    required:
+      - domains
+      - groups
+
+  domainsWithGroupsByUser:
+    description: "Domains and groups linked to a specific user"
+    type: object
+    properties:
+      userId:
+        type: integer
+        format: int64
+      domains:
+        $ref: "#/definitions/domainsWithGroups"
+    required:
+      - userId
+      - domains
+  
+  group:
+    description: "Group basic data"
+    type: object
+    properties:
+      groupId:
+        type: integer
+        format: int64
+      name:
+        type: string
+    required:
+      - groupId
+      - name
+  domainUser:
+    description: "User who created domain"
+    type: object
+    properties:
+      userId:
+        type: integer
+        format: int64
+    required:
+      - userId
+  domainCamera:
+    description: "Cloud domain camera"
+    type: object
+    properties:
+      deviceDomainId:
+        type: integer
+        x-nullable: true
+      accessPoint:
+        type: string
+      displayId:
+        type: string
+      displayName:
+        type: string
+      groupIds:
+        type: array
+        items:
+          type: string
+    required:
+      - accessPoint
+      - displayId
+      - displayName
+
+  domainIds:
+    description: "Domain IDs list"
+    type: object
+    properties:
+      domainIds:
+        type: array
+        items:
+          type: integer
+          format: int64
+    required:
+      - domainIds
+
+  errorResult:
+    description: "Error result"
+    type: object
+    properties:
+      statusCode:
+        type: integer
+      result:
+        type: string
+  domainField:
+    description: Domain field
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      value:
+        type: object
+  domainPermissions:
+    description: Permissions by domain
+    type: object
+    properties:
+      domainId:
+        type: integer
+      permissions:
+        type: object
+        properties:
+          canApplyLicenseKey:
+            type: boolean
+          canBeDeleted:
+            type: boolean
+          canBindDevice:
+            type: boolean
+          canCreateKeys:
+            type: boolean
+          canDeleteContainers:
+            type: boolean
+          canDeleteDomain:
+            type: boolean
+          canDeleteMediaFiles:
+            type: boolean
+          canDeleteSites:
+            type: boolean
+          canEditContainers:
+            type: boolean
+          canEditSites:
+            type: boolean
+          canManageRoles:
+            type: boolean
+          canRename:
+            type: boolean
+          canSupervisor:
+            type: boolean
+          canUseMediaFiles:
+            type: boolean
+          canUseMiniconf:
+            type: boolean
+          canViewContainers:
+            type: boolean
+          canViewSites:
+            type: boolean
+          canViewWebClient:
+            type: boolean
+          canWebConfigurator:
+            type: boolean
+
+  resultObject:
+    description: "Result object"
+    type: object
+    properties:
+      id:
+        type: integer
+      webServerURL:
+        type: string
+      internalWebServerURL:
+        type: string
+    required:
+      - id
+      - webServerURL
+      - internalWebServerURL
+
+  domainConnInfo:
+    description: "Domain's conn info"
+    type: object
+    properties:
+      result:
+        type: string
+      messageKey:
+        type: string
+      statusCode:
+        type: integer
+      resultObject:
+        type: array
+        items:
+          $ref: "#/definitions/resultObject"
+  
+  fileInfo:
+    description: "Uploaded file info"
+    type: object
+    properties:
+      fileKey:
+        type: string
+      userId:
+        type: integer
+
+  S2sUserInfoExtended:
+    type: object
+    description: "User info"
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: Unique identifier of the user.
+      email:
+        type: string
+        format: email
+        description: User e-mail address.
+      lastActivityTime:
+        type: string
+        format: date-time
+        description: Timestamp of the user’s most recent activity.
+      userGroupNames:
+        type: array
+        description: Human-readable names of groups the user belongs to.
+        items:
+          type: string
+      userSessionIPs:
+        type: array
+        description: IP addresses associated with the user’s active sessions.
+        items:
+          type: string
+      isOnline:
+        type: boolean
+        description: Indicates whether the user currently has at least one active session.
+
+responses:
+  badRequestError:
+    description: "Indicates that error occurred during request validation"
+    schema:
+      $ref: "#/definitions/errorResult"
+  notFoundError:
+    description: "Indicated that object is not found during request processing"
+    schema:
+      $ref: "#/definitions/errorResult"
+  internalServerError:
+    description: "Indicates that server error occurred during request processing"
+    schema:
+      $ref: "#/definitions/errorResult"
+  domainFieldsResponse:
+    description: Domain's fields
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/domainField"
+  domainUserResponse:
+    description: "Domain user info"
+    schema:
+      $ref: "#/definitions/domainUser"
+  domainPermissionsResponse:
+    description: User's permissions by domain
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/domainPermissions"
+  domainConnInfoResponse:
+    description: "Domain's conn info"
+    schema:
+      $ref: "#/definitions/domainConnInfo"
+  uploadFileResponse:
+    description: "Upload file response"
+    schema:
+      $ref: "#/definitions/fileInfo"
+
+securityDefinitions:
+  AuthToken:
+    type: apiKey
+    in: header
+    name: Authorization
+  ShareToken:
+    type: apiKey
+    in: header
+    name: ShareToken

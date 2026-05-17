@@ -1,0 +1,21 @@
+{
+  "domains": [
+    {
+      "domain": {
+        "domainId": 42,
+        "name": "Lab Domain",
+        "status": "online",
+        "createTime": "2024-01-15T10:00:00Z",
+        "isVisible": true,
+        "isService": false
+      },
+      "isSynced": true,
+      "permission": {
+        "canViewCameras": true,
+        "canViewWebClient": true
+      }
+    }
+  ],
+  "totalCount": 1,
+  "countInPage": 1
+}
