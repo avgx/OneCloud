@@ -13,7 +13,7 @@ struct DomainDecodingTests {
     #expect(list.domains[0].domain.isOnline == false)
     #expect(list.domains[0].permission?.canViewWebClient == true)
     #expect(list.domains[0].permission?.canManageFaceList == true)
-    #expect(list.domains[0].domain.licenseType?.value == .zero)
+    #expect(list.domains[0].domain.licenseType?.value == .unknown)
     #expect(list.domains[0].domain.licenseStatus == nil)
     #expect(list.domains[1].domain.licenseStatus?.value == .demoInactive)
     #expect(list.domains[0].domainNodeId == nil)

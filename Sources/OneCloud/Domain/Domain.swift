@@ -12,7 +12,7 @@ public struct Domain: Codable, Equatable, Sendable, Identifiable {
     public let eventLimit: Int64
     public let isService: Bool
     public let isVisible: Bool
-    public let licenseType: SafeEnum<LicenseType>?
+    public let licenseType: SafeEnum<ProductType>?
     public let mmSize: Int64
     public let status: SafeEnum<Status>
     public let type: SafeEnum<DomainType>
@@ -86,11 +86,13 @@ extension Domain {
         case unavailable = "LS_Unavailable"
     }
 
-    /// Wire values from `licenseType` (numeric codes as strings).
-    public enum LicenseType: String, Codable, Hashable, Sendable {
-        case zero = "0"
-        case twelve = "12"
-        case thirteen = "13"
+    /// `ProductType` wire strings (numeric codes in JSON `licenseType`).
+    public enum ProductType: String, Codable, Hashable, Sendable {
+        case unknown = "0"
+        case pro = "10"
+        case start = "11"
+        case free = "12"
+        case enterprise = "13"
     }
 
     /// Domain connectivity (`status`).
