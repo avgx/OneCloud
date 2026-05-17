@@ -1,0 +1,1399 @@
+[
+  {
+    "domainId": 48,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 36,
+          "cameras": 7,
+          "detectors": {
+            "total": 2,
+            "types": [
+              {
+                "amount": 1,
+                "detectorType": "LprDetector_RoadarArchive"
+              },
+              {
+                "amount": 1,
+                "detectorType": "VaFaceDetector"
+              }
+            ]
+          }
+        },
+        "name": "Node-1"
+      }
+    ]
+  },
+  {
+    "domainId": 49,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 87,
+          "cameras": 5,
+          "detectors": {
+            "total": 4,
+            "types": [
+              {
+                "amount": 4,
+                "detectorType": "MotionDetection"
+              }
+            ]
+          }
+        },
+        "name": "Node-2"
+      }
+    ]
+  },
+  {
+    "domainId": 50,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 200,
+          "cameras": 5,
+          "detectors": {
+            "total": 4,
+            "types": [
+              {
+                "amount": 3,
+                "detectorType": "MotionDetection"
+              },
+              {
+                "amount": 1,
+                "detectorType": "CrossOneLine"
+              }
+            ]
+          }
+        },
+        "name": "Node-3"
+      }
+    ]
+  },
+  {
+    "domainId": 51,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 43,
+          "cameras": 5,
+          "detectors": {
+            "total": 1,
+            "types": [
+              {
+                "amount": 1,
+                "detectorType": "MotionDetection"
+              }
+            ]
+          }
+        },
+        "name": "Node-4"
+      }
+    ]
+  },
+  {
+    "domainId": 52,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 296,
+          "cameras": 1,
+          "detectors": {}
+        },
+        "name": "Node-5"
+      }
+    ]
+  },
+  {
+    "domainId": 53,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 1,
+          "cameras": 1,
+          "detectors": {
+            "total": 1,
+            "types": [
+              {
+                "amount": 1,
+                "detectorType": "MotionDetection"
+              }
+            ]
+          }
+        },
+        "name": "Node-6"
+      }
+    ]
+  },
+  {
+    "domainId": 54,
+    "nodes": [
+      {
+        "amount": {
+          "cameras": 1,
+          "detectors": {
+            "total": 1,
+            "types": [
+              {
+                "amount": 1,
+                "detectorType": "SceneDescription"
+              }
+            ]
+          }
+        },
+        "name": "Node-7"
+      }
+    ]
+  },
+  {
+    "domainId": 55,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 11,
+          "cameras": 1,
+          "detectors": {}
+        },
+        "name": "Node-8"
+      }
+    ]
+  },
+  {
+    "domainId": 56,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 298,
+          "cameras": 2,
+          "detectors": {}
+        },
+        "name": "Node-9"
+      }
+    ]
+  },
+  {
+    "domainId": 57,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 117,
+          "cameras": 1,
+          "detectors": {
+            "total": 2,
+            "types": [
+              {
+                "amount": 1,
+                "detectorType": "MoveInZone"
+              },
+              {
+                "amount": 1,
+                "detectorType": "SceneDescription"
+              }
+            ]
+          }
+        },
+        "name": "Node-10"
+      }
+    ]
+  },
+  {
+    "domainId": 58,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 26,
+          "cameras": 1,
+          "detectors": {
+            "total": 3,
+            "types": [
+              {
+                "amount": 2,
+                "detectorType": "SceneDescription"
+              },
+              {
+                "amount": 3,
+                "detectorType": "MotionDetection"
+              },
+              {
+                "amount": 1,
+                "detectorType": "MotionDetection"
+              },
+              {
+                "amount": 1,
+                "detectorType": "MotionDetection"
+              }
+            ]
+          }
+        },
+        "name": "Node-11"
+      }
+    ]
+  },
+  {
+    "domainId": 59,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 169,
+          "cameras": 4,
+          "detectors": {}
+        },
+        "name": "Node-12"
+      }
+    ]
+  },
+  {
+    "domainId": 60,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 50,
+          "cameras": 32,
+          "detectors": {
+            "total": 49,
+            "types": [
+              {
+                "amount": 1,
+                "detectorType": "FireDetector"
+              },
+              {
+                "amount": 3,
+                "detectorType": "RRTrafficAnalyzer"
+              },
+              {
+                "amount": 2,
+                "detectorType": "PrivacyShieldDetector"
+              },
+              {
+                "amount": 4,
+                "detectorType": "MoveInZone"
+              },
+              {
+                "amount": 1,
+                "detectorType": "SitDownDetector"
+              },
+              {
+                "amount": 1,
+                "detectorType": "FightDetector_Roadar"
+              },
+              {
+                "amount": 1,
+                "detectorType": "PeopleCounter"
+              },
+              {
+                "amount": 1,
+                "detectorType": "LprDetector_Roadar"
+              },
+              {
+                "amount": 2,
+                "detectorType": "VaFaceDetector"
+              },
+              {
+                "amount": 1,
+                "detectorType": "VaCrowdDetector"
+              },
+              {
+                "amount": 1,
+                "detectorType": "RecumbentDetector"
+              },
+              {
+                "amount": 1,
+                "detectorType": "SelfMaskSegmentDetector"
+              },
+              {
+                "amount": 1,
+                "detectorType": "BlipDetector"
+              },
+              {
+                "amount": 6,
+                "detectorType": "CrossOneLine"
+              },
+              {
+                "amount": 1,
+                "detectorType": "LotsObjects"
+              },
+              {
+                "amount": 2,
+                "detectorType": "LongInZone"
+              },
+              {
+                "amount": 18,
+                "detectorType": "NeuroTracker"
+              },
+              {
+                "amount": 1,
+                "detectorType": "PoseDetector"
+              },
+              {
+                "amount": 1,
+                "detectorType": "FaceEvasionDetector"
+              }
+            ]
+          }
+        },
+        "name": "Node-13"
+      }
+    ]
+  },
+  {
+    "domainId": 61,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 5,
+          "cameras": 1,
+          "detectors": {
+            "total": 1,
+            "types": [
+              {
+                "amount": 1,
+                "detectorType": "VaFaceDetector"
+              }
+            ]
+          }
+        },
+        "name": "Node-14"
+      }
+    ]
+  },
+  {
+    "domainId": 62,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 2,
+          "cameras": 12,
+          "detectors": {
+            "total": 2,
+            "types": [
+              {
+                "amount": 2,
+                "detectorType": "MotionDetection"
+              }
+            ]
+          }
+        },
+        "name": "Node-15"
+      }
+    ]
+  },
+  {
+    "domainId": 63,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 1,
+          "cameras": 1,
+          "detectors": {}
+        },
+        "name": "Node-16"
+      }
+    ]
+  },
+  {
+    "domainId": 64,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 2,
+          "cameras": 1,
+          "detectors": {}
+        },
+        "name": "Node-17"
+      }
+    ]
+  },
+  {
+    "domainId": 65,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 180,
+          "cameras": 5,
+          "detectors": {}
+        },
+        "name": "Node-18"
+      }
+    ]
+  },
+  {
+    "domainId": 66,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 1,
+          "detectors": {}
+        },
+        "name": "Node-19"
+      }
+    ]
+  },
+  {
+    "domainId": 67,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 1,
+          "cameras": 4,
+          "detectors": {}
+        },
+        "name": "Node-20"
+      }
+    ]
+  },
+  {
+    "domainId": 68,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 1,
+          "cameras": 26,
+          "detectors": {
+            "total": 9,
+            "types": [
+              {
+                "amount": 6,
+                "detectorType": "MotionDetection"
+              },
+              {
+                "amount": 1,
+                "detectorType": "SceneDescription"
+              },
+              {
+                "amount": 1,
+                "detectorType": "LprDetector_Roadar"
+              },
+              {
+                "amount": 1,
+                "detectorType": "TvaFaceDetector"
+              }
+            ]
+          }
+        },
+        "name": "Node-21"
+      }
+    ]
+  },
+  {
+    "domainId": 69,
+    "nodes": [
+      {
+        "amount": {
+          "cameras": 10,
+          "detectors": {}
+        },
+        "name": "Node-22"
+      },
+      {
+        "amount": {
+          "archives": 100,
+          "detectors": {}
+        },
+        "name": "Node-23"
+      }
+    ]
+  },
+  {
+    "domainId": 70,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 1,
+          "cameras": 18,
+          "detectors": {
+            "total": 19,
+            "types": [
+              {
+                "amount": 1,
+                "detectorType": "SceneDescription"
+              },
+              {
+                "amount": 1,
+                "detectorType": "StopInZone"
+              },
+              {
+                "amount": 17,
+                "detectorType": "MotionDetection"
+              }
+            ]
+          }
+        },
+        "name": "Node-24"
+      }
+    ]
+  },
+  {
+    "domainId": 71,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 22,
+          "detectors": {}
+        },
+        "name": "Node-25"
+      }
+    ]
+  },
+  {
+    "domainId": 72,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 10,
+          "cameras": 3,
+          "detectors": {
+            "total": 3,
+            "types": [
+              {
+                "amount": 2,
+                "detectorType": "SceneDescription"
+              },
+              {
+                "amount": 3,
+                "detectorType": "MotionDetection"
+              },
+              {
+                "amount": 1,
+                "detectorType": "MotionDetection"
+              },
+              {
+                "amount": 1,
+                "detectorType": "MotionDetection"
+              }
+            ]
+          }
+        },
+        "name": "Node-26"
+      }
+    ]
+  },
+  {
+    "domainId": 73,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 11,
+          "cameras": 1,
+          "detectors": {}
+        },
+        "name": "Node-27"
+      }
+    ]
+  },
+  {
+    "domainId": 74,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 1,
+          "cameras": 1,
+          "detectors": {
+            "total": 2,
+            "types": [
+              {
+                "amount": 1,
+                "detectorType": "MotionDetection"
+              },
+              {
+                "amount": 1,
+                "detectorType": "LprDetector_Xr"
+              }
+            ]
+          }
+        },
+        "name": "Node-28"
+      }
+    ]
+  },
+  {
+    "domainId": 75,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 10,
+          "cameras": 13,
+          "detectors": {
+            "total": 9,
+            "types": [
+              {
+                "amount": 1,
+                "detectorType": "LprDetector_Roadar"
+              },
+              {
+                "amount": 2,
+                "detectorType": "SceneDescription"
+              },
+              {
+                "amount": 1,
+                "detectorType": "CrossOneLine"
+              },
+              {
+                "amount": 4,
+                "detectorType": "MotionDetection"
+              },
+              {
+                "amount": 1,
+                "detectorType": "TvaFaceDetector"
+              }
+            ]
+          }
+        },
+        "name": "Node-29"
+      },
+      {
+        "amount": {
+          "cameras": 7,
+          "detectors": {}
+        },
+        "name": "Node-30"
+      }
+    ]
+  },
+  {
+    "domainId": 76,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 169,
+          "cameras": 4,
+          "detectors": {}
+        },
+        "name": "Node-31"
+      }
+    ]
+  },
+  {
+    "domainId": 77,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 127,
+          "cameras": 3,
+          "detectors": {
+            "total": 5,
+            "types": [
+              {
+                "amount": 1,
+                "detectorType": "CrossOneLine"
+              },
+              {
+                "amount": 1,
+                "detectorType": "TvaFaceDetector"
+              },
+              {
+                "amount": 1,
+                "detectorType": "SceneDescription"
+              },
+              {
+                "amount": 1,
+                "detectorType": "MoveInZone"
+              },
+              {
+                "amount": 1,
+                "detectorType": "LprDetector_Roadar"
+              }
+            ]
+          }
+        },
+        "name": "Node-32"
+      }
+    ]
+  },
+  {
+    "domainId": 78,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 11,
+          "detectors": {}
+        },
+        "name": "Node-33"
+      }
+    ]
+  },
+  {
+    "domainId": 79,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 243,
+          "cameras": 3,
+          "detectors": {
+            "total": 4,
+            "types": [
+              {
+                "amount": 1,
+                "detectorType": "LprDetector_Vit"
+              },
+              {
+                "amount": 1,
+                "detectorType": "PrivacyShieldDetector"
+              },
+              {
+                "amount": 1,
+                "detectorType": "SceneDescription"
+              },
+              {
+                "amount": 1,
+                "detectorType": "LprDetector_RoadarParking"
+              }
+            ]
+          }
+        },
+        "name": "Node-34"
+      }
+    ]
+  },
+  {
+    "domainId": 80,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 1,
+          "detectors": {}
+        },
+        "name": "Node-35"
+      }
+    ]
+  },
+  {
+    "domainId": 81,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 10,
+          "cameras": 1,
+          "detectors": {
+            "total": 1,
+            "types": [
+              {
+                "amount": 2,
+                "detectorType": "SceneDescription"
+              },
+              {
+                "amount": 3,
+                "detectorType": "MotionDetection"
+              },
+              {
+                "amount": 1,
+                "detectorType": "MotionDetection"
+              },
+              {
+                "amount": 1,
+                "detectorType": "MotionDetection"
+              }
+            ]
+          }
+        },
+        "name": "Node-36"
+      }
+    ]
+  },
+  {
+    "domainId": 82,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 56,
+          "cameras": 4,
+          "detectors": {}
+        },
+        "name": "Node-37"
+      }
+    ]
+  },
+  {
+    "domainId": 83,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 1,
+          "cameras": 1,
+          "detectors": {}
+        },
+        "name": "Node-38"
+      }
+    ]
+  },
+  {
+    "domainId": 84,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 500,
+          "cameras": 1,
+          "detectors": {
+            "total": 1,
+            "types": [
+              {
+                "amount": 1,
+                "detectorType": "MotionDetection"
+              }
+            ]
+          }
+        },
+        "name": "Node-39"
+      }
+    ]
+  },
+  {
+    "domainId": 85,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 11,
+          "cameras": 1,
+          "detectors": {}
+        },
+        "name": "Node-40"
+      }
+    ]
+  },
+  {
+    "domainId": 86,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 2,
+          "cameras": 2,
+          "detectors": {
+            "total": 2,
+            "types": [
+              {
+                "amount": 1,
+                "detectorType": "MotionDetection"
+              },
+              {
+                "amount": 1,
+                "detectorType": "VaFaceDetector"
+              }
+            ]
+          }
+        },
+        "name": "Node-41"
+      }
+    ]
+  },
+  {
+    "domainId": 87,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 97,
+          "cameras": 10,
+          "detectors": {}
+        },
+        "name": "Node-42"
+      }
+    ]
+  },
+  {
+    "domainId": 88,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 56,
+          "cameras": 4,
+          "detectors": {}
+        },
+        "name": "Node-43"
+      }
+    ]
+  },
+  {
+    "domainId": 89,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 169,
+          "cameras": 4,
+          "detectors": {}
+        },
+        "name": "Node-44"
+      }
+    ]
+  },
+  {
+    "domainId": 90,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 10,
+          "cameras": 1,
+          "detectors": {}
+        },
+        "name": "Node-45"
+      }
+    ]
+  },
+  {
+    "domainId": 91,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 11,
+          "detectors": {}
+        },
+        "name": "Node-46"
+      }
+    ]
+  },
+  {
+    "domainId": 92,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 169,
+          "cameras": 4,
+          "detectors": {
+            "total": 4,
+            "types": [
+              {
+                "amount": 4,
+                "detectorType": "MotionDetection"
+              }
+            ]
+          }
+        },
+        "name": "Node-47"
+      }
+    ]
+  },
+  {
+    "domainId": 93,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 3,
+          "cameras": 20,
+          "detectors": {
+            "total": 23,
+            "types": [
+              {
+                "amount": 1,
+                "detectorType": "TvaFaceDetector"
+              },
+              {
+                "amount": 1,
+                "detectorType": "LotsObjects"
+              },
+              {
+                "amount": 1,
+                "detectorType": "SelfMaskSegmentDetector"
+              },
+              {
+                "amount": 1,
+                "detectorType": "CrossOneLine"
+              },
+              {
+                "amount": 1,
+                "detectorType": "NeuroTracker"
+              },
+              {
+                "amount": 1,
+                "detectorType": "MoveInZone"
+              },
+              {
+                "amount": 1,
+                "detectorType": "LprDetector_Roadar"
+              },
+              {
+                "amount": 15,
+                "detectorType": "MotionDetection"
+              },
+              {
+                "amount": 1,
+                "detectorType": "PrivacyShieldDetector"
+              }
+            ]
+          }
+        },
+        "name": "Node-48"
+      }
+    ]
+  },
+  {
+    "domainId": 94,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 5,
+          "cameras": 7,
+          "detectors": {
+            "total": 10,
+            "types": [
+              {
+                "amount": 1,
+                "detectorType": "TvaFaceDetector"
+              },
+              {
+                "amount": 9,
+                "detectorType": "MotionDetection"
+              }
+            ]
+          }
+        },
+        "name": "Node-49"
+      }
+    ]
+  },
+  {
+    "domainId": 95,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 169,
+          "cameras": 4,
+          "detectors": {
+            "total": 4,
+            "types": [
+              {
+                "amount": 4,
+                "detectorType": "MotionDetection"
+              }
+            ]
+          }
+        },
+        "name": "Node-50"
+      }
+    ]
+  },
+  {
+    "domainId": 96,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 3,
+          "cameras": 2,
+          "detectors": {}
+        },
+        "name": "Node-51"
+      }
+    ]
+  },
+  {
+    "domainId": 97,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 127,
+          "cameras": 3,
+          "detectors": {}
+        },
+        "name": "Node-52"
+      }
+    ]
+  },
+  {
+    "domainId": 98,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 2,
+          "cameras": 5,
+          "detectors": {}
+        },
+        "name": "Node-53"
+      }
+    ]
+  },
+  {
+    "domainId": 99,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 4,
+          "cameras": 4,
+          "detectors": {
+            "total": 1,
+            "types": [
+              {
+                "amount": 1,
+                "detectorType": "SignalAudioDetection"
+              }
+            ]
+          }
+        },
+        "name": "Node-54"
+      }
+    ]
+  },
+  {
+    "domainId": 100,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 222,
+          "cameras": 3,
+          "detectors": {
+            "total": 2,
+            "types": [
+              {
+                "amount": 1,
+                "detectorType": "VehicleDetector_Roadar"
+              },
+              {
+                "amount": 1,
+                "detectorType": "NeuroTracker"
+              }
+            ]
+          }
+        },
+        "name": "Node-55"
+      }
+    ]
+  },
+  {
+    "domainId": 101,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 50,
+          "cameras": 2,
+          "detectors": {
+            "total": 2,
+            "types": [
+              {
+                "amount": 1,
+                "detectorType": "TvaFaceDetector"
+              },
+              {
+                "amount": 1,
+                "detectorType": "LprDetector_Roadar"
+              }
+            ]
+          }
+        },
+        "name": "Node-56"
+      }
+    ]
+  },
+  {
+    "domainId": 102,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 21,
+          "cameras": 7,
+          "detectors": {
+            "total": 4,
+            "types": [
+              {
+                "amount": 1,
+                "detectorType": "MoveInZone"
+              },
+              {
+                "amount": 1,
+                "detectorType": "TvaFaceDetector"
+              },
+              {
+                "amount": 1,
+                "detectorType": "SceneDescription"
+              },
+              {
+                "amount": 1,
+                "detectorType": "LprDetector_Roadar"
+              }
+            ]
+          }
+        },
+        "name": "Node-57"
+      }
+    ]
+  },
+  {
+    "domainId": 103,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 6,
+          "cameras": 5,
+          "detectors": {
+            "total": 1,
+            "types": [
+              {
+                "amount": 1,
+                "detectorType": "VaFaceDetector"
+              }
+            ]
+          }
+        },
+        "name": "Node-58"
+      }
+    ]
+  },
+  {
+    "domainId": 104,
+    "nodes": [
+      {
+        "amount": {
+          "cameras": 1,
+          "detectors": {}
+        },
+        "name": "Node-59"
+      }
+    ]
+  },
+  {
+    "domainId": 105,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 1182,
+          "cameras": 4,
+          "detectors": {}
+        },
+        "name": "Node-60"
+      }
+    ]
+  },
+  {
+    "domainId": 106,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 3,
+          "cameras": 1,
+          "detectors": {}
+        },
+        "name": "Node-61"
+      }
+    ]
+  },
+  {
+    "domainId": 107,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 11,
+          "cameras": 1,
+          "detectors": {}
+        },
+        "name": "Node-62"
+      }
+    ]
+  },
+  {
+    "domainId": 108,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 127,
+          "cameras": 3,
+          "detectors": {}
+        },
+        "name": "Node-63"
+      }
+    ]
+  },
+  {
+    "domainId": 109,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 1,
+          "cameras": 1,
+          "detectors": {}
+        },
+        "name": "Node-64"
+      }
+    ]
+  },
+  {
+    "domainId": 110,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 1,
+          "cameras": 1,
+          "detectors": {}
+        },
+        "name": "Node-65"
+      }
+    ]
+  },
+  {
+    "domainId": 111,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 37,
+          "cameras": 2,
+          "detectors": {}
+        },
+        "name": "Node-66"
+      }
+    ]
+  },
+  {
+    "domainId": 112,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 211,
+          "cameras": 4,
+          "detectors": {}
+        },
+        "name": "Node-67"
+      }
+    ]
+  },
+  {
+    "domainId": 113,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 10,
+          "cameras": 1,
+          "detectors": {
+            "total": 1,
+            "types": [
+              {
+                "amount": 1,
+                "detectorType": "LprDetector_Roadar"
+              }
+            ]
+          }
+        },
+        "name": "Node-68"
+      }
+    ]
+  },
+  {
+    "domainId": 114,
+    "nodes": [
+      {
+        "amount": {
+          "cameras": 1,
+          "detectors": {}
+        },
+        "name": "Node-69"
+      }
+    ]
+  },
+  {
+    "domainId": 115,
+    "nodes": [
+      {
+        "amount": {
+          "archives": 30,
+          "cameras": 3,
+          "detectors": {
+            "total": 4,
+            "types": [
+              {
+                "amount": 3,
+                "detectorType": "MotionDetection"
+              },
+              {
+                "amount": 1,
+                "detectorType": "TvaFaceDetector"
+              }
+            ]
+          }
+        },
+        "name": "Node-70"
+      }
+    ]
+  }
+]

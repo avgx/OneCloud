@@ -18,6 +18,14 @@ struct DomainsApiTests {
     #expect(url.query?.contains("page%5Boffset%5D=10") == true || url.absoluteString.contains("page[offset]=10"))
   }
 
+  @Test("list with limit 2 and offset 2 builds page query")
+  func listPagingURL() throws {
+    let url = try builder.url(for: DomainsApi.list(offset: 2, limit: 2))
+    let query = url.query ?? ""
+    #expect(query.contains("page%5Blimit%5D=2") || query.contains("page[limit]=2"))
+    #expect(query.contains("page%5Boffset%5D=2") || query.contains("page[offset]=2"))
+  }
+
   @Test("get builds domain id path")
   func getURL() throws {
     let url = try builder.url(for: DomainsApi.get(domainId: 99))

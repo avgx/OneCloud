@@ -1,0 +1,15 @@
+[
+  {
+    "id": "00000000-0000-0000-0000-000000000001",
+    "title": "Test Dashboard",
+    "description": "",
+    "tags": "data",
+    "lang": "en",
+    "version": 1,
+    "revision": "2023-12-27T14:04:19.494Z",
+    "serviceMode": false,
+    "owner": 2,
+    "widgets": [],
+    "layout": {}
+  }
+]

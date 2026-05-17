@@ -3,44 +3,8 @@
   "domains": [
     {
       "domain": {
-        "createTime": "2023-04-10T11:33:04.304429Z",
-        "domainId": 42,
-        "emailLimit": 100,
-        "eventLimit": 10000,
-        "isService": false,
-        "isVisible": true,
-        "licenseType": "0",
-        "mmSize": 1073741824,
-        "name": "D1",
-        "status": "offline",
-        "type": "vms/on-site",
-        "userId": 7
-      },
-      "isSynced": true,
-      "permission": {
-        "canBeDeleted": true,
-        "canBindFaceListToDomainNode": true,
-        "canBindLPRListToDomainNode": true,
-        "canDeleteMediaFiles": true,
-        "canManageChildDomainNodes": true,
-        "canManageFaceList": true,
-        "canManageLPRList": true,
-        "canManagePolicies": true,
-        "canManageRoles": true,
-        "canRename": true,
-        "canSupervisor": true,
-        "canUseMediaFiles": true,
-        "canUseMiniconf": true,
-        "canViewFaceList": true,
-        "canViewLPRList": true,
-        "canViewVmsRoleNames": true,
-        "canViewWebClient": true
-      }
-    },
-    {
-      "domain": {
-        "createTime": "2023-05-12T14:03:59.186035Z",
-        "domainId": 43,
+        "createTime": "2023-11-21T11:19:56.189744Z",
+        "domainId": 44,
         "emailLimit": 100,
         "eventLimit": 10000,
         "isService": false,
@@ -48,7 +12,35 @@
         "licenseStatus": "LS_DemoInactive",
         "licenseType": "0",
         "mmSize": 1073741824,
-        "name": "D2",
+        "name": "D9",
+        "status": "offline",
+        "type": "vms/on-site",
+        "userId": 8
+      },
+      "isSynced": true,
+      "permission": {
+        "canBindFaceListToDomainNode": true,
+        "canBindLPRListToDomainNode": true,
+        "canManageFaceList": true,
+        "canManageLPRList": true,
+        "canUseMediaFiles": true,
+        "canViewFaceList": true,
+        "canViewLPRList": true,
+        "canViewWebClient": true
+      }
+    },
+    {
+      "domain": {
+        "createTime": "2023-12-25T23:08:03.197625Z",
+        "domainId": 45,
+        "emailLimit": 100,
+        "eventLimit": 10000,
+        "isService": false,
+        "isVisible": true,
+        "licenseStatus": "LS_OK",
+        "licenseType": "12",
+        "mmSize": 1073741824,
+        "name": "D10",
         "status": "offline",
         "type": "vms/on-site",
         "userId": 7

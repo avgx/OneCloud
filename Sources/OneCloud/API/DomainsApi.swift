@@ -71,9 +71,4 @@ public enum DomainsApi {
     public static func update(domainId: Int64, body: UpdateDomainBody) -> Request<Domain> {
         Request(path: "domains/\(domainId)", method: .patch, body: body)
     }
-
-    /// DELETE /domains/{domainId}
-    public static func delete(domainId: Int64) -> Request<OK> {
-        Request(path: "domains/\(domainId)", method: .delete)
-    }
 }

@@ -19,6 +19,8 @@ public struct Permission: Codable, Equatable, Sendable {
     public let canApplyLicenseKey: Bool?
     public let canViewFaceList: Bool?
     public let canViewLPRList: Bool?
+    public let canManageFaceList: Bool?
+    public let canManageLPRList: Bool?
     public let canBindFaceListToDomainNode: Bool?
     public let canBindLPRListToDomainNode: Bool?
     public let canViewPolicies: Bool?
@@ -54,6 +56,8 @@ public struct Permission: Codable, Equatable, Sendable {
         case canApplyLicenseKey
         case canViewFaceList
         case canViewLPRList
+        case canManageFaceList
+        case canManageLPRList
         case canBindFaceListToDomainNode
         case canBindLPRListToDomainNode
         case canViewPolicies

@@ -1,38 +1,40 @@
 import Foundation
+import SafeEnum
 
 /// Domain object nested in `presentDomain` (`domain` schema).
 public struct Domain: Codable, Equatable, Sendable, Identifiable {
     public var id: Int64 { domainId }
 
     public let domainId: Int64
-    public let name: String?
+    public let name: String
+    public let createTime: String
+    public let emailLimit: Int64
+    public let eventLimit: Int64
+    public let isService: Bool
+    public let isVisible: Bool
+    public let licenseType: SafeEnum<LicenseType>?
+    public let mmSize: Int64
+    public let status: SafeEnum<Status>
+    public let type: SafeEnum<DomainType>
+    public let userId: Int64
+
     public let description: String?
     public let region: String?
-    public let status: String?
-    public let type: String?
     public let clusterName: String?
-    public let createTime: String?
     public let publicURL: String?
     public let publicArpURL: String?
     public let webClientURL: String?
     public let webConfiguratorURL: String?
     public let additionalWebClientURL: String?
     public let additionalWebConfiguratorURL: String?
-    public let licenseStatus: String?
-    public let licenseType: String?
-    public let isVisible: Bool?
-    public let isService: Bool?
-    public let userId: Int64?
+    public let licenseStatus: SafeEnum<LicenseStatus>?
     public let archivePath: String?
     public let backupsMaxCount: Int64?
     public let cloudAuthority: String?
     public let cloudConnKey: String?
     public let connServerName: String?
-    public let emailLimit: Int64?
-    public let eventLimit: Int64?
     public let failoverURL: String?
     public let isArchiveEncryptionPasswordSet: Bool?
-    public let mmSize: Int64?
     public let saleSystemId: String?
 
     private enum CodingKeys: String, CodingKey {
@@ -70,7 +72,41 @@ public struct Domain: Codable, Equatable, Sendable, Identifiable {
 }
 
 extension Domain {
+    /// `LicenseServiceStatus` wire strings (`LS_*`).
+    public enum LicenseStatus: String, Codable, Hashable, Sendable {
+        case unknown = "LS_Unknown"
+        case ok = "LS_OK"
+        case noKey = "LS_NoKey"
+        case invalidKey = "LS_InvalidKey"
+        case mismatchingKey = "LS_MismatchingKey"
+        case expired = "LS_Expired"
+        case demoInactive = "LS_DemoInactive"
+        case demoExpired = "LS_DemoExpired"
+        case demoActive = "LS_DemoActive"
+        case unavailable = "LS_Unavailable"
+    }
+
+    /// Wire values from `licenseType` (numeric codes as strings).
+    public enum LicenseType: String, Codable, Hashable, Sendable {
+        case zero = "0"
+        case twelve = "12"
+        case thirteen = "13"
+    }
+
+    /// Domain connectivity (`status`).
+    public enum Status: String, Codable, Hashable, Sendable {
+        case online
+        case offline
+    }
+
+    /// Domain product type (`type`).
+    public enum DomainType: String, Codable, Hashable, Sendable {
+        case vmsOnSite = "vms/on-site"
+        case vmsManaged = "vms/managed"
+        case vmsIntellect = "vms/intellect"
+    }
+
     public var isOnline: Bool {
-        status?.lowercased() == "online"
+        status.value == .online
     }
 }

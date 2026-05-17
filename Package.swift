@@ -16,11 +16,16 @@ let package = Package(
             name: "OneCloud",
             targets: ["OneCloud"]
         ),
+        .library(
+            name: "OneCloudData",
+            targets: ["OneCloudData"]
+        ),
     ],
     dependencies: [
         .package(url: "https://github.com/avgx/RequestResponse", from: "2.0.0"),
         .package(url: "https://github.com/avgx/SafeEnum", from: "1.0.0"),
         .package(url: "https://github.com/avgx/EncodeDecode", from: "1.0.2"),
+        .package(url: "https://github.com/auth0/JWTDecode.swift", from: "4.0.0"),
     ],
     targets: [
         .target(
@@ -28,6 +33,13 @@ let package = Package(
             dependencies: [
                 .product(name: "RequestResponse", package: "RequestResponse"),
                 .product(name: "SafeEnum", package: "SafeEnum"),
+                .product(name: "JWTDecode", package: "JWTDecode.swift"),
+            ]
+        ),
+        .target(
+            name: "OneCloudData",
+            dependencies: [
+                .product(name: "RequestResponse", package: "RequestResponse"),
             ]
         ),
         .testTarget(
@@ -36,6 +48,13 @@ let package = Package(
                 "OneCloud",
                 .product(name: "EncodeDecode", package: "EncodeDecode"),
             ],
+            resources: [
+                .process("Resources"),
+            ]
+        ),
+        .testTarget(
+            name: "OneCloudDataTests",
+            dependencies: ["OneCloudData"],
             resources: [
                 .process("Resources"),
             ]

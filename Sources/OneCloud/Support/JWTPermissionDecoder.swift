@@ -1,28 +1,26 @@
 import Foundation
+import JWTDecode
 
 enum JWTPermissionDecoder {
     static func decodePermissionStorage(from jwt: String) throws -> UserPermissionStorage {
-        let segments = jwt.split(separator: ".")
-        guard segments.count >= 2 else {
-            throw DecodingError.dataCorrupted(
-                DecodingError.Context(codingPath: [], debugDescription: "Invalid JWT format")
-            )
+        let decoded = try decode(jwt: jwt)
+        var storage = UserPermissionStorage()
+        for (key, value) in decoded.body {
+            if let bool = value as? Bool {
+                storage[key] = bool
+            }
         }
+        return storage
+    }
 
-        var base64 = String(segments[1])
-            .replacingOccurrences(of: "-", with: "+")
-            .replacingOccurrences(of: "_", with: "/")
-        let padding = (4 - base64.count % 4) % 4
-        if padding > 0 {
-            base64 += String(repeating: "=", count: padding)
+    static func userId(from jwt: String) -> Int64? {
+        guard let decoded = try? decode(jwt: jwt) else { return nil }
+        if let int = decoded["UserID"].integer {
+            return Int64(int)
         }
-
-        guard let data = Data(base64Encoded: base64) else {
-            throw DecodingError.dataCorrupted(
-                DecodingError.Context(codingPath: [], debugDescription: "Invalid JWT payload encoding")
-            )
+        if let double = decoded["UserID"].double {
+            return Int64(double)
         }
-
-        return try JSONDecoder().decode(UserPermissionStorage.self, from: data)
+        return nil
     }
 }

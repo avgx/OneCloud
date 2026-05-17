@@ -1,8 +1,10 @@
 [
   {
-    "key": "550e8400-e29b-41d4-a716-446655440000",
-    "name": "Stream 1",
-    "rtmpLink": "rtmp://example/live",
-    "rtspLink": "rtsp://example/live"
+    "key": "0D3D4DB4-4BFF-4177-8D97-7A1524D4A8FF",
+    "name": "test",
+    "rtmpLink": "rtmp://example.com/live/stream",
+    "rtmpsLink": "rtmps://example.com/live/stream",
+    "rtspLink": "rtsp://example.com/live/stream",
+    "rtspsLink": "rtsps://example.com/live/stream"
   }
 ]

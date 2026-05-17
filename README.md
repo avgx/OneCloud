@@ -12,14 +12,22 @@ The package does **not** use OpenAPI code generation. Models are maintained as S
 | Package | Role in OneCloud |
 | --- | --- |
 | [RequestResponse](https://github.com/avgx/RequestResponse) | `*Api` enums return `Request<Response>`; paths are relative to a `RequestBuilder` base URL |
-| [SafeEnum](https://github.com/avgx/SafeEnum) | Reserved for open-ended wire enums when fixtures show unknown values |
-| [EncodeDecode](https://github.com/avgx/EncodeDecode) | **Tests only** — optional helpers for raw captures |
+| [SafeEnum](https://github.com/avgx/SafeEnum) | `licenseStatus`, `licenseType`, `status`, `type` on `Domain` |
+| [EncodeDecode](https://github.com/avgx/EncodeDecode) | **Tests only** — optional helpers |
+| [JWTDecode.swift](https://github.com/auth0/JWTDecode.swift) | Decode JWT `permission` claim in `UserWithPermissions` |
 
 [`axxoncloud.swagger.yml`](axxoncloud.swagger.yml) documents legacy `/api/v1` and `/ac/v1` endpoints; they are **not** implemented in this package.
 
-## What is included (iteration 1)
+## Products
 
-### API surface
+| Library | Base URL | Import |
+| --- | --- | --- |
+| **OneCloud** | `/api/v3/ac-backend` | `import OneCloud` |
+| **OneCloudData** | `/api/v1/ad-backend` | `import OneCloudData` |
+
+## What is included
+
+### API surface (OneCloud)
 
 Base URL for ac-backend builders: `https://{host}/api/v3/ac-backend`
 
@@ -32,14 +40,9 @@ Base URL for ac-backend builders: `https://{host}/api/v3/ac-backend`
 | `DomainsApi.regions` | GET | `/domains/regions` | `DomainRegions` |
 | `DomainsApi.webClientURL` | GET | `/public/domains/{domainId}/webclienturl` | `PublicWebClientURL` |
 | `DomainsApi.update` | PATCH | `/domains/{domainId}` | `Domain` |
-| `DomainsApi.delete` | DELETE | `/domains/{domainId}` | `OK` |
 | `DescriptionApi.about` | GET | `/about` | `OK` |
 | `DescriptionApi.settings` | GET | `/settings` | `Settings` |
 | `DiagnosticsApi.summary` | GET | `/diagnostics/summary` | `[DomainObjectsAmount]` |
-| `DomainLicensesApi.list` | GET | `/domain-licenses` | `UserLicenseKeysWithCameraStats` |
-| `DomainLicensesApi.upload` | POST | `/domain-licenses` | `OK` |
-| `DomainLicensesApi.delete` | DELETE | `/domain-licenses` | `OK` |
-| `LicensesApi.listFeatures` | GET | `/licenses` | `[LicenseFeaturesResp]` |
 | `StreamingApi.list` | GET | `/streaming` | `[StreamingInfo]` |
 | `StreamingApi.create` | POST | `/streaming` | `StreamingInfo` |
 | `StreamingApi.get` | GET | `/streaming/keys/{key}` | `StreamingInfo` |
@@ -47,12 +50,12 @@ Base URL for ac-backend builders: `https://{host}/api/v3/ac-backend`
 | `StreamingApi.delete` | DELETE | `/streaming/keys/{key}` | `OK` |
 | `UsersApi.get` | GET | `/users/{userId}` | `UserWithPermissions` |
 
-**Axxon Data backend** — separate base URL: `https://{host}/api/v1/ad-backend`
+**Axxon Data backend** — library **`OneCloudData`**, base URL: `https://{host}/api/v1/ad-backend`
 
 | API | Method | HTTP | Response |
 | --- | --- | --- | --- |
-| `AdBackendApi.dashboards` | GET | `/users/my/dashboards` | `[Dashboard]` |
-| `AdBackendApi.shareToken` | GET | `/user/share/token` | `ShareToken` |
+| `BackendApi.dashboards` | GET | `/users/my/dashboards` | `[Dashboard]` |
+| `BackendApi.shareToken` | GET | `/user/share/token` | `ShareToken` |
 
 ### Models
 
@@ -60,7 +63,8 @@ Base URL for ac-backend builders: `https://{host}/api/v3/ac-backend`
 - **`DomainsListWithGroups`**, **`DomainGroup`**, **`DomainRegions`**, **`DomainVMSVersion`** — tree, regions, VMS versions.
 - **`UserWithPermissions`** — JWT `permission` string decoded to `[String: Bool]`; use `UserGlobalPermission` for known keys.
 - **`Permission`** — per-domain CRUD flags (distinct from global JWT permissions).
-- **`StreamingInfo`**, **`Settings`**, license and diagnostics types, **`OK`**, **`APIError`**.
+- **`StreamingInfo`**, **`Settings`**, diagnostics types, **`OK`**, **`APIError`**.
+- **`Domain.LicenseStatus`**, **`Domain.DomainType`**, … — wire enums on `Domain` via `SafeEnum`.
 
 ## Usage
 
@@ -81,14 +85,16 @@ let (data, _) = try await URLSession.shared.data(for: urlRequest)
 let page = try decoder.decode(DomainResponse.self, from: data)
 ```
 
-For ad-backend:
+For ad-backend (`OneCloudData`):
 
 ```swift
+import OneCloudData
+
 let adBuilder = RequestBuilder.json(
     baseURL: URL(string: "https://axxoncloud.example/api/v1/ad-backend")!,
     encoder: encoder
 )
-let dashboardsRequest = AdBackendApi.dashboards()
+let dashboardsRequest = BackendApi.dashboards()
 ```
 
 ## Module layout
@@ -100,18 +106,20 @@ Sources/OneCloud/
 ├── Permission/    Permission (per-domain)
 ├── User/          UserWithPermissions, User, UserGlobalPermission
 ├── Streaming/     StreamingInfo
-├── Dashboard/     Dashboard, ShareToken
-├── License/       LicenseFeaturesResp, UserLicenseKeysWithCameraStats, …
 ├── Diagnostics/   DomainObjectsAmount, …
 ├── Common/        OK, APIError, Settings, …
-└── Support/       JWTPermissionDecoder
+└── Support/       JWTPermissionDecoder (uses JWTDecode)
+
+Sources/OneCloudData/
+├── API/           BackendApi
+└── Dashboard/     Dashboard, ShareToken
 ```
 
-Tests mirror folders under `Tests/OneCloudTests/Decoding/` with JSON fixtures in `Tests/OneCloudTests/Resources/`.
+Tests mirror folders under `Tests/OneCloudTests/Decoding/` and `Tests/OneCloudDataTests/Decoding/` with anonymized JSON fixtures in each target’s `Resources/` (captured from beta/prod GET responses).
 
 ## Optional fields
 
-Swagger is Go-oriented (`x-omitempty`, sparse `required`). Prefer **capturing real JSON** from your cloud instance and tightening optionality over time (same workflow as [OneDomain](https://github.com/avgx/OneDomain)).
+Models follow **real wire JSON** in test fixtures, not only swagger `required`.
 
 ## Tests
 

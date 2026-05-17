@@ -1,0 +1,32 @@
+{
+  "domain": {
+    "createTime": "2025-01-31T06:36:00.363027Z",
+    "domainId": 99,
+    "emailLimit": 100,
+    "eventLimit": 10000,
+    "isService": false,
+    "isVisible": true,
+    "mmSize": 1073741824,
+    "name": "psim",
+    "status": "offline",
+    "type": "vms/intellect",
+    "userId": 7
+  },
+  "isSynced": false,
+  "permission": {
+    "canBeDeleted": true,
+    "canBindFaceListToDomainNode": true,
+    "canBindLPRListToDomainNode": true,
+    "canManageChildDomainNodes": true,
+    "canManagePolicies": true,
+    "canManageRoles": true,
+    "canRename": true,
+    "canSupervisor": true,
+    "canUseMiniconf": true,
+    "canViewFaceList": true,
+    "canViewLPRList": true,
+    "canViewVmsRoleNames": true,
+    "canViewWebClient": true,
+    "canWebConfigurator": true
+  }
+}

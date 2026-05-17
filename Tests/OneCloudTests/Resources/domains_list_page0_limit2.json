@@ -11,7 +11,7 @@
         "isVisible": true,
         "licenseType": "0",
         "mmSize": 1073741824,
-        "name": "D1",
+        "name": "D7",
         "status": "offline",
         "type": "vms/on-site",
         "userId": 7
@@ -48,7 +48,7 @@
         "licenseStatus": "LS_DemoInactive",
         "licenseType": "0",
         "mmSize": 1073741824,
-        "name": "D2",
+        "name": "D8",
         "status": "offline",
         "type": "vms/on-site",
         "userId": 7

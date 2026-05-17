@@ -1,6 +1,6 @@
 {
+  "cloudUIAutoLogoutTTLMin": 4320,
   "installationType": "cloud",
-  "isLicenseEnable": true,
-  "webclientAutoLogoutTTLMin": 30,
-  "cloudUIAutoLogoutTTLMin": 60
+  "platformCalculatorURL": "https://example.com",
+  "webclientAutoLogoutTTLMin": 4320
 }

@@ -8,7 +8,14 @@ struct CommonDecodingTests {
   func settings() throws {
     let settings = try FixtureLoader.decode(Settings.self, resource: "settings")
     #expect(settings.installationType == "cloud")
-    #expect(settings.isLicenseEnable == true)
+    #expect(settings.cloudUIAutoLogoutTTLMin == 4320)
+    #expect(settings.platformCalculatorURL == "https://example.com")
+  }
+
+  @Test("decode about from fixture")
+  func about() throws {
+    let about = try FixtureLoader.decode(OK.self, resource: "about")
+    #expect(about.description != nil)
   }
 
   @Test("decode OK inline")

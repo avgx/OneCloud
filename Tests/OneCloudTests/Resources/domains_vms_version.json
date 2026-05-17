@@ -1,8 +1,44 @@
 [
   {
+    "domainId": 44,
+    "domainIsVisible": true,
+    "domainName": "AvgxNUCd",
+    "domainType": "vms/on-site",
+    "vmsVersion": "2.0.0.180"
+  },
+  {
+    "domainId": 45,
+    "domainIsVisible": true,
+    "domainName": "AvgxNUCd2",
+    "domainType": "vms/on-site",
+    "vmsVersion": "4.6.3.11338"
+  },
+  {
+    "domainId": 46,
+    "domainIsVisible": true,
+    "domainName": "AvgxNUCd3",
+    "domainType": "vms/on-site",
+    "vmsVersion": "2.0.0.188"
+  },
+  {
+    "domainId": 47,
+    "domainIsVisible": true,
+    "domainName": "Default",
+    "domainType": "vms/on-site",
+    "vmsVersion": "2.0.4.156"
+  },
+  {
     "domainId": 42,
-    "domainName": "Lab",
-    "domainType": "vms",
-    "vmsVersion": "2.0.0.1234"
+    "domainIsVisible": true,
+    "domainName": "Default-s540",
+    "domainType": "vms/on-site",
+    "vmsVersion": "1.9.0.37"
+  },
+  {
+    "domainId": 43,
+    "domainIsVisible": true,
+    "domainName": "Tanya-TAG1622",
+    "domainType": "vms/on-site",
+    "vmsVersion": "4.6.2.1007"
   }
 ]

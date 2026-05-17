@@ -1,9 +1,72 @@
 {
+  "domainManagedFields": [
+    {
+      "enumValues": [
+        "Basic",
+        "Standard",
+        "Advanced"
+      ],
+      "id": 1,
+      "name": "analytic",
+      "required": false,
+      "type": "string"
+    },
+    {
+      "id": 2,
+      "name": "contacts",
+      "required": false,
+      "type": "string"
+    },
+    {
+      "id": 3,
+      "name": "description",
+      "required": false,
+      "type": "string"
+    },
+    {
+      "id": 4,
+      "name": "expirationDate",
+      "required": false,
+      "type": "dateTime"
+    },
+    {
+      "id": 5,
+      "name": "name",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "id": 6,
+      "name": "maxCamerasCount",
+      "required": false,
+      "type": "integer"
+    },
+    {
+      "enumValues": [
+        "7",
+        "14",
+        "28"
+      ],
+      "id": 7,
+      "name": "storageDepth",
+      "required": false,
+      "type": "integer"
+    }
+  ],
+  "permission": "eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJjYW5GYWNlIjogdHJ1ZSwgImNhbkxQUiI6IGZhbHNlfQ.",
+  "twoFactorAuthType": "email",
   "user": {
+    "createdTime": "0001-01-01T00:00:00Z",
+    "email": "user@example.com",
+    "enabled2FA": false,
+    "locale": "en",
+    "login": "user@example.com",
+    "name": "Test User",
     "userId": 7,
-    "login": "root",
-    "name": "Administrator",
-    "enabled2FA": false
+    "userSpecifiedPassword": true
   },
-  "permission": "eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJjYW5GYWNlIjp0cnVlfQ."
+  "userNotifySettings": {
+    "needNotify": true,
+    "notifyBefore": 3
+  }
 }
