@@ -1,7 +1,7 @@
 import Foundation
 import RequestResponse
 
-/// Diagnostics API (`diagnostics` tag).
+/// Diagnostics API
 public enum DiagnosticsApi {
     /// GET /diagnostics/summary
     public static func summary() -> Request<[DomainObjectsAmount]> {

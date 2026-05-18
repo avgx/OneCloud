@@ -1,0 +1,296 @@
+[
+  {
+    "compare": false,
+    "main": true,
+    "tag": {
+      "translation": "Other",
+      "type": "other"
+    },
+    "translation": "User defined",
+    "type": "userdefined"
+  },
+  {
+    "compare": false,
+    "from": "2026-05-18T00:00:00",
+    "main": true,
+    "tag": {
+      "translation": "Day",
+      "type": "daily"
+    },
+    "to": "2026-05-19T00:00:00",
+    "translation": "Today",
+    "type": "today"
+  },
+  {
+    "compare": false,
+    "from": "2026-05-18T00:00:00",
+    "main": true,
+    "tag": {
+      "translation": "Week",
+      "type": "weekly"
+    },
+    "to": "2026-05-25T00:00:00",
+    "translation": "This week",
+    "type": "this_week"
+  },
+  {
+    "compare": false,
+    "from": "2026-05-01T00:00:00",
+    "main": true,
+    "tag": {
+      "translation": "Month",
+      "type": "monthly"
+    },
+    "to": "2026-06-01T00:00:00",
+    "translation": "This month",
+    "type": "this_month"
+  },
+  {
+    "compare": false,
+    "from": "2026-01-01T00:00:00",
+    "main": true,
+    "tag": {
+      "translation": "Year",
+      "type": "yearly"
+    },
+    "to": "2027-01-01T00:00:00",
+    "translation": "This year",
+    "type": "this_year"
+  },
+  {
+    "compare": true,
+    "from": "2026-05-17T00:00:00",
+    "main": true,
+    "tag": {
+      "translation": "Day",
+      "type": "daily"
+    },
+    "to": "2026-05-18T00:00:00",
+    "translation": "Yesterday",
+    "type": "yesterday"
+  },
+  {
+    "compare": true,
+    "main": false,
+    "tag": {
+      "translation": "Day",
+      "type": "daily"
+    },
+    "translation": "Day before yesterday",
+    "type": "day_before_yesterday"
+  },
+  {
+    "compare": true,
+    "main": false,
+    "tag": {
+      "translation": "Day",
+      "type": "daily"
+    },
+    "translation": "This day last week",
+    "type": "this_day_last_week"
+  },
+  {
+    "compare": true,
+    "from": "2026-05-11T00:00:00",
+    "main": true,
+    "tag": {
+      "translation": "Week",
+      "type": "weekly"
+    },
+    "to": "2026-05-18T00:00:00",
+    "translation": "Previous week",
+    "type": "previous_week"
+  },
+  {
+    "compare": true,
+    "from": "2026-04-01T00:00:00",
+    "main": true,
+    "tag": {
+      "translation": "Month",
+      "type": "monthly"
+    },
+    "to": "2026-05-01T00:00:00",
+    "translation": "Previous month",
+    "type": "previous_month"
+  },
+  {
+    "compare": true,
+    "from": "2025-01-01T00:00:00",
+    "main": true,
+    "tag": {
+      "translation": "Year",
+      "type": "yearly"
+    },
+    "to": "2026-01-01T00:00:00",
+    "translation": "Previous year",
+    "type": "previous_year"
+  },
+  {
+    "compare": true,
+    "from": "2026-05-18T06:52:34.905",
+    "main": true,
+    "tag": {
+      "translation": "Hour",
+      "type": "hourly"
+    },
+    "to": "2026-05-18T07:07:34.905",
+    "translation": "Last 15 minutes",
+    "type": "last_15_minutes"
+  },
+  {
+    "compare": false,
+    "from": "2026-05-18T06:37:34.905",
+    "main": true,
+    "tag": {
+      "translation": "Hour",
+      "type": "hourly"
+    },
+    "to": "2026-05-18T07:07:34.905",
+    "translation": "Last 30 minutes",
+    "type": "last_30_minutes"
+  },
+  {
+    "compare": false,
+    "from": "2026-05-18T06:07:34.905",
+    "main": true,
+    "tag": {
+      "translation": "Hour",
+      "type": "hourly"
+    },
+    "to": "2026-05-18T07:07:34.905",
+    "translation": "Last 1 hour",
+    "type": "last_1_hour"
+  },
+  {
+    "compare": false,
+    "from": "2026-05-18T03:07:34.905",
+    "main": true,
+    "tag": {
+      "translation": "Hour",
+      "type": "hourly"
+    },
+    "to": "2026-05-18T07:07:34.905",
+    "translation": "Last 4 hours",
+    "type": "last_4_hours"
+  },
+  {
+    "compare": false,
+    "from": "2026-05-17T19:07:34.905",
+    "main": true,
+    "tag": {
+      "translation": "Hour",
+      "type": "hourly"
+    },
+    "to": "2026-05-18T07:07:34.905",
+    "translation": "Last 12 hours",
+    "type": "last_12_hours"
+  },
+  {
+    "compare": false,
+    "from": "2026-05-17T07:07:34.905",
+    "main": true,
+    "tag": {
+      "translation": "Hour",
+      "type": "hourly"
+    },
+    "to": "2026-05-18T07:07:34.905",
+    "translation": "Last 24 hours",
+    "type": "last_24_hours"
+  },
+  {
+    "compare": false,
+    "from": "2026-05-11T07:07:34.905",
+    "main": true,
+    "tag": {
+      "translation": "Week",
+      "type": "weekly"
+    },
+    "to": "2026-05-18T07:07:34.905",
+    "translation": "Last 7 days",
+    "type": "last_7_days"
+  },
+  {
+    "compare": false,
+    "from": "2026-04-18T07:07:34.905",
+    "main": true,
+    "tag": {
+      "translation": "Month",
+      "type": "monthly"
+    },
+    "to": "2026-05-18T07:07:34.905",
+    "translation": "Last 30 days",
+    "type": "last_30_days"
+  },
+  {
+    "compare": false,
+    "from": "2026-03-19T07:07:34.905",
+    "main": true,
+    "tag": {
+      "translation": "Month",
+      "type": "monthly"
+    },
+    "to": "2026-05-18T07:07:34.905",
+    "translation": "Last 60 days",
+    "type": "last_60_days"
+  },
+  {
+    "compare": false,
+    "from": "2026-02-17T07:07:34.905",
+    "main": true,
+    "tag": {
+      "translation": "Month",
+      "type": "monthly"
+    },
+    "to": "2026-05-18T07:07:34.905",
+    "translation": "Last 90 days",
+    "type": "last_90_days"
+  },
+  {
+    "compare": false,
+    "from": "2025-11-18T07:07:34.905",
+    "main": true,
+    "tag": {
+      "translation": "Month",
+      "type": "monthly"
+    },
+    "to": "2026-05-18T07:07:34.905",
+    "translation": "Last 6 month",
+    "type": "last_6_month"
+  },
+  {
+    "compare": false,
+    "from": "2025-05-18T07:07:34.905",
+    "main": true,
+    "tag": {
+      "translation": "Year",
+      "type": "yearly"
+    },
+    "to": "2026-05-18T07:07:34.905",
+    "translation": "Last year",
+    "type": "last_year"
+  },
+  {
+    "compare": false,
+    "from": "2016-05-18T07:07:34.905",
+    "main": true,
+    "tag": {
+      "translation": "Year",
+      "type": "yearly"
+    },
+    "to": "2026-05-18T07:07:34.905",
+    "translation": "Last 10 years",
+    "type": "last_10_years"
+  },
+  {
+    "compare": false,
+    "from": "past",
+    "main": true,
+    "tag": {
+      "translation": "Other",
+      "type": "other"
+    },
+    "to": "future",
+    "translation": "All the time",
+    "type": "forever"
+  }
+]

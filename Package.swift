@@ -26,6 +26,7 @@ let package = Package(
         .package(url: "https://github.com/avgx/SafeEnum", from: "1.0.0"),
         .package(url: "https://github.com/avgx/EncodeDecode", from: "1.0.2"),
         .package(url: "https://github.com/auth0/JWTDecode.swift", from: "4.0.0"),
+        .package(url: "https://github.com/avgx/JSONValue", from: "1.0.0"),
     ],
     targets: [
         .target(
@@ -40,6 +41,7 @@ let package = Package(
             name: "OneCloudData",
             dependencies: [
                 .product(name: "RequestResponse", package: "RequestResponse"),
+                .product(name: "JSONValue", package: "JSONValue"),
             ]
         ),
         .testTarget(

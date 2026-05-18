@@ -1,7 +1,8 @@
 import Foundation
 import RequestResponse
 
-/// Axxon Data backend (`/api/v1/ad-backend` — use a separate `RequestBuilder` base URL).
+/// Axxon Data backend (`/api/v1/ad-backend`)
+/// use a separate `RequestBuilder` base URL.
 public enum BackendApi {
     /// GET /users/my/dashboards
     public static func dashboards() -> Request<[Dashboard]> {

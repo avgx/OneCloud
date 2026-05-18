@@ -1,0 +1,30 @@
+[
+  {
+    "description": "AxACFA events",
+    "name": "acfa_events"
+  },
+  {
+    "description": "Alerts",
+    "name": "alerts"
+  },
+  {
+    "description": "Potential violations events",
+    "name": "analyzer_events"
+  },
+  {
+    "description": "Audit events",
+    "name": "audit_events"
+  },
+  {
+    "description": "Detectors events",
+    "name": "events"
+  },
+  {
+    "description": "POS events",
+    "name": "pos_events"
+  },
+  {
+    "description": "PSIM events",
+    "name": "psim_events"
+  }
+]

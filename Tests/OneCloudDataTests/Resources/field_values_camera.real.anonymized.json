@@ -1,0 +1,1538 @@
+{
+  "result": [
+    {
+      "key": "camera-value-anon-001",
+      "value": "Camera 1"
+    },
+    {
+      "key": "camera-value-anon-002",
+      "value": "Camera 2"
+    },
+    {
+      "key": "camera-value-anon-003",
+      "value": "Camera 3"
+    },
+    {
+      "key": "camera-value-anon-004",
+      "value": "Camera 4"
+    },
+    {
+      "key": "camera-value-anon-005",
+      "value": "Camera 5"
+    },
+    {
+      "key": "camera-value-anon-006",
+      "value": "Camera 6"
+    },
+    {
+      "key": "camera-value-anon-007",
+      "value": "Camera 7"
+    },
+    {
+      "key": "camera-value-anon-008",
+      "value": "Camera 8"
+    },
+    {
+      "key": "camera-value-anon-009",
+      "value": "Camera 9"
+    },
+    {
+      "key": "camera-value-anon-010",
+      "value": "Camera 10"
+    },
+    {
+      "key": "camera-value-anon-011",
+      "value": "Camera 11"
+    },
+    {
+      "key": "camera-value-anon-012",
+      "value": "Camera 12"
+    },
+    {
+      "key": "camera-value-anon-013",
+      "value": "Camera 13"
+    },
+    {
+      "key": "camera-value-anon-014",
+      "value": "Camera 14"
+    },
+    {
+      "key": "camera-value-anon-015",
+      "value": "Camera 15"
+    },
+    {
+      "key": "camera-value-anon-016",
+      "value": "Camera 16"
+    },
+    {
+      "key": "camera-value-anon-017",
+      "value": "Camera 17"
+    },
+    {
+      "key": "camera-value-anon-018",
+      "value": "Camera 18"
+    },
+    {
+      "key": "camera-value-anon-019",
+      "value": "Camera 19"
+    },
+    {
+      "key": "camera-value-anon-020",
+      "value": "Camera 20"
+    },
+    {
+      "key": "camera-value-anon-021",
+      "value": "Camera 21"
+    },
+    {
+      "key": "camera-value-anon-022",
+      "value": "Camera 22"
+    },
+    {
+      "key": "camera-value-anon-023",
+      "value": "Camera 23"
+    },
+    {
+      "key": "camera-value-anon-024",
+      "value": "Camera 24"
+    },
+    {
+      "key": "camera-value-anon-025",
+      "value": "Camera 25"
+    },
+    {
+      "key": "camera-value-anon-026",
+      "value": "Camera 26"
+    },
+    {
+      "key": "camera-value-anon-027",
+      "value": "Camera 27"
+    },
+    {
+      "key": "camera-value-anon-028",
+      "value": "Camera 28"
+    },
+    {
+      "key": "camera-value-anon-029",
+      "value": "Camera 29"
+    },
+    {
+      "key": "camera-value-anon-030",
+      "value": "Camera 30"
+    },
+    {
+      "key": "camera-value-anon-031",
+      "value": "Camera 31"
+    },
+    {
+      "key": "camera-value-anon-032",
+      "value": "Camera 32"
+    },
+    {
+      "key": "camera-value-anon-033",
+      "value": "Camera 33"
+    },
+    {
+      "key": "camera-value-anon-034",
+      "value": "Camera 34"
+    },
+    {
+      "key": "camera-value-anon-035",
+      "value": "Camera 35"
+    },
+    {
+      "key": "camera-value-anon-036",
+      "value": "Camera 36"
+    },
+    {
+      "key": "camera-value-anon-037",
+      "value": "Camera 37"
+    },
+    {
+      "key": "camera-value-anon-038",
+      "value": "Camera 38"
+    },
+    {
+      "key": "camera-value-anon-039",
+      "value": "Camera 39"
+    },
+    {
+      "key": "camera-value-anon-040",
+      "value": "Camera 40"
+    },
+    {
+      "key": "camera-value-anon-041",
+      "value": "Camera 41"
+    },
+    {
+      "key": "camera-value-anon-042",
+      "value": "Camera 42"
+    },
+    {
+      "key": "camera-value-anon-043",
+      "value": "Camera 43"
+    },
+    {
+      "key": "camera-value-anon-044",
+      "value": "Camera 44"
+    },
+    {
+      "key": "camera-value-anon-045",
+      "value": "Camera 45"
+    },
+    {
+      "key": "camera-value-anon-046",
+      "value": "Camera 46"
+    },
+    {
+      "key": "camera-value-anon-047",
+      "value": "Camera 47"
+    },
+    {
+      "key": "camera-value-anon-048",
+      "value": "Camera 48"
+    },
+    {
+      "key": "camera-value-anon-049",
+      "value": "Camera 49"
+    },
+    {
+      "key": "camera-value-anon-050",
+      "value": "Camera 50"
+    },
+    {
+      "key": "camera-value-anon-051",
+      "value": "Camera 51"
+    },
+    {
+      "key": "camera-value-anon-052",
+      "value": "Camera 52"
+    },
+    {
+      "key": "camera-value-anon-053",
+      "value": "Camera 53"
+    },
+    {
+      "key": "camera-value-anon-054",
+      "value": "Camera 54"
+    },
+    {
+      "key": "camera-value-anon-055",
+      "value": "Camera 55"
+    },
+    {
+      "key": "camera-value-anon-056",
+      "value": "Camera 56"
+    },
+    {
+      "key": "camera-value-anon-057",
+      "value": "Camera 57"
+    },
+    {
+      "key": "camera-value-anon-058",
+      "value": "Camera 58"
+    },
+    {
+      "key": "camera-value-anon-059",
+      "value": "Camera 59"
+    },
+    {
+      "key": "camera-value-anon-060",
+      "value": "Camera 60"
+    },
+    {
+      "key": "camera-value-anon-061",
+      "value": "Camera 61"
+    },
+    {
+      "key": "camera-value-anon-062",
+      "value": "Camera 62"
+    },
+    {
+      "key": "camera-value-anon-063",
+      "value": "Camera 63"
+    },
+    {
+      "key": "camera-value-anon-064",
+      "value": "Camera 64"
+    },
+    {
+      "key": "camera-value-anon-065",
+      "value": "Camera 65"
+    },
+    {
+      "key": "camera-value-anon-066",
+      "value": "Camera 66"
+    },
+    {
+      "key": "camera-value-anon-067",
+      "value": "Camera 67"
+    },
+    {
+      "key": "camera-value-anon-068",
+      "value": "Camera 68"
+    },
+    {
+      "key": "camera-value-anon-069",
+      "value": "Camera 69"
+    },
+    {
+      "key": "camera-value-anon-070",
+      "value": "Camera 70"
+    },
+    {
+      "key": "camera-value-anon-071",
+      "value": "Camera 71"
+    },
+    {
+      "key": "camera-value-anon-072",
+      "value": "Camera 72"
+    },
+    {
+      "key": "camera-value-anon-073",
+      "value": "Camera 73"
+    },
+    {
+      "key": "camera-value-anon-074",
+      "value": "Camera 74"
+    },
+    {
+      "key": "camera-value-anon-075",
+      "value": "Camera 75"
+    },
+    {
+      "key": "camera-value-anon-076",
+      "value": "Camera 76"
+    },
+    {
+      "key": "camera-value-anon-077",
+      "value": "Camera 77"
+    },
+    {
+      "key": "camera-value-anon-078",
+      "value": "Camera 78"
+    },
+    {
+      "key": "camera-value-anon-079",
+      "value": "Camera 79"
+    },
+    {
+      "key": "camera-value-anon-080",
+      "value": "Camera 80"
+    },
+    {
+      "key": "camera-value-anon-081",
+      "value": "Camera 81"
+    },
+    {
+      "key": "camera-value-anon-082",
+      "value": "Camera 82"
+    },
+    {
+      "key": "camera-value-anon-083",
+      "value": "Camera 83"
+    },
+    {
+      "key": "camera-value-anon-084",
+      "value": "Camera 84"
+    },
+    {
+      "key": "camera-value-anon-085",
+      "value": "Camera 85"
+    },
+    {
+      "key": "camera-value-anon-086",
+      "value": "Camera 86"
+    },
+    {
+      "key": "camera-value-anon-087",
+      "value": "Camera 87"
+    },
+    {
+      "key": "camera-value-anon-088",
+      "value": "Camera 88"
+    },
+    {
+      "key": "camera-value-anon-089",
+      "value": "Camera 89"
+    },
+    {
+      "key": "camera-value-anon-090",
+      "value": "Camera 90"
+    },
+    {
+      "key": "camera-value-anon-091",
+      "value": "Camera 91"
+    },
+    {
+      "key": "camera-value-anon-092",
+      "value": "Camera 92"
+    },
+    {
+      "key": "camera-value-anon-093",
+      "value": "Camera 93"
+    },
+    {
+      "key": "camera-value-anon-094",
+      "value": "Camera 94"
+    },
+    {
+      "key": "camera-value-anon-095",
+      "value": "Camera 95"
+    },
+    {
+      "key": "camera-value-anon-096",
+      "value": "Camera 96"
+    },
+    {
+      "key": "camera-value-anon-097",
+      "value": "Camera 97"
+    },
+    {
+      "key": "camera-value-anon-098",
+      "value": "Camera 98"
+    },
+    {
+      "key": "camera-value-anon-099",
+      "value": "Camera 99"
+    },
+    {
+      "key": "camera-value-anon-100",
+      "value": "Camera 100"
+    },
+    {
+      "key": "camera-value-anon-101",
+      "value": "Camera 101"
+    },
+    {
+      "key": "camera-value-anon-102",
+      "value": "Camera 102"
+    },
+    {
+      "key": "camera-value-anon-103",
+      "value": "Camera 103"
+    },
+    {
+      "key": "camera-value-anon-104",
+      "value": "Camera 104"
+    },
+    {
+      "key": "camera-value-anon-105",
+      "value": "Camera 105"
+    },
+    {
+      "key": "camera-value-anon-106",
+      "value": "Camera 106"
+    },
+    {
+      "key": "camera-value-anon-107",
+      "value": "Camera 107"
+    },
+    {
+      "key": "camera-value-anon-108",
+      "value": "Camera 108"
+    },
+    {
+      "key": "camera-value-anon-109",
+      "value": "Camera 109"
+    },
+    {
+      "key": "camera-value-anon-110",
+      "value": "Camera 110"
+    },
+    {
+      "key": "camera-value-anon-111",
+      "value": "Camera 111"
+    },
+    {
+      "key": "camera-value-anon-112",
+      "value": "Camera 112"
+    },
+    {
+      "key": "camera-value-anon-113",
+      "value": "Camera 113"
+    },
+    {
+      "key": "camera-value-anon-114",
+      "value": "Camera 114"
+    },
+    {
+      "key": "camera-value-anon-115",
+      "value": "Camera 115"
+    },
+    {
+      "key": "camera-value-anon-116",
+      "value": "Camera 116"
+    },
+    {
+      "key": "camera-value-anon-117",
+      "value": "Camera 117"
+    },
+    {
+      "key": "camera-value-anon-118",
+      "value": "Camera 118"
+    },
+    {
+      "key": "camera-value-anon-119",
+      "value": "Camera 119"
+    },
+    {
+      "key": "camera-value-anon-120",
+      "value": "Camera 120"
+    },
+    {
+      "key": "camera-value-anon-121",
+      "value": "Camera 121"
+    },
+    {
+      "key": "camera-value-anon-122",
+      "value": "Camera 122"
+    },
+    {
+      "key": "camera-value-anon-123",
+      "value": "Camera 123"
+    },
+    {
+      "key": "camera-value-anon-124",
+      "value": "Camera 124"
+    },
+    {
+      "key": "camera-value-anon-125",
+      "value": "Camera 125"
+    },
+    {
+      "key": "camera-value-anon-126",
+      "value": "Camera 126"
+    },
+    {
+      "key": "camera-value-anon-127",
+      "value": "Camera 127"
+    },
+    {
+      "key": "camera-value-anon-128",
+      "value": "Camera 128"
+    },
+    {
+      "key": "camera-value-anon-129",
+      "value": "Camera 129"
+    },
+    {
+      "key": "camera-value-anon-130",
+      "value": "Camera 130"
+    },
+    {
+      "key": "camera-value-anon-131",
+      "value": "Camera 131"
+    },
+    {
+      "key": "camera-value-anon-132",
+      "value": "Camera 132"
+    },
+    {
+      "key": "camera-value-anon-133",
+      "value": "Camera 133"
+    },
+    {
+      "key": "camera-value-anon-134",
+      "value": "Camera 134"
+    },
+    {
+      "key": "camera-value-anon-135",
+      "value": "Camera 135"
+    },
+    {
+      "key": "camera-value-anon-136",
+      "value": "Camera 136"
+    },
+    {
+      "key": "camera-value-anon-137",
+      "value": "Camera 137"
+    },
+    {
+      "key": "camera-value-anon-138",
+      "value": "Camera 138"
+    },
+    {
+      "key": "camera-value-anon-139",
+      "value": "Camera 139"
+    },
+    {
+      "key": "camera-value-anon-140",
+      "value": "Camera 140"
+    },
+    {
+      "key": "camera-value-anon-141",
+      "value": "Camera 141"
+    },
+    {
+      "key": "camera-value-anon-142",
+      "value": "Camera 142"
+    },
+    {
+      "key": "camera-value-anon-143",
+      "value": "Camera 143"
+    },
+    {
+      "key": "camera-value-anon-144",
+      "value": "Camera 144"
+    },
+    {
+      "key": "camera-value-anon-145",
+      "value": "Camera 145"
+    },
+    {
+      "key": "camera-value-anon-146",
+      "value": "Camera 146"
+    },
+    {
+      "key": "camera-value-anon-147",
+      "value": "Camera 147"
+    },
+    {
+      "key": "camera-value-anon-148",
+      "value": "Camera 148"
+    },
+    {
+      "key": "camera-value-anon-149",
+      "value": "Camera 149"
+    },
+    {
+      "key": "camera-value-anon-150",
+      "value": "Camera 150"
+    },
+    {
+      "key": "camera-value-anon-151",
+      "value": "Camera 151"
+    },
+    {
+      "key": "camera-value-anon-152",
+      "value": "Camera 152"
+    },
+    {
+      "key": "camera-value-anon-153",
+      "value": "Camera 153"
+    },
+    {
+      "key": "camera-value-anon-154",
+      "value": "Camera 154"
+    },
+    {
+      "key": "camera-value-anon-155",
+      "value": "Camera 155"
+    },
+    {
+      "key": "camera-value-anon-156",
+      "value": "Camera 156"
+    },
+    {
+      "key": "camera-value-anon-157",
+      "value": "Camera 157"
+    },
+    {
+      "key": "camera-value-anon-158",
+      "value": "Camera 158"
+    },
+    {
+      "key": "camera-value-anon-159",
+      "value": "Camera 159"
+    },
+    {
+      "key": "camera-value-anon-160",
+      "value": "Camera 160"
+    },
+    {
+      "key": "camera-value-anon-161",
+      "value": "Camera 161"
+    },
+    {
+      "key": "camera-value-anon-162",
+      "value": "Camera 162"
+    },
+    {
+      "key": "camera-value-anon-163",
+      "value": "Camera 163"
+    },
+    {
+      "key": "camera-value-anon-164",
+      "value": "Camera 164"
+    },
+    {
+      "key": "camera-value-anon-165",
+      "value": "Camera 165"
+    },
+    {
+      "key": "camera-value-anon-166",
+      "value": "Camera 166"
+    },
+    {
+      "key": "camera-value-anon-167",
+      "value": "Camera 167"
+    },
+    {
+      "key": "camera-value-anon-168",
+      "value": "Camera 168"
+    },
+    {
+      "key": "camera-value-anon-169",
+      "value": "Camera 169"
+    },
+    {
+      "key": "camera-value-anon-170",
+      "value": "Camera 170"
+    },
+    {
+      "key": "camera-value-anon-171",
+      "value": "Camera 171"
+    },
+    {
+      "key": "camera-value-anon-172",
+      "value": "Camera 172"
+    },
+    {
+      "key": "camera-value-anon-173",
+      "value": "Camera 173"
+    },
+    {
+      "key": "camera-value-anon-174",
+      "value": "Camera 174"
+    },
+    {
+      "key": "camera-value-anon-175",
+      "value": "Camera 175"
+    },
+    {
+      "key": "camera-value-anon-176",
+      "value": "Camera 176"
+    },
+    {
+      "key": "camera-value-anon-177",
+      "value": "Camera 177"
+    },
+    {
+      "key": "camera-value-anon-178",
+      "value": "Camera 178"
+    },
+    {
+      "key": "camera-value-anon-179",
+      "value": "Camera 179"
+    },
+    {
+      "key": "camera-value-anon-180",
+      "value": "Camera 180"
+    },
+    {
+      "key": "camera-value-anon-181",
+      "value": "Camera 181"
+    },
+    {
+      "key": "camera-value-anon-182",
+      "value": "Camera 182"
+    },
+    {
+      "key": "camera-value-anon-183",
+      "value": "Camera 183"
+    },
+    {
+      "key": "camera-value-anon-184",
+      "value": "Camera 184"
+    },
+    {
+      "key": "camera-value-anon-185",
+      "value": "Camera 185"
+    },
+    {
+      "key": "camera-value-anon-186",
+      "value": "Camera 186"
+    },
+    {
+      "key": "camera-value-anon-187",
+      "value": "Camera 187"
+    },
+    {
+      "key": "camera-value-anon-188",
+      "value": "Camera 188"
+    },
+    {
+      "key": "camera-value-anon-189",
+      "value": "Camera 189"
+    },
+    {
+      "key": "camera-value-anon-190",
+      "value": "Camera 190"
+    },
+    {
+      "key": "camera-value-anon-191",
+      "value": "Camera 191"
+    },
+    {
+      "key": "camera-value-anon-192",
+      "value": "Camera 192"
+    },
+    {
+      "key": "camera-value-anon-193",
+      "value": "Camera 193"
+    },
+    {
+      "key": "camera-value-anon-194",
+      "value": "Camera 194"
+    },
+    {
+      "key": "camera-value-anon-195",
+      "value": "Camera 195"
+    },
+    {
+      "key": "camera-value-anon-196",
+      "value": "Camera 196"
+    },
+    {
+      "key": "camera-value-anon-197",
+      "value": "Camera 197"
+    },
+    {
+      "key": "camera-value-anon-198",
+      "value": "Camera 198"
+    },
+    {
+      "key": "camera-value-anon-199",
+      "value": "Camera 199"
+    },
+    {
+      "key": "camera-value-anon-200",
+      "value": "Camera 200"
+    },
+    {
+      "key": "camera-value-anon-201",
+      "value": "Camera 201"
+    },
+    {
+      "key": "camera-value-anon-202",
+      "value": "Camera 202"
+    },
+    {
+      "key": "camera-value-anon-203",
+      "value": "Camera 203"
+    },
+    {
+      "key": "camera-value-anon-204",
+      "value": "Camera 204"
+    },
+    {
+      "key": "camera-value-anon-205",
+      "value": "Camera 205"
+    },
+    {
+      "key": "camera-value-anon-206",
+      "value": "Camera 206"
+    },
+    {
+      "key": "camera-value-anon-207",
+      "value": "Camera 207"
+    },
+    {
+      "key": "camera-value-anon-208",
+      "value": "Camera 208"
+    },
+    {
+      "key": "camera-value-anon-209",
+      "value": "Camera 209"
+    },
+    {
+      "key": "camera-value-anon-210",
+      "value": "Camera 210"
+    },
+    {
+      "key": "camera-value-anon-211",
+      "value": "Camera 211"
+    },
+    {
+      "key": "camera-value-anon-212",
+      "value": "Camera 212"
+    },
+    {
+      "key": "camera-value-anon-213",
+      "value": "Camera 213"
+    },
+    {
+      "key": "camera-value-anon-214",
+      "value": "Camera 214"
+    },
+    {
+      "key": "camera-value-anon-215",
+      "value": "Camera 215"
+    },
+    {
+      "key": "camera-value-anon-216",
+      "value": "Camera 216"
+    },
+    {
+      "key": "camera-value-anon-217",
+      "value": "Camera 217"
+    },
+    {
+      "key": "camera-value-anon-218",
+      "value": "Camera 218"
+    },
+    {
+      "key": "camera-value-anon-219",
+      "value": "Camera 219"
+    },
+    {
+      "key": "camera-value-anon-220",
+      "value": "Camera 220"
+    },
+    {
+      "key": "camera-value-anon-221",
+      "value": "Camera 221"
+    },
+    {
+      "key": "camera-value-anon-222",
+      "value": "Camera 222"
+    },
+    {
+      "key": "camera-value-anon-223",
+      "value": "Camera 223"
+    },
+    {
+      "key": "camera-value-anon-224",
+      "value": "Camera 224"
+    },
+    {
+      "key": "camera-value-anon-225",
+      "value": "Camera 225"
+    },
+    {
+      "key": "camera-value-anon-226",
+      "value": "Camera 226"
+    },
+    {
+      "key": "camera-value-anon-227",
+      "value": "Camera 227"
+    },
+    {
+      "key": "camera-value-anon-228",
+      "value": "Camera 228"
+    },
+    {
+      "key": "camera-value-anon-229",
+      "value": "Camera 229"
+    },
+    {
+      "key": "camera-value-anon-230",
+      "value": "Camera 230"
+    },
+    {
+      "key": "camera-value-anon-231",
+      "value": "Camera 231"
+    },
+    {
+      "key": "camera-value-anon-232",
+      "value": "Camera 232"
+    },
+    {
+      "key": "camera-value-anon-233",
+      "value": "Camera 233"
+    },
+    {
+      "key": "camera-value-anon-234",
+      "value": "Camera 234"
+    },
+    {
+      "key": "camera-value-anon-235",
+      "value": "Camera 235"
+    },
+    {
+      "key": "camera-value-anon-236",
+      "value": "Camera 236"
+    },
+    {
+      "key": "camera-value-anon-237",
+      "value": "Camera 237"
+    },
+    {
+      "key": "camera-value-anon-238",
+      "value": "Camera 238"
+    },
+    {
+      "key": "camera-value-anon-239",
+      "value": "Camera 239"
+    },
+    {
+      "key": "camera-value-anon-240",
+      "value": "Camera 240"
+    },
+    {
+      "key": "camera-value-anon-241",
+      "value": "Camera 241"
+    },
+    {
+      "key": "camera-value-anon-242",
+      "value": "Camera 242"
+    },
+    {
+      "key": "camera-value-anon-243",
+      "value": "Camera 243"
+    },
+    {
+      "key": "camera-value-anon-244",
+      "value": "Camera 244"
+    },
+    {
+      "key": "camera-value-anon-245",
+      "value": "Camera 245"
+    },
+    {
+      "key": "camera-value-anon-246",
+      "value": "Camera 246"
+    },
+    {
+      "key": "camera-value-anon-247",
+      "value": "Camera 247"
+    },
+    {
+      "key": "camera-value-anon-248",
+      "value": "Camera 248"
+    },
+    {
+      "key": "camera-value-anon-249",
+      "value": "Camera 249"
+    },
+    {
+      "key": "camera-value-anon-250",
+      "value": "Camera 250"
+    },
+    {
+      "key": "camera-value-anon-251",
+      "value": "Camera 251"
+    },
+    {
+      "key": "camera-value-anon-252",
+      "value": "Camera 252"
+    },
+    {
+      "key": "camera-value-anon-253",
+      "value": "Camera 253"
+    },
+    {
+      "key": "camera-value-anon-254",
+      "value": "Camera 254"
+    },
+    {
+      "key": "camera-value-anon-255",
+      "value": "Camera 255"
+    },
+    {
+      "key": "camera-value-anon-256",
+      "value": "Camera 256"
+    },
+    {
+      "key": "camera-value-anon-257",
+      "value": "Camera 257"
+    },
+    {
+      "key": "camera-value-anon-258",
+      "value": "Camera 258"
+    },
+    {
+      "key": "camera-value-anon-259",
+      "value": "Camera 259"
+    },
+    {
+      "key": "camera-value-anon-260",
+      "value": "Camera 260"
+    },
+    {
+      "key": "camera-value-anon-261",
+      "value": "Camera 261"
+    },
+    {
+      "key": "camera-value-anon-262",
+      "value": "Camera 262"
+    },
+    {
+      "key": "camera-value-anon-263",
+      "value": "Camera 263"
+    },
+    {
+      "key": "camera-value-anon-264",
+      "value": "Camera 264"
+    },
+    {
+      "key": "camera-value-anon-265",
+      "value": "Camera 265"
+    },
+    {
+      "key": "camera-value-anon-266",
+      "value": "Camera 266"
+    },
+    {
+      "key": "camera-value-anon-267",
+      "value": "Camera 267"
+    },
+    {
+      "key": "camera-value-anon-268",
+      "value": "Camera 268"
+    },
+    {
+      "key": "camera-value-anon-269",
+      "value": "Camera 269"
+    },
+    {
+      "key": "camera-value-anon-270",
+      "value": "Camera 270"
+    },
+    {
+      "key": "camera-value-anon-271",
+      "value": "Camera 271"
+    },
+    {
+      "key": "camera-value-anon-272",
+      "value": "Camera 272"
+    },
+    {
+      "key": "camera-value-anon-273",
+      "value": "Camera 273"
+    },
+    {
+      "key": "camera-value-anon-274",
+      "value": "Camera 274"
+    },
+    {
+      "key": "camera-value-anon-275",
+      "value": "Camera 275"
+    },
+    {
+      "key": "camera-value-anon-276",
+      "value": "Camera 276"
+    },
+    {
+      "key": "camera-value-anon-277",
+      "value": "Camera 277"
+    },
+    {
+      "key": "camera-value-anon-278",
+      "value": "Camera 278"
+    },
+    {
+      "key": "camera-value-anon-279",
+      "value": "Camera 279"
+    },
+    {
+      "key": "camera-value-anon-280",
+      "value": "Camera 280"
+    },
+    {
+      "key": "camera-value-anon-281",
+      "value": "Camera 281"
+    },
+    {
+      "key": "camera-value-anon-282",
+      "value": "Camera 282"
+    },
+    {
+      "key": "camera-value-anon-283",
+      "value": "Camera 283"
+    },
+    {
+      "key": "camera-value-anon-284",
+      "value": "Camera 284"
+    },
+    {
+      "key": "camera-value-anon-285",
+      "value": "Camera 285"
+    },
+    {
+      "key": "camera-value-anon-286",
+      "value": "Camera 286"
+    },
+    {
+      "key": "camera-value-anon-287",
+      "value": "Camera 287"
+    },
+    {
+      "key": "camera-value-anon-288",
+      "value": "Camera 288"
+    },
+    {
+      "key": "camera-value-anon-289",
+      "value": "Camera 289"
+    },
+    {
+      "key": "camera-value-anon-290",
+      "value": "Camera 290"
+    },
+    {
+      "key": "camera-value-anon-291",
+      "value": "Camera 291"
+    },
+    {
+      "key": "camera-value-anon-292",
+      "value": "Camera 292"
+    },
+    {
+      "key": "camera-value-anon-293",
+      "value": "Camera 293"
+    },
+    {
+      "key": "camera-value-anon-294",
+      "value": "Camera 294"
+    },
+    {
+      "key": "camera-value-anon-295",
+      "value": "Camera 295"
+    },
+    {
+      "key": "camera-value-anon-296",
+      "value": "Camera 296"
+    },
+    {
+      "key": "camera-value-anon-297",
+      "value": "Camera 297"
+    },
+    {
+      "key": "camera-value-anon-298",
+      "value": "Camera 298"
+    },
+    {
+      "key": "camera-value-anon-299",
+      "value": "Camera 299"
+    },
+    {
+      "key": "camera-value-anon-300",
+      "value": "Camera 300"
+    },
+    {
+      "key": "camera-value-anon-301",
+      "value": "Camera 301"
+    },
+    {
+      "key": "camera-value-anon-302",
+      "value": "Camera 302"
+    },
+    {
+      "key": "camera-value-anon-303",
+      "value": "Camera 303"
+    },
+    {
+      "key": "camera-value-anon-304",
+      "value": "Camera 304"
+    },
+    {
+      "key": "camera-value-anon-305",
+      "value": "Camera 305"
+    },
+    {
+      "key": "camera-value-anon-306",
+      "value": "Camera 306"
+    },
+    {
+      "key": "camera-value-anon-307",
+      "value": "Camera 307"
+    },
+    {
+      "key": "camera-value-anon-308",
+      "value": "Camera 308"
+    },
+    {
+      "key": "camera-value-anon-309",
+      "value": "Camera 309"
+    },
+    {
+      "key": "camera-value-anon-310",
+      "value": "Camera 310"
+    },
+    {
+      "key": "camera-value-anon-311",
+      "value": "Camera 311"
+    },
+    {
+      "key": "camera-value-anon-312",
+      "value": "Camera 312"
+    },
+    {
+      "key": "camera-value-anon-313",
+      "value": "Camera 313"
+    },
+    {
+      "key": "camera-value-anon-314",
+      "value": "Camera 314"
+    },
+    {
+      "key": "camera-value-anon-315",
+      "value": "Camera 315"
+    },
+    {
+      "key": "camera-value-anon-316",
+      "value": "Camera 316"
+    },
+    {
+      "key": "camera-value-anon-317",
+      "value": "Camera 317"
+    },
+    {
+      "key": "camera-value-anon-318",
+      "value": "Camera 318"
+    },
+    {
+      "key": "camera-value-anon-319",
+      "value": "Camera 319"
+    },
+    {
+      "key": "camera-value-anon-320",
+      "value": "Camera 320"
+    },
+    {
+      "key": "camera-value-anon-321",
+      "value": "Camera 321"
+    },
+    {
+      "key": "camera-value-anon-322",
+      "value": "Camera 322"
+    },
+    {
+      "key": "camera-value-anon-323",
+      "value": "Camera 323"
+    },
+    {
+      "key": "camera-value-anon-324",
+      "value": "Camera 324"
+    },
+    {
+      "key": "camera-value-anon-325",
+      "value": "Camera 325"
+    },
+    {
+      "key": "camera-value-anon-326",
+      "value": "Camera 326"
+    },
+    {
+      "key": "camera-value-anon-327",
+      "value": "Camera 327"
+    },
+    {
+      "key": "camera-value-anon-328",
+      "value": "Camera 328"
+    },
+    {
+      "key": "camera-value-anon-329",
+      "value": "Camera 329"
+    },
+    {
+      "key": "camera-value-anon-330",
+      "value": "Camera 330"
+    },
+    {
+      "key": "camera-value-anon-331",
+      "value": "Camera 331"
+    },
+    {
+      "key": "camera-value-anon-332",
+      "value": "Camera 332"
+    },
+    {
+      "key": "camera-value-anon-333",
+      "value": "Camera 333"
+    },
+    {
+      "key": "camera-value-anon-334",
+      "value": "Camera 334"
+    },
+    {
+      "key": "camera-value-anon-335",
+      "value": "Camera 335"
+    },
+    {
+      "key": "camera-value-anon-336",
+      "value": "Camera 336"
+    },
+    {
+      "key": "camera-value-anon-337",
+      "value": "Camera 337"
+    },
+    {
+      "key": "camera-value-anon-338",
+      "value": "Camera 338"
+    },
+    {
+      "key": "camera-value-anon-339",
+      "value": "Camera 339"
+    },
+    {
+      "key": "camera-value-anon-340",
+      "value": "Camera 340"
+    },
+    {
+      "key": "camera-value-anon-341",
+      "value": "Camera 341"
+    },
+    {
+      "key": "camera-value-anon-342",
+      "value": "Camera 342"
+    },
+    {
+      "key": "camera-value-anon-343",
+      "value": "Camera 343"
+    },
+    {
+      "key": "camera-value-anon-344",
+      "value": "Camera 344"
+    },
+    {
+      "key": "camera-value-anon-345",
+      "value": "Camera 345"
+    },
+    {
+      "key": "camera-value-anon-346",
+      "value": "Camera 346"
+    },
+    {
+      "key": "camera-value-anon-347",
+      "value": "Camera 347"
+    },
+    {
+      "key": "camera-value-anon-348",
+      "value": "Camera 348"
+    },
+    {
+      "key": "camera-value-anon-349",
+      "value": "Camera 349"
+    },
+    {
+      "key": "camera-value-anon-350",
+      "value": "Camera 350"
+    },
+    {
+      "key": "camera-value-anon-351",
+      "value": "Camera 351"
+    },
+    {
+      "key": "camera-value-anon-352",
+      "value": "Camera 352"
+    },
+    {
+      "key": "camera-value-anon-353",
+      "value": "Camera 353"
+    },
+    {
+      "key": "camera-value-anon-354",
+      "value": "Camera 354"
+    },
+    {
+      "key": "camera-value-anon-355",
+      "value": "Camera 355"
+    },
+    {
+      "key": "camera-value-anon-356",
+      "value": "Camera 356"
+    },
+    {
+      "key": "camera-value-anon-357",
+      "value": "Camera 357"
+    },
+    {
+      "key": "camera-value-anon-358",
+      "value": "Camera 358"
+    },
+    {
+      "key": "camera-value-anon-359",
+      "value": "Camera 359"
+    },
+    {
+      "key": "camera-value-anon-360",
+      "value": "Camera 360"
+    },
+    {
+      "key": "camera-value-anon-361",
+      "value": "Camera 361"
+    },
+    {
+      "key": "camera-value-anon-362",
+      "value": "Camera 362"
+    },
+    {
+      "key": "camera-value-anon-363",
+      "value": "Camera 363"
+    },
+    {
+      "key": "camera-value-anon-364",
+      "value": "Camera 364"
+    },
+    {
+      "key": "camera-value-anon-365",
+      "value": "Camera 365"
+    },
+    {
+      "key": "camera-value-anon-366",
+      "value": "Camera 366"
+    },
+    {
+      "key": "camera-value-anon-367",
+      "value": "Camera 367"
+    },
+    {
+      "key": "camera-value-anon-368",
+      "value": "Camera 368"
+    },
+    {
+      "key": "camera-value-anon-369",
+      "value": "Camera 369"
+    },
+    {
+      "key": "camera-value-anon-370",
+      "value": "Camera 370"
+    },
+    {
+      "key": "camera-value-anon-371",
+      "value": "Camera 371"
+    },
+    {
+      "key": "camera-value-anon-372",
+      "value": "Camera 372"
+    },
+    {
+      "key": "camera-value-anon-373",
+      "value": "Camera 373"
+    },
+    {
+      "key": "camera-value-anon-374",
+      "value": "Camera 374"
+    },
+    {
+      "key": "camera-value-anon-375",
+      "value": "Camera 375"
+    },
+    {
+      "key": "camera-value-anon-376",
+      "value": "Camera 376"
+    },
+    {
+      "key": "camera-value-anon-377",
+      "value": "Camera 377"
+    },
+    {
+      "key": "camera-value-anon-378",
+      "value": "Camera 378"
+    },
+    {
+      "key": "camera-value-anon-379",
+      "value": "Camera 379"
+    },
+    {
+      "key": "camera-value-anon-380",
+      "value": "Camera 380"
+    },
+    {
+      "key": "camera-value-anon-381",
+      "value": "Camera 381"
+    },
+    {
+      "key": "camera-value-anon-382",
+      "value": "Camera 382"
+    },
+    {
+      "key": "camera-value-anon-383",
+      "value": "Camera 383"
+    }
+  ],
+  "status": 200,
+  "total": 383
+}

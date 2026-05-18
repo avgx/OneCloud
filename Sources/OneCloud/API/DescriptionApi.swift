@@ -1,7 +1,7 @@
 import Foundation
 import RequestResponse
 
-/// Description API (`description` tag).
+/// Description API
 public enum DescriptionApi {
     /// GET /about
     public static func about() -> Request<OK> {

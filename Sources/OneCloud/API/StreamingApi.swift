@@ -1,7 +1,7 @@
 import Foundation
 import RequestResponse
 
-/// Streaming API (`streaming` tag).
+/// Streaming API
 public enum StreamingApi {
     /// GET /streaming
     public static func list() -> Request<[StreamingInfo]> {

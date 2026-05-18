@@ -1,7 +1,7 @@
 import Foundation
 import RequestResponse
 
-/// Domains API (`domains` tag, ac-backend v3).
+/// Domains API
 public enum DomainsApi {
     /// GET /domains — `ListUserDomains`
     public static func list(

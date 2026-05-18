@@ -1,0 +1,118 @@
+{
+  "compare": null,
+  "delta": 0,
+  "result": [
+    {
+      "count": 2066448,
+      "detector.type": ""
+    },
+    {
+      "count": 1488,
+      "detector.type": "FightDetected"
+    },
+    {
+      "count": 590910,
+      "detector.type": "MotionDetected"
+    },
+    {
+      "count": 3513,
+      "detector.type": "NoBodySegment"
+    },
+    {
+      "count": 10492,
+      "detector.type": "NoHeadSegment"
+    },
+    {
+      "count": 1238,
+      "detector.type": "OverspeedDetected"
+    },
+    {
+      "count": 3474,
+      "detector.type": "People"
+    },
+    {
+      "count": 216,
+      "detector.type": "QueryDetected"
+    },
+    {
+      "count": 72,
+      "detector.type": "SpeedDecreaseDetected"
+    },
+    {
+      "count": 1103,
+      "detector.type": "StatisticsInfo"
+    },
+    {
+      "count": 157,
+      "detector.type": "TrafficJamDetected"
+    },
+    {
+      "count": 186724,
+      "detector.type": "VehicleRecognized"
+    },
+    {
+      "count": 155,
+      "detector.type": "VehicleStopDetected"
+    },
+    {
+      "count": 418,
+      "detector.type": "VideoMotion"
+    },
+    {
+      "count": 3793,
+      "detector.type": "WrongDirectionDetected"
+    },
+    {
+      "count": 2,
+      "detector.type": "activeShooter"
+    },
+    {
+      "count": 2,
+      "detector.type": "areaOccupied"
+    },
+    {
+      "count": 35,
+      "detector.type": "barcodeDecoded"
+    },
+    {
+      "count": 20678750,
+      "detector.type": "faceAppeared"
+    },
+    {
+      "count": 5350967,
+      "detector.type": "listed_face_detected"
+    },
+    {
+      "count": 2228079,
+      "detector.type": "listed_lpr_detected"
+    },
+    {
+      "count": 279,
+      "detector.type": "longInZone"
+    },
+    {
+      "count": 40392,
+      "detector.type": "lotsObjects"
+    },
+    {
+      "count": 1256724,
+      "detector.type": "moveInZone"
+    },
+    {
+      "count": 4152242,
+      "detector.type": "oneLine"
+    },
+    {
+      "count": 2580977,
+      "detector.type": "plateRecognized"
+    },
+    {
+      "count": 396,
+      "detector.type": "recumbent"
+    },
+    {
+      "count": 611,
+      "detector.type": "sitDown"
+    }
+  ]
+}

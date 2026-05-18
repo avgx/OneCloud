@@ -1,7 +1,7 @@
 import Foundation
 import RequestResponse
 
-/// User API (`user` tag).
+/// User API
 public enum UsersApi {
     /// GET /users/{userId} — `CurrentUser`
     public static func get(userId: Int64) -> Request<UserWithPermissions> {
