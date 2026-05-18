@@ -1,0 +1,753 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  description: Provides an API for events metadata dictionary
+  title: AxxonData Dictionary
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+host: "localhost:8706"
+basePath: "/api/v1/ad-dictionary"
+produces:
+  - application/json
+consumes:
+  - application/json
+
+securityDefinitions:
+  AuthToken:
+    type: apiKey
+    in: header
+    name: Authorization
+  ShareToken:
+    type: apiKey
+    in: header
+    name: Authorization
+
+paths:
+  /:
+    get:
+      summary: Get version info
+      description: Returns service version info
+      operationId: getVersionInfo
+      tags:
+        - Common
+      responses:
+        200:
+          $ref: "#/responses/versionInfoResponse"
+
+  /openapi-spec:
+    get:
+      summary: Get service OpenAPI specification
+      description: Returns service OpenAPI specification
+      tags:
+        - Common
+      operationId: getOpenAPISpec
+      responses:
+        200:
+          description: scheme in json
+          schema:
+            type: object
+        404:
+          description: not found error
+
+  /heartbeat:
+    get:
+      summary: Healthcheck
+      description: Healthcheck
+      tags:
+        - Common
+      operationId: healthcheck
+      responses:
+        200:
+          description: "service is healthy"
+
+  /metrics:
+    get:
+      summary: Get metrics
+      description: Returns metrics describing service
+      tags:
+        - Common
+      produces:
+        - "text/plain"
+      responses:
+        200:
+          description: response with metrics values
+          schema:
+            type: object
+        500:
+          description: "Internal error during request processing"
+
+  /events/fields:
+    get:
+      summary: Returns events fields
+      description: Get events fields
+      tags:
+        - Metadata
+      operationId: getEventsFields
+      parameters:
+        - in: query
+          name: lang
+          type: string
+          description: events fields names language
+          required: false
+      security:
+        - AuthToken: []
+        - ShareToken: []
+      responses:
+        200:
+          $ref: "#/responses/eventsFieldsResponse"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /secured/events/fields:
+    get:
+      summary: Returns events fields (for interservice calls)
+      description: Get events fields
+      tags:
+        - Metadata
+      operationId: getEventsFieldsSecured
+      responses:
+        200:
+          $ref: "#/responses/eventsFieldsResponse"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /events/tables:
+    get:
+      summary: Returns events tables
+      description: Get events tables
+      tags:
+        - Metadata
+      operationId: getEventsTables
+      parameters:
+        - in: query
+          name: lang
+          type: string
+          description: tables description language
+          required: false
+      security:
+        - AuthToken: []
+        - ShareToken: []
+      responses:
+        200:
+          $ref: "#/responses/eventsTablesResponse"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+ 
+  /events/statuses:
+    get:
+      summary: Returns events statuses
+      description: Get events statuses
+      tags:
+        - Metadata
+      operationId: getEventStatuses
+      parameters:
+        - in: query
+          name: lang
+          type: string
+          description: status translation language
+          required: false
+      security:
+        - AuthToken: []
+        - ShareToken: []
+      responses:
+        200:
+          $ref: "#/responses/eventsStatusesResponse"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+    post:
+      summary: Adds new status
+      description: Add new status
+      tags:
+        - Metadata
+      operationId: addEventStatus
+      parameters:
+        - in: body
+          name: status
+          schema:
+            $ref: '#/definitions/status'
+          required: true
+      security:
+        - AuthToken: []
+        - ShareToken: []
+      responses:
+        200:
+          $ref: "#/responses/addStatusResponse"
+        400:
+          description: "Status already exists"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /events/statuses/{id}:
+    delete:
+      summary: Delete status
+      description: Delete status
+      tags:
+        - Metadata
+      operationId: deleteEventStatus
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          description: ID of the status to be deleted
+          required: true
+      security:
+        - AuthToken: []
+        - ShareToken: []
+      responses:
+        204:
+          description: "Status successfully deleted"
+        400:
+          description: "Bad status ID"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /secured/events/tables:
+    get:
+      summary: Returns events tables (for interservice calls)
+      description: Get events tables
+      tags:
+        - Metadata
+      operationId: getEventsTablesSecured
+      responses:
+        200:
+          description: "Events tables list"
+          schema:
+            type: array
+            items:
+              type: string
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /psim/events/params:
+    post:
+      summary: Create event param
+      description: Creates event param
+      tags:
+        - PSIM
+      operationId: createEventParam
+      security:
+        - AuthToken: [ ]
+        - ShareToken: [ ]
+      parameters:
+        - in: body
+          name: eventParam
+          schema:
+            type: object
+            $ref: '#/definitions/eventParam'
+          required: true
+          description: event param
+      responses:
+        201:
+          $ref: "#/responses/eventParamResponse"
+        400:
+          description: "Invalid parameter"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Set event params forbidden"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+    get:
+      summary: Get events params list
+      description: Gets events params list
+      tags:
+        - PSIM
+      operationId: getEventsParams
+      security:
+        - AuthToken: [ ]
+        - ShareToken: [ ]
+      responses:
+        200:
+          $ref: "#/responses/eventParamsListResponse"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Get event params forbidden"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+    delete:
+      summary: Delete events param
+      description: Deletes events param
+      tags:
+        - PSIM
+      operationId: deleteEventsParam
+      security:
+        - AuthToken: [ ]
+        - ShareToken: [ ]
+      parameters:
+        - in: body
+          name: eventParam
+          schema:
+            type: object
+            $ref: '#/definitions/eventParam'
+          required: true
+          description: event param
+      responses:
+        204:
+          description: "Event param successfully deleted"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Delete event param forbidden"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        404:
+          description: "Event param not found"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /timeperiods:
+    get:
+      summary: Get time periods for queries
+      description: Returns time periods for queries
+      tags:
+        - Metadata
+      operationId: getTimePeriods
+      parameters:
+        - in: query
+          name: lang
+          type: string
+          description: time periods names language
+          required: false
+      security:
+        - AuthToken: []
+        - ShareToken: []
+      responses:
+        200:
+          $ref: "#/responses/timePeriodsResponse"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /timeperiods/comparison/{timeperiod}:
+    post:
+      summary: Get comparing time intervals for the time period
+      description: Returns comparing time intervals for the time period
+      tags:
+        - Metadata
+      operationId: compareTimePeriod
+      parameters:
+        - in: path
+          name: timeperiod
+          type: string
+          description: specified time period for the comparison
+          required: true
+      security:
+        - AuthToken: []
+      responses:
+        200:
+          $ref: "#/responses/timePeriodsComparisonResponse"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /secured/audit/templates:
+    get:
+      summary: Get templates for audit description
+      description: Returns templates for audit description
+      tags:
+        - Metadata
+      operationId: getAuditTemplatesSecured
+      parameters:
+        - in: query
+          name: lang
+          type: string
+          description: audit template language
+          required: false
+      responses:
+        200:
+          $ref: "#/responses/auditTemplatesResponse"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /secured/translations:
+    get:
+      summary: Get translations for events fields values
+      description: Get translations for events fields values
+      tags:
+        - Metadata
+      operationId: getTranslations
+      responses:
+        200:
+          $ref: "#/responses/translationsResponse"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /secured/schema/columns:
+    get:
+      summary: Get tables columns
+      description: Returns tables columns
+      tags:
+        - Schema
+      operationId: getColumns
+      responses:
+        200:
+          $ref: "#/responses/columnsResponse"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+definitions:
+  eventFieldDescriptor:
+    description: "Event field descriptor"
+    type: object
+    properties:
+      key:
+        type: string
+      value:
+        type: string
+      type:
+        type: string
+      result_type:
+        type: string
+      childs:
+        type: array
+        items:
+          type: string
+      fields:
+        type: array
+        items:
+          type: string
+      tables:
+        type: array
+        items:
+          type: string
+    required:
+      - type
+
+  eventField:
+    description: "Event field"
+    type: object
+    properties:
+      name:
+        type: string
+      translation:
+        type: string
+      descriptor:
+        $ref: "#/definitions/eventFieldDescriptor"
+    required:
+      - name
+      - translation
+      - descriptor
+
+  eventsFields:
+    description: "Events fields list for reports construction"
+    type: array
+    items:
+      $ref: "#/definitions/eventField"
+
+  eventTable:
+    description: "Event table"
+    type: object
+    properties:
+      name:
+        type: string
+      description:
+        type: string
+    required:
+      - name
+      - description
+
+  eventStatus:
+    description: "Event status"
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      translation:
+        type: string
+      color:
+        type: string
+    required:
+      - name
+      - translation
+
+  eventsTables:
+    description: "Events tables"
+    type: array
+    items:
+      $ref: "#/definitions/eventTable"
+
+  eventsStatuses:
+    description: "Events statuses"
+    type: array
+    items:
+      $ref: "#/definitions/eventStatus"
+
+  timePeriod:
+    description: "Time period parameter for reports"
+    type: object
+    properties:
+      type:
+        type: string
+      translation:
+        type: string
+      main:
+        type: boolean
+      compare:
+        type: boolean
+      from:
+        type: string
+      to:
+        type: string
+      tag:
+        $ref: "#/definitions/timeTag"
+    required:
+      - type
+      - translation
+      - main
+      - compare
+      - tag
+
+  timeTag:
+    description: "Tag for time period grouping with translation"
+    type: object
+    properties:
+      type:
+        type: string
+        enum: [hourly, daily, weekly, monthly, yearly]
+      translation:
+        type: string
+    required:
+      - type
+      - translation
+
+  timePeriods:
+    description: "Time periods"
+    type: array
+    items:
+      $ref: "#/definitions/timePeriod"
+
+  timePeriodComparison:
+    description: "Time period comparison parameter for reports"
+    type: object
+    properties:
+      type:
+        type: string
+      from:
+        type: string
+      to:
+        type: string
+    required:
+      - type
+      - from
+      - to
+
+  timePeriodsComparison:
+    description: "Time periods comparison"
+    type: array
+    items:
+      $ref: "#/definitions/timePeriodComparison"
+
+  auditTemplates:
+    description: "Audit description templates"
+    type: object
+    additionalProperties:
+      type: string
+
+  translation:
+    description: "Translation"
+    type: object
+    additionalProperties:
+      type: string
+
+  column:
+    description: "Table column descriptor"
+    type: object
+    properties:
+      name:
+        type: string
+      type:
+        type: string
+      tableName:
+        type: string
+    required:
+      - name
+      - type
+      - tableName
+
+  columns:
+    description: "Tables columns descriptors"
+    type: array
+    items:
+      $ref: "#/definitions/column"
+
+  error:
+    description: "API call error result"
+    type: object
+    properties:
+      message:
+        type: string
+    required:
+      - message
+
+  status:
+    type: object
+    properties:
+      lang:
+        type: string
+      status:
+        type: string
+      translation:
+        type: string
+      color:
+        type: string
+      domains:
+        type: array
+        items:
+          type: integer
+
+  eventParam:
+    type: object
+    properties:
+      name:
+        type: string
+      type:
+        enum: [ UInt8, UInt16, UInt32, UInt64, Int8, Int16, Int32, Int64, Float32, Float64, String, DateTime ]
+        format: string
+    required:
+      - name
+      - type
+
+  eventParamsList:
+    type: array
+    items:
+      $ref: "#/definitions/eventParam"
+
+responses:
+  versionInfoResponse:
+    description: "Service version info"
+    schema:
+      type: object
+      properties:
+        planKey:
+          type: string
+        branch:
+          type: string
+        build:
+          type: string
+        revision:
+          type: string
+
+  eventsFieldsResponse:
+    description: "Events fields response"
+    schema:
+      $ref: "#/definitions/eventsFields"
+
+  eventsTablesResponse:
+    description: "Events tables response"
+    schema:
+      $ref: "#/definitions/eventsTables"
+
+  eventsStatusesResponse:
+    description: "Events statuses response"
+    schema:
+      $ref: "#/definitions/eventsStatuses"
+
+  addStatusResponse:
+    description: "Add new status response"
+    schema:
+      $ref: "#/definitions/status"
+
+
+  timePeriodsResponse:
+    description: "Time periods response"
+    schema:
+      $ref: "#/definitions/timePeriods"
+
+  timePeriodsComparisonResponse:
+    description: "Time periods comparison response"
+    schema:
+      $ref: "#/definitions/timePeriodsComparison"
+
+  translationsResponse:
+    description: "Events fields values translations"
+    schema:
+      $ref: "#/definitions/translation"
+
+  auditTemplatesResponse:
+    description: "Audit description template"
+    schema:
+      $ref: "#/definitions/auditTemplates"
+
+  columnsResponse:
+    description: "Table columns response"
+    schema:
+      $ref: "#/definitions/columns"
+
+  eventParamResponse:
+    description: "Event param object"
+    schema:
+      type: object
+      $ref: "#/definitions/eventParam"
+
+  eventParamsListResponse:
+    description: "Event params list"
+    schema:
+      type: object
+      $ref: "#/definitions/eventParamsList"

@@ -1,0 +1,1369 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  description: Provides an API for data querying from events storage
+  title: AxxonData Query
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+host: "localhost:8789"
+basePath: "/api/v2/ad-query"
+
+produces:
+  - "application/json"
+consumes:
+  - "application/json"
+
+securityDefinitions:
+  AuthToken:
+    type: apiKey
+    in: header
+    name: Authorization
+  ShareToken:
+    type: apiKey
+    in: header
+    name: Authorization
+
+parameters:
+  authorizationHeader:
+    in: header
+    name: Authorization
+    type: string
+    description: user token
+    required: true
+  optionalAuthHeader:
+    in: header
+    name: Authorization
+    type: string
+    description: user token
+    required: false
+
+paths:
+  /:
+    get:
+      summary: Get version info
+      description: Returns service version info
+      operationId: getVersionInfo
+      tags:
+        - Common
+      responses:
+        200:
+          $ref: "#/responses/versionInfoResponse"
+
+  /openapi-spec:
+    get:
+      summary: Get service OpenAPI specification
+      description: Returns service OpenAPI specification
+      tags:
+        - Common
+      operationId: getOpenAPISpec
+      responses:
+        200:
+          description: scheme in json
+          schema:
+            type: object
+        404:
+          description: not found error
+
+  /heartbeat:
+    get:
+      summary: Healthcheck
+      description: Healthcheck
+      tags:
+        - Common
+      operationId: healthcheck
+      responses:
+        200:
+          description: "service is healthy"
+
+  /metrics:
+    get:
+      summary: Get metrics
+      description: Returns metrics describing service
+      tags:
+        - Common
+      produces:
+        - "text/plain"
+      responses:
+        200:
+          description: response with metrics values
+          schema:
+            type: object
+        500:
+          description: "Internal error during request processing"
+
+  /query:
+    post:
+      summary: Execute query
+      description: Executes query
+      tags:
+        - Query
+      operationId: executeQuery
+      security:
+        - AuthToken: []
+        - ShareToken: []
+      parameters:
+        - $ref: '#/parameters/authorizationHeader'
+        - in: query
+          name: lang
+          type: string
+          required: false
+          description: language for translations
+        - in: query
+          name: internal
+          type: boolean
+          default: false
+          required: false
+          description: internal query attribute
+        - in: body
+          name: query
+          schema:
+            $ref: '#/definitions/query'
+          required: true
+          description: query for fetching data
+      responses:
+        200:
+          $ref: "#/responses/queryResponse"
+        400:
+          $ref: "#/responses/queryBadRequestResponse"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /query/parking:
+    post:
+      summary: Execute parking query
+      description: Executes parking query
+      tags:
+        - Query
+      operationId: executeParkingQuery
+      security:
+        - AuthToken: []
+        - ShareToken: []
+      parameters:
+        - $ref: '#/parameters/authorizationHeader'
+        - in: query
+          name: lang
+          type: string
+          required: false
+          description: language for translations
+        - in: body
+          name: filter
+          schema:
+            $ref: '#/definitions/filter'
+          required: true
+          description: filter for fetching parking data
+      responses:
+        200:
+          $ref: "#/responses/queryResponse"
+        400:
+          $ref: "#/responses/queryBadRequestResponse"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /query/csv:
+    post:
+      summary: Execute query and return response in CSV format
+      description: Executes query and returns response in CSV format
+      tags:
+        - Query
+      produces:
+        - "text/plain"
+      operationId: executeQueryCSV
+      security:
+        - AuthToken: [ ]
+        - ShareToken: [ ]
+      parameters:
+        - $ref: '#/parameters/authorizationHeader'
+        - in: body
+          name: params
+          schema:
+            $ref: '#/definitions/csvParamsQuery'
+          required: true
+          description: params for data in CSV format and query params
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: string
+        400:
+          description: "Bad request"
+        500:
+          description: "Internal error during request processing"
+
+  /query/batch:
+    post:
+      summary: Execute queries
+      description: Executes several queries
+      tags:
+        - Query
+      operationId: executeBatchQuery
+      security:
+        - AuthToken: []
+      parameters:
+        - $ref: '#/parameters/authorizationHeader'
+        - in: body
+          name: batch
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/query'
+          required: true
+          description: query for fetching data
+      responses:
+        200:
+          $ref: "#/responses/queryResponse"
+        400:
+          $ref: "#/responses/queryBadRequestResponse"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /query/preview:
+    post:
+      summary: Get generated query preview
+      description: Returns generated query preview
+      tags:
+        - Query
+      operationId: getQueryPreview
+      security:
+        - AuthToken: [ ]
+      parameters:
+        - $ref: '#/parameters/authorizationHeader'
+        - in: body
+          name: query
+          schema:
+            $ref: '#/definitions/query'
+          required: true
+          description: query for fetching data
+      responses:
+        200:
+          $ref: "#/responses/queryPreviewResponse"
+        400:
+          description: "Invalid query"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /reports/{presetId}:
+    post:
+      summary: Get reports data
+      description: Get reports data by preset id and filters
+      tags:
+        - Query
+      operationId: getReportData
+      security:
+        - AuthToken: []
+      parameters:
+        - $ref: '#/parameters/authorizationHeader'
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/reportFilters'
+          required: true
+          description: filters for report
+        - in: path
+          name: presetId
+          type: string
+          format: uuid
+          required: true
+          description: preset id
+      responses:
+        200:
+          $ref: "#/responses/queryResponse"
+        400:
+          description: "Invalid filters"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        404:
+          description: "Report not found"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        422:
+          description: "presetId is required and must be a valid UUID"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /field/{type}/{name}:
+    post:
+      summary: Get distinct event field values with filter
+      description: Returns distinct event field values depending on field type and filter
+      tags:
+        - Query
+      operationId: getEventFieldValues
+      security:
+        - AuthToken: []
+        - ShareToken: []
+      parameters:
+        - $ref: '#/parameters/authorizationHeader'
+        - in: path
+          name: type
+          type: string
+          required: true
+          description: field type
+        - in: path
+          name: name
+          type: string
+          required: true
+          description: field name
+        - in: query
+          name: parentValue
+          type: string
+          required: false
+          description: parent field value
+        - in: query
+          name: lang
+          type: string
+          required: false
+          description: language of fields values
+        - in: body
+          name: filter
+          schema:
+            $ref: '#/definitions/filter'
+          required: false
+          description: filter for field values
+      responses:
+        200:
+          $ref: "#/responses/eventFieldValuesResponse"
+        400:
+          description: "Invalid field type"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        401:
+          description: "Not authenticated"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        404:
+          description: "Field not found"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /heatmap/{node}/{device}/{source}:
+    post:
+      summary: Get heatmap image for specified source and period from VMS archive
+      description: Returns heatmap image with live snapshot for specified source and period from VMS archive
+      tags:
+        - Query
+      operationId: getHeatmap
+      security:
+        - AuthToken: []
+      parameters:
+        - $ref: '#/parameters/authorizationHeader'
+        - in: path
+          name: node
+          type: string
+          required: true
+          description: vms node (hostname), e.g. AXXONNEXT-657F9954D4-BHKMQ
+        - in: path
+          name: device
+          type: string
+          required: true
+          description: video device, e.g. DeviceIpint.1
+        - in: path
+          name: source
+          type: string
+          required: true
+          description: video source, e.g. SourceEndpoint.video:0:0
+        - in: query
+          name: domainID
+          type: integer
+          format: int64
+          required: false
+          description: domainID for request
+        - in: body
+          name: period
+          schema:
+            $ref: '#/definitions/timePeriod'
+          required: true
+          description: heatmap time period
+      responses:
+        200:
+          $ref: "#/responses/heatmapResponse"
+        400:
+          description: "Invalid request params"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /secured/heatmap:
+    post:
+      summary: Get heatmap image for specified source and period from VMS archive
+      description: Returns heatmap image with live snapshot for specified source and period from VMS archive
+      tags:
+        - Query
+      operationId: securedGetHeatmap
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/heatmapParams'
+          required: true
+          description: heatmap params
+      responses:
+        200:
+          $ref: "#/responses/heatmapResponse"
+        400:
+          description: "Invalid request params"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /heatmap/new:
+    post:
+      summary: Get heatmap image for specified source and period from VMS archive (authenticated)
+      description: Returns heatmap image with live snapshot for specified source and period from VMS archive
+      tags:
+        - Query
+      operationId: getHeatmapNew
+      security:
+        - AuthToken: []
+        - ShareToken: []
+      parameters:
+        - $ref: '#/parameters/authorizationHeader'
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/heatmapParams'
+          required: true
+          description: heatmap params
+      responses:
+        200:
+          $ref: "#/responses/heatmapResponse"
+        400:
+          description: "Invalid request params"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        401:
+          description: "Not authenticated"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /heatmap/consolidated/{node}:
+    post:
+      summary: Get consolidated heatmap image for specified source and period from VMS archive
+      description: Returns consolidated heatmap image with live snapshot for specified source and period from VMS archive
+      tags:
+        - Query
+      operationId: getConsolidatedHeatmap
+      security:
+        - AuthToken: []
+        - ShareToken: []
+      parameters:
+        - $ref: '#/parameters/authorizationHeader'
+        - in: path
+          name: node
+          type: string
+          required: true
+          description: vms node (hostname), e.g. AXXONNEXT-657F9954D4-BHKMQ
+        - in: query
+          name: domainId
+          type: integer
+          format: int64
+          required: false
+          description: domainID for request
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/consolidatedHeatmapParams'
+          required: true
+          description: consolidated heatmap params
+      responses:
+        200:
+          $ref: "#/responses/consolidatedHeatmapResponse"
+        400:
+          description: "Invalid request params"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        401:
+          description: "Not authenticated"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /users/info:
+    get:
+      summary: List internal users info
+      description: Returns internal users info retrieved via the GetUsersInfo client.
+      tags:
+        - Query
+      operationId: listUsersInfo
+      security:
+        - AuthToken: []
+      parameters:
+        - in: query
+          name: pageLimit
+          type: integer
+          format: int64
+          required: false
+          description: Maximum number of users to return.
+        - in: query
+          name: pageOffset
+          type: integer
+          format: int64
+          required: false
+          description: 0-based index of the first record to return.
+        - in: query
+          name: sortBy
+          type: string
+          required: false
+          description: Field name to sort by (e.g. `email`, `lastActivityTime`).
+        - in: query
+          name: orderBy
+          type: string
+          enum: [asc, desc]
+          required: false
+          description: Sort order direction.
+        - in: query
+          name: searchByEmail
+          type: string
+          required: false
+          description: Case-insensitive substring filter applied to user e-mail addresses.
+        - in: query
+          name: onlineOnly
+          type: boolean
+          required: false
+          description: When true, restricts the result set to users with active sessions.
+      responses:
+        200:
+          $ref: "#/responses/internalUsersResponse"
+        400:
+          description: "Invalid query parameters"
+          schema:
+            $ref: "#/definitions/error"
+        403:
+          description: "User does not have permissions to view users info"
+          schema:
+            $ref: "#/definitions/error"
+        500:
+          description: "Failed to retrieve users from AxxonNet"
+          schema:
+            $ref: "#/definitions/error"
+
+  /secured/teams/{teamId}/users/{userId}/reports/{presetId}:
+    post:
+      summary: Get reports data
+      description: Get reports data by preset id and filters
+      tags:
+        - Query
+      operationId: securedGetReportData
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/reportFilters'
+          required: true
+          description: filters for report
+        - in: path
+          name: presetId
+          type: string
+          format: uuid
+          required: true
+          description: preset id
+        - in: path
+          name: teamId
+          type: string
+          required: true
+          description: team id
+        - in: path
+          name: userId
+          type: string
+          required: true
+          description: user id
+      responses:
+        200:
+          $ref: "#/responses/queryResponse"
+        400:
+          description: "Invalid filters"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        404:
+          description: "Report not found"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        422:
+          description: "presetId is required and must be a valid UUID"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /secured/teams/{teamId}/field/{type}/{name}:
+    post:
+      summary: Get distinct event field values with filter
+      description: Returns distinct event field values depending on field type and filter
+      tags:
+        - Query
+      operationId: securedGetEventFieldValues
+      parameters:
+        - in: path
+          name: teamId
+          type: string
+          required: true
+          description: team id
+        - in: path
+          name: type
+          type: string
+          required: true
+          description: field type
+        - in: path
+          name: name
+          type: string
+          required: true
+          description: field name
+        - in: query
+          name: parentValue
+          type: string
+          required: false
+          description: parent field value
+        - in: query
+          name: lang
+          type: string
+          required: false
+          description: language of fields values
+        - in: body
+          name: filter
+          schema:
+            $ref: '#/definitions/filter'
+          required: false
+          description: filter for field values
+      responses:
+        200:
+          $ref: "#/responses/eventFieldValuesResponse"
+        400:
+          description: "Invalid field type"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        404:
+          description: "Field not found"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /secured/teams:
+    get:
+      summary: Get teams
+      description: Return list of teams from events table
+      tags:
+        - Query
+      operationId: securedGetTeams
+      parameters:
+        - in: query
+          name: limit
+          type: integer
+          format: int64
+      responses:
+        200:
+          $ref: "#/responses/teamsListResponse"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /events/latestTime:
+    get:
+      summary: Get latest event time
+      description: Get latest event time
+      tags:
+        - Query
+      operationId: getLatestEventTime
+      security:
+        - AuthToken: []
+      responses:
+        200:
+          $ref: "#/responses/latestEventTimeResponse"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+definitions:
+  timePeriodValue: { type: string, enum: [ "today", "this_week","this_month", "this_year",
+                                           "yesterday", "day_before_yesterday", "this_day_last_week", "previous_week",
+                                           "previous_month", "previous_year", "last_15_minutes", "last_30_minutes",
+                                           "last_1_hour", "last_4_hours", "last_12_hours", "last_24_hours",
+                                           "last_7_days", "last_30_days", "last_60_days", "last_90_days",
+                                           "last_6_month", "last_year", "last_10_years", "forever","userdefined" ] }
+
+  eventView: {type: string, enum: ["columns", "fields"], default: "columns"}
+  clauseOperation: {type: string, "enum": ["gt", "lt", "gte", "lte", "eq", "neq", "in", "nin", "containsand", "containsor", "notcontains", "isnull", "isnotnull", "isnulloreq", "like", "notlike"]}
+  mathOperator: {type: string, enum: ["add", "subtract", "multiply", "divide"]}
+  aggregationFunc: { type: string, enum: [ "sum", "avg","max", "min", "count", "last_value" ] }
+  builtinFunc: { type: string, enum: [ "$now()", "extract_seconds", "extract_minutes", "coalesce_date", "day_of_week" ] }
+  setRelationType: { type: string, enum: [ "IN", "NOT IN", "EQUAL" ] }
+  joinType: { type: string, enum: [ "LEFT", "RIGHT", "INNER" ] }
+  joinOperator: { type: string, enum: [ "and", "or"] }
+  timeIntervalType: { type: string, enum: [ "second", "minute", "hour", "day", "week", "month", "year" ] }
+
+  sort:
+    type: object
+    properties:
+      field:
+        type: string
+      desc:
+        type: boolean
+    required:
+      - field
+
+  clause:
+    type: object
+    properties:
+      field:
+        type: string
+      prefix:
+        type: string
+      op:
+        $ref: "#/definitions/clauseOperation"
+      value:
+        type: object
+    required:
+      - field
+      - op
+      - value
+  having:
+    type: object
+    properties:
+      field:
+        $ref: "#/definitions/queryField"
+      prefix:
+        type: string
+      op:
+        $ref: "#/definitions/clauseOperation"
+      value:
+        type: object
+    required:
+      - field
+      - op
+      - value
+  timePeriod:
+    type: object
+    properties:
+      type:
+        $ref: "#/definitions/timePeriodValue"
+      compare:
+        $ref: "#/definitions/timePeriodValue"
+      from:
+        type: string
+      to:
+        type: string
+      timeZone:
+        type: string
+    required:
+      - type
+
+  filter:
+    description: "filter for query construction"
+    type: object
+    properties:
+      version:
+        type: integer
+      clauses:
+        type: array
+        items:
+          $ref: "#/definitions/clause"
+      period:
+        $ref: "#/definitions/timePeriod"
+      search:
+        type: string
+        description: "Search phrase. Supports wildcards: * (any number of chars), ? (one char). Example: K*0?E*07"
+    required:
+      - period
+
+  timeInterval:
+    type: object
+    properties:
+      type:
+        $ref: "#/definitions/timeIntervalType"
+      value:
+        type: integer
+
+  queryFieldExpression:
+    type: object
+    properties:
+      left:
+        $ref: "#/definitions/queryField"
+      right:
+        $ref: "#/definitions/queryField"
+      operator:
+        $ref: "#/definitions/mathOperator"
+      alias:
+        type: string
+    required:
+      - left
+      - right
+      - operator
+
+  downsampling:
+    type: object
+    properties:
+      first:
+        $ref: "#/definitions/queryField"
+      second:
+        $ref: "#/definitions/queryField"
+      number:
+        type: integer
+        minimum: 1
+    required:
+      - first
+      - second
+      - number
+
+  queryField:
+    type: object
+    properties:
+      field:
+        type: string
+      alias:
+        type: string
+      prefix:
+        type: string
+      distinct:
+        type: boolean
+      aggregationFunc:
+        $ref: "#/definitions/aggregationFunc"
+      builtinFunc:
+        $ref: "#/definitions/builtinFunc"
+      expression:
+        $ref: "#/definitions/queryFieldExpression"
+      timeInterval:
+        $ref: "#/definitions/timeInterval"
+      downsampling:
+        $ref: "#/definitions/downsampling"
+
+  queryRelationToSet:
+    type: object
+    properties:
+      fields:
+        type: array
+        items:
+          type: string
+      relation:
+        $ref: "#/definitions/setRelationType"
+      set:
+        $ref: "#/definitions/query"
+    required:
+      - fields
+      - relation
+      - set
+
+  queryJoinCondition:
+    type: object
+    properties:
+      left:
+        type: string
+      right:
+        type: string
+      condition:
+        $ref: "#/definitions/clauseOperation"
+      operator:
+        $ref: "#/definitions/joinOperator"
+    required:
+      - left
+      - right
+      - condition
+
+  queryJoinConditionGroup:
+    type: object
+    properties:
+      groupOperator:
+        $ref: "#/definitions/joinOperator"
+        description: "How to combine this group with other groups (AND/OR)"
+      conditions:
+        type: array
+        items:
+          $ref: "#/definitions/queryJoinCondition"
+    required:
+      - groupOperator
+      - conditions
+
+  queryJoinTable:
+    type: object
+    properties:
+      joinType:
+        $ref: "#/definitions/joinType"
+      table:
+        type: string
+      conditions:
+        type: array
+        items:
+          $ref: "#/definitions/queryJoinCondition"
+      conditionGroups:
+        type: array
+        items:
+          $ref: "#/definitions/queryJoinConditionGroup"
+    required:
+      - joinType
+      - table
+
+  queryJoinSubquery:
+    type: object
+    properties:
+      joinType:
+        $ref: "#/definitions/joinType"
+      subquery:
+        $ref: "#/definitions/query"
+      alias:
+        type: string
+      conditions:
+        type: array
+        items:
+          $ref: "#/definitions/queryJoinCondition"
+      conditionGroups:
+        type: array
+        items:
+          $ref: "#/definitions/queryJoinConditionGroup"
+    required:
+      - joinType
+      - subquery
+      - alias
+
+  join:
+    type: object
+    properties:
+      type:
+        $ref: "#/definitions/joinType"
+      alias:
+        type: string
+      table:
+        type: string
+      query:
+        $ref: "#/definitions/query"
+      conditions:
+        type: array
+        items:
+          $ref: "#/definitions/queryJoinCondition"
+      conditionGroups:
+        type: array
+        items:
+          $ref: "#/definitions/queryJoinConditionGroup"
+    required:
+      - type
+
+  reportFilters:
+    type: object
+    properties:
+      view:
+        $ref: "#/definitions/eventView"
+      period:
+        $ref: '#/definitions/timePeriod'
+      clauses:
+        type: object
+        additionalProperties:
+          $ref: "#/definitions/clause"
+      sites:
+        type: array
+        items:
+          type: string
+      search:
+        type: string
+        description: "Search phrase. Supports wildcards: * (any number of chars), ? (one char). Example: K*0?E*07"
+    required:
+      - period
+
+  query:
+    type: object
+    properties:
+      view:
+        $ref: "#/definitions/eventView"
+      distinct:
+        type: boolean
+      fields:
+        type: array
+        items:
+          $ref: "#/definitions/queryField"
+      table:
+        type: string
+      distinctOn:
+        type: array
+        items:
+          $ref: "#/definitions/queryField"
+      countRows:
+        type: boolean
+        default: false
+      subquery:
+        $ref: "#/definitions/query"
+      subqueryAlias:
+        type: string
+      filter:
+        $ref: "#/definitions/filter"
+      relatesToSet:
+        type: array
+        items:
+          $ref: "#/definitions/queryRelationToSet"
+      groupBy:
+        type: array
+        items:
+          type: string
+      having:
+        $ref: "#/definitions/having"
+      limit:
+        type: integer
+        format: int64
+      offset:
+        type: integer
+        format: int64
+      orderBy:
+        type: array
+        items:
+          $ref: "#/definitions/sort"
+      joinTable:
+        $ref: "#/definitions/queryJoinTable"
+      joinSubquery:
+        $ref: "#/definitions/queryJoinSubquery"
+      joins:
+        type: array
+        items:
+          $ref: "#/definitions/join"
+    required:
+      - fields
+
+  queryResult:
+    description: "Query result"
+    type: object
+    properties:
+      total:
+        type: integer
+        format: int64
+      result:
+        type: array
+        items:
+          type: object
+      compare:
+        type: array
+        items:
+          type: object
+      delta:
+        type: integer
+        format: int64
+        x-omitempty: false
+
+  queryPreview:
+    description: "Query preview"
+    type: object
+    properties:
+      text:
+        type: string
+      args:
+        type: array
+        items:
+          type: object
+
+  eventFieldValues:
+    type: object
+    properties:
+      total:
+        type: integer
+      status:
+        type: integer
+      result:
+        type: object
+    required:
+      - total
+      - status
+      - result
+
+  heatmapParams:
+    type: object
+    properties:
+      nodeName:
+        type: string
+        description: vms node (hostname), e.g. AXXONNEXT-657F9954D4-BHKMQ
+      detector:
+        type: string
+        description: detector object name, e.g. "AVDetector.34" from "IT-13706/AVDetector.34/EventSupplier"
+      camera:
+        type: string
+        description: camera object name, e.g. "DeviceIpint.2" from "IT-13706/DeviceIpint.2/SourceEndpoint.video:0:0"
+      videoSource:
+        type: string
+        description: video source, e.g. "SourceEndpoint.video:0:0"
+      domainId:
+        type: integer
+        format: int64
+        description: domain id from AxxonNet
+      period:
+        $ref: '#/definitions/timePeriod'
+    required:
+      - nodeName
+      - detector
+      - camera
+      - videoSource
+      - domainId
+      - period
+
+  heatmap:
+    type: object
+    properties:
+      snapshot:
+        type: string
+        description: base64-encoded camera snapshot image
+      heatmap:
+        type: string
+        description: base64-encoded heat map mask
+    required:
+      - snapshot
+      - heatmap
+
+  consolidatedHeatmap:
+    type: object
+    properties:
+      heatmap:
+        type: string
+        description: base64-encoded consolidated heat map mask
+      mapImage:
+        type: string
+        description: base64-encoded map image
+    required:
+      - heatmap
+      - mapImage
+
+  consolidatedHeatmapParams:
+    type: object
+    properties:
+      mapId:
+        type: string
+        format: uuid
+        description: map id from AxxonNext
+      period:
+        $ref: '#/definitions/timePeriod'
+      dataSources:
+        type: array
+        minItems: 2
+        uniqueItems: true
+        description: metadata sources for heatmap
+        items:
+          type: object
+          properties:
+            accessPoint:
+              type: string
+              description: access point name
+    required:
+      - mapId
+      - period
+      - dataSources
+
+  internalUserInfo:
+    type: object
+    properties:
+      email:
+        type: string
+        format: email
+        description: User e-mail address.
+      id:
+        type: integer
+        format: int64
+        description: Unique identifier of the user.
+      isOnline:
+        type: boolean
+        description: Indicates whether the user currently has at least one active session.
+      lastActivityTime:
+        type: string
+        format: date-time
+        description: Timestamp of the user’s most recent activity.
+      userGroupNames:
+        type: array
+        description: Human-readable names of groups the user belongs to.
+        items:
+          type: string
+      userSessionIPs:
+        type: array
+        description: IP addresses associated with the user’s active sessions.
+        items:
+          type: string
+      domainNames:
+        type: array
+        description: domain names that user has access to.
+        items:
+          type: string
+
+  queryError:
+    type: object
+    properties:
+      queryPreview:
+        type: string
+      errorMessage:
+        type: string
+
+  teamsList:
+    type: array
+    items:
+      type: string
+
+  csvParamsQuery:
+    type: object
+    properties:
+      separator:
+        type: string
+      displayHeader:
+        type: boolean
+      query:
+        $ref: '#/definitions/query'
+      pivot:
+        $ref: '#/definitions/pivot'
+    required:
+      - query
+
+  pivot:
+    type: object
+    properties:
+      row:
+        type: array
+        items:
+          type: string
+      column:
+        type: string
+      value:
+        type: string
+    required:
+      - row
+      - column
+      - value
+
+  latestEventTime:
+    type: array
+    items:
+      type: object
+      properties:
+        latestEventTime:
+          type: string
+        eventType:
+          type: string
+      required:
+        - latestEventTime
+        - eventType
+
+  error:
+    description: "API call error result"
+    type: object
+    properties:
+      message:
+        type: string
+    required:
+      - message
+
+responses:
+  queryResponse:
+    description: "Plain query result"
+    schema:
+      $ref: "#/definitions/queryResult"
+
+  queryBadRequestResponse:
+    description: "Query bad request"
+    schema:
+      $ref: "#/definitions/queryError"
+
+  queryPreviewResponse:
+    description: "Query preview response"
+    schema:
+      $ref: "#/definitions/queryPreview"
+
+  internalUsersResponse:
+    description: "List of AxxonNet users"
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/internalUserInfo"
+
+  eventFieldValuesResponse:
+    description: "event field values"
+    schema:
+      $ref: "#/definitions/eventFieldValues"
+
+  heatmapResponse:
+    description: "Heatmap image from VMS"
+    schema:
+      $ref: "#/definitions/heatmap"
+
+  consolidatedHeatmapResponse:
+    description: "Consolidated heatmap image from VMS"
+    schema:
+      $ref: "#/definitions/consolidatedHeatmap"
+
+  teamsListResponse:
+    description: "teams list"
+    schema:
+      $ref: "#/definitions/teamsList"
+
+  latestEventTimeResponse:
+    description: "Latest event time"
+    schema:
+      $ref: "#/definitions/latestEventTime"
+
+  versionInfoResponse:
+    description: "Service version info"
+    schema:
+      type: object
+      properties:
+        planKey:
+          type: string
+        branch:
+          type: string
+        build:
+          type: string
+        revision:
+          type: string

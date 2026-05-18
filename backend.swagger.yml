@@ -1,0 +1,2473 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  description: Provides CRUD API for AxxonData entities
+  title: AxxonData Backend
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+host: "localhost:8080"
+basePath: "/api/v1/ad-backend"
+
+produces:
+  - "application/json"
+consumes:
+  - "application/json"
+
+paths:
+  /:
+    get:
+      summary: Get Version Info
+      description: Get Version Info
+      operationId: getVersionInfo
+      tags:
+        - Common
+      responses:
+        200:
+          $ref: "#/responses/versionInfo"
+  /openapi-spec:
+    get:
+      summary: returns json api description
+      description: getAPI
+      tags:
+        - Common
+      operationId: getOpenAPISpec
+      responses:
+        200:
+          description: scheme in json
+          schema:
+            type: object
+        404:
+          description: not found error
+  /heartbeat:
+    get:
+      summary: Healthcheck
+      description: Healthcheck
+      tags:
+        - Common
+      operationId: healthcheck
+      responses:
+        200:
+          description: service is ok
+  /metrics:
+    get:
+      summary: Get metrics
+      description: Returns metrics for backend
+      tags:
+        - Common
+      produces:
+        - "text/plain"
+      consumes:
+        - "application/json"
+      responses:
+        200:
+          description: response with metrics values
+          schema:
+            type: object
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+  /userInfo:
+    get:
+      summary: Get user info
+      description: Gets logged user info
+      tags:
+        - Users
+      operationId: getUserInfo
+      security:
+        - AuthToken: []
+      responses:
+        200:
+          $ref: "#/responses/userInfoResponse"
+        401:
+          description: "Indicates that request was not authorized"
+        404:
+          description: "User not found"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /user/share/token:
+    get:
+      summary: Get share token for user
+      description: Get share token for user
+      tags:
+        - Users
+      operationId: getUserShareToken
+      security:
+        - AuthToken: [ ]
+      responses:
+        200:
+          $ref: "#/responses/shareTokenResponse"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Get share token forbidden"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /secured/users/{userId}/share/token:
+    get:
+      summary: Get share token for user
+      description: Get share token for user
+      tags:
+        - Users
+      operationId: securedGetUserShareToken
+      parameters:
+        - in: path
+          name: userId
+          type: string
+          required: true
+          description: "user id"
+      responses:
+        200:
+          $ref: "#/responses/shareTokenResponse"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Get share token forbidden"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /widgets:
+    get:
+      summary: Get predefined widgets
+      description: Gets predefined widgets
+      tags:
+        - Widgets
+      operationId: getWidgets
+      security:
+        - AuthToken: []
+      responses:
+        200:
+          $ref: "#/responses/widgetsListResponse"
+        401:
+          description: "Indicates that request was not authorized"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+    put:
+      summary: Update widget from presets
+      description: Performs widgets update by presets
+      tags:
+        - Widgets
+      operationId: updateWidgetsFromPresets
+      security:
+        - AuthToken: []
+      responses:
+        204:
+          description: "Widgets successfully updated"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Update widget forbidden"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /users/{userId}/widgets:
+    get:
+      summary: Get user widgets
+      description: Gets user widgets
+      tags:
+        - Widgets
+      operationId: getUserWidgets
+      security:
+        - AuthToken: []
+      parameters:
+        - in: path
+          name: userId
+          type: string
+          required: true
+          description: user id
+      responses:
+        200:
+          $ref: "#/responses/widgetsListResponse"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Create report forbidden"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+    post:
+      summary: Create widget
+      description: Creates a new widget for user
+      tags:
+        - Widgets
+      operationId: createWidget
+      security:
+        - AuthToken: []
+      parameters:
+        - in: path
+          name: userId
+          type: string
+          required: true
+          description: user id
+        - in: body
+          name: widget
+          schema:
+            type: object
+            $ref: '#/definitions/widgetParams'
+          required: true
+          description: widget parameters
+      responses:
+        200:
+          $ref: "#/responses/widgetResponse"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Create widget"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /users/{userId}/widgets/{widgetId}:
+    put:
+      summary: Update widget parameters
+      description: Updates widget parameters
+      tags:
+        - Widgets
+      operationId: updateWidget
+      security:
+        - AuthToken: []
+      parameters:
+        - in: path
+          name: userId
+          type: string
+          required: true
+          description: user id
+        - in: path
+          name: widgetId
+          type: string
+          required: true
+          description: widget id
+        - in: body
+          name: widget
+          schema:
+            type: object
+            $ref: '#/definitions/widgetParams'
+          required: true
+          description: widget parameters
+      responses:
+        200:
+          $ref: "#/responses/widgetResponse"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Update widget forbidden"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+    delete:
+      summary: Delete widget
+      description: Deletes widget from user
+      tags:
+        - Widgets
+      operationId: deleteWidget
+      security:
+        - AuthToken: []
+      parameters:
+        - in: path
+          name: userId
+          type: string
+          required: true
+          description: user id
+        - in: path
+          name: widgetId
+          type: string
+          required: true
+          description: widget id
+      responses:
+        204:
+          description: "Widget successfully deleted"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Delete widget forbidden"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /reports:
+    get:
+      summary: Get predefined reports
+      description: Gets predefined reports
+      tags:
+        - Reports
+      operationId: getPredefinedReports
+      parameters:
+        - in: query
+          name: lang
+          type: string
+          required: false
+          description: language for report group name
+      security:
+        - AuthToken: []
+      responses:
+        200:
+          $ref: "#/responses/reportsSummaryListResponse"
+        401:
+          description: "Indicates that request was not authorized"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+    post:
+      summary: Create report
+      description: Creates a new report
+      tags:
+        - Reports
+      operationId: createReport
+      security:
+        - AuthToken: []
+      parameters:
+        - in: body
+          name: report
+          schema:
+            type: object
+            $ref: '#/definitions/createReportParams'
+          required: true
+          description: report parameters
+      responses:
+        200:
+          $ref: "#/responses/reportResponse"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Create report forbidden"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        404:
+          description: "Report preset not found"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        422:
+          description: "presetId is required and must be a valid UUID"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+    put:
+      summary: Update reports from presets
+      description: Performs reports update by presets
+      tags:
+        - Reports
+      operationId: updateReportsFromPresets
+      security:
+        - AuthToken: []
+      responses:
+        204:
+          description: "Reports successfully updated"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Update reports from presets forbidden"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /reports/{reportId}:
+    put:
+      summary: Update report parameters
+      description: Updates report parameters
+      tags:
+        - Reports
+      operationId: updateReport
+      security:
+        - AuthToken: []
+      parameters:
+        - in: path
+          name: reportId
+          type: string
+          required: true
+          description: report id
+        - in: body
+          name: report
+          schema:
+            type: object
+            $ref: '#/definitions/updateReportParams'
+          required: true
+          description: report parameters
+      responses:
+        200:
+          $ref: "#/responses/reportResponse"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Update report forbidden"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        404:
+          description: "Report not found"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        422:
+          description: "presetId is required and must be a valid UUID"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+    delete:
+      summary: Delete report
+      description: Deletes report from user
+      tags:
+        - Reports
+      operationId: deleteReport
+      security:
+        - AuthToken: []
+      parameters:
+        - in: path
+          name: reportId
+          type: string
+          required: true
+          description: report id
+      responses:
+        204:
+          description: "Report successfully deleted"
+        400:
+          description: "Invalid delete report arguments"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Delete report forbidden"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        404:
+          description: "Report not found"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+  /reports/{reportId}/content:
+    get:
+      summary: Get report content
+      description: Gets report content
+      tags:
+        - Reports
+      operationId: getReportContent
+      security:
+        - AuthToken: []
+      parameters:
+        - in: path
+          name: reportId
+          type: string
+          required: true
+          description: report id
+      responses:
+        200:
+          $ref: "#/responses/reportContentResponse"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Get report content forbidden"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        404:
+          description: "Report not found"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /reports/{reportId}/template:
+    get:
+      summary: Get report template
+      description: Gets report template
+      tags:
+        - Reports
+      operationId: getReportTemplate
+      security:
+        - AuthToken: []
+      parameters:
+        - in: path
+          name: reportId
+          type: string
+          required: true
+          description: report id
+      responses:
+        200:
+          $ref: "#/responses/reportTemplateResponse"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Get report template forbidden"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        404:
+          description: "Report not found"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /users/{userId}/reports:
+    get:
+      summary: Get user reports
+      description: Gets user reports
+      tags:
+        - Reports
+      operationId: getUserReports
+      security:
+        - AuthToken: []
+      parameters:
+        - in: path
+          name: userId
+          type: string
+          required: true
+          description: user id
+        - in: query
+          name: lang
+          type: string
+          required: false
+          description: language for report group name
+      responses:
+        200:
+          $ref: "#/responses/reportsSummaryListResponse"
+        401:
+          description: "Indicates that request was not authorized"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+  /secured/teams/{teamId}/users/{userId}/reports:
+    post:
+      summary: Get user reports
+      description: Gets user reports
+      tags:
+        - Reports
+      operationId: securedGetUserReports
+      security: [ ]
+      parameters:
+        - in: path
+          name: userId
+          type: string
+          required: true
+          description: user id
+        - in: path
+          name: teamId
+          type: string
+          required: true
+          description: team id
+        - in: body
+          name: reports
+          schema:
+            type: object
+            $ref: '#/definitions/reports'
+          required: false
+          description: reports list
+      responses:
+        200:
+          $ref: "#/responses/reportsListResponse"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /secured/reports/vendor/{vendor}:
+    post:
+      summary: Change reports vendor
+      description: Updates the vendor for reports.
+      operationId: changeReportsVendor
+      tags:
+        - Reports
+      parameters:
+        - name: vendor
+          in: path
+          description: The new vendor name for reports.
+          required: true
+          type: string
+      responses:
+        '204':
+          description: Reports vendor changed successfully
+        '400':
+          description: Invalid vendor name or request format
+          schema:
+            $ref: '#/definitions/error'
+        '500':
+          description: Internal error during request processing
+          schema:
+            $ref: '#/definitions/error'
+
+  /dashboards:
+    get:
+      summary: Get predefined dashboards
+      description: Gets predefined dashboards
+      tags:
+        - Dashboards
+      operationId: getPredefinedDashboards
+      security:
+        - AuthToken: []
+      parameters:
+        - in: query
+          name: q
+          type: string
+          required: false
+          description: search phrase
+        - in: query
+          name: lang
+          type: string
+          required: false
+          description: language for search phrase
+        - in: query
+          name: page
+          type: integer
+          required: false
+          description: page number
+        - in: query
+          name: rowsPerPage
+          type: integer
+          required: false
+          description: rows count per page
+      responses:
+        200:
+          $ref: "#/responses/dashboardsInfoListResponse"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Get predefined dashboards forbidden"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+    post:
+      summary: Create dashboard
+      description: Creates a new dashboard
+      tags:
+        - Dashboards
+      operationId: createDashboard
+      security:
+        - AuthToken: []
+      parameters:
+        - in: body
+          name: dashboard
+          schema:
+            type: object
+            $ref: '#/definitions/dashboardParams'
+          required: true
+          description: dashboard parameters
+      responses:
+        200:
+          $ref: "#/responses/dashboardResponse"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Create dashboard forbidden"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /dashboards/{dashboardId}:
+    get:
+      summary: Get dashboard
+      description: Gets dashboard
+      tags:
+        - Dashboards
+      operationId: getDashboard
+      security:
+        - AuthToken: []
+      parameters:
+        - in: path
+          name: dashboardId
+          type: string
+          required: true
+          description: dashboard id
+      responses:
+        200:
+          $ref: "#/responses/dashboardResponse"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Get dashboard forbidden"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        404:
+          description: "Dashboard not found"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+    put:
+      summary: Update dashboard
+      description: Updates dashboard parameters
+      tags:
+        - Dashboards
+      operationId: updateDashboard
+      security:
+        - AuthToken: []
+      parameters:
+        - in: path
+          name: dashboardId
+          type: string
+          required: true
+          description: dashboard id
+        - in: body
+          name: dashboard
+          schema:
+            type: object
+            $ref: '#/definitions/dashboardParams'
+          required: true
+          description: dashboard parameters
+      responses:
+        200:
+          $ref: "#/responses/dashboardResponse"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Update dashboard forbidden"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        404:
+          description: "Dashboard not found"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+    delete:
+      summary: Delete dashboard
+      description: Deletes dashboard from user
+      tags:
+        - Dashboards
+      operationId: deleteDashboard
+      security:
+        - AuthToken: []
+      parameters:
+        - in: path
+          name: dashboardId
+          type: string
+          required: true
+          description: dashboard id
+      responses:
+        204:
+          description: "Dashboard successfully deleted"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Delete dashboard forbidden"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        404:
+          description: "Dashboard not found"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /dashboards/{dashboardId}/fork:
+    put:
+      summary: Fork dashboard
+      description: Fork dashboard to user
+      tags:
+        - Dashboards
+      operationId: forkDashboard
+      security:
+        - AuthToken: []
+      parameters:
+        - in: path
+          name: dashboardId
+          type: string
+          required: true
+          description: dashboard id
+      responses:
+        200:
+          $ref: "#/responses/dashboardResponse"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Fork dashboard forbidden"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        404:
+          description: "Dashboard not found"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /dashboards/{dashboardId}/clone:
+    put:
+      summary: Clone dashboard
+      description: Clone dashboard to user
+      tags:
+        - Dashboards
+      operationId: cloneDashboard
+      security:
+        - AuthToken: []
+      parameters:
+        - in: path
+          name: dashboardId
+          type: string
+          required: true
+          description: dashboard id
+      responses:
+        200:
+          $ref: "#/responses/dashboardResponse"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Clone dashboard forbidden"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        404:
+          description: "Dashboard not found"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /dashboards/{dashboardId}/install:
+    put:
+      summary: Install dashboard
+      description: Install dashboard to user
+      tags:
+        - Dashboards
+      operationId: installDashboard
+      security:
+        - AuthToken: []
+      parameters:
+        - in: path
+          name: dashboardId
+          type: string
+          required: true
+          description: dashboard id
+      responses:
+        200:
+          $ref: "#/responses/dashboardResponse"
+        400:
+          description: "Install own dashboard"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Install dashboard forbidden"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        404:
+          description: "Dashboard not found"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /dashboards/{dashboardId}/uninstall:
+    put:
+      summary: Uninstall dashboard
+      description: Uninstall dashboard to user
+      tags:
+        - Dashboards
+      operationId: uninstallDashboard
+      security:
+        - AuthToken: [ ]
+      parameters:
+        - in: path
+          name: dashboardId
+          type: string
+          required: true
+          description: dashboard id
+      responses:
+        200:
+          description: "Dashboard was successfully uninstalled"
+        400:
+          description: "Uninstall own dashboard"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Uninstall dashboard forbidden"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        404:
+          description: "Dashboard not found"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /dashboards/{dashboardId}/service:
+    post:
+      summary: Set dashboard to service mode on/off
+      description: Set dashboard to service mode on/off
+      tags:
+        - Dashboards
+      operationId: serviceDashboard
+      security:
+        - AuthToken: []
+      parameters:
+        - in: path
+          name: dashboardId
+          type: string
+          required: true
+          description: dashboard id
+        - in: body
+          name: body
+          schema:
+            type: object
+            properties:
+              serviceMode:
+                type: boolean
+          required: true
+          description: service mode value
+      responses:
+        200:
+          description: "OK"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Service dashboard forbidden"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        404:
+          description: "Dashboard not found"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /dashboards/{dashboardId}/users:
+    get:
+      summary: Get dashboard users
+      description: Get dashboard users
+      tags:
+        - Dashboards
+      operationId: getDashboardUsers
+      security:
+        - AuthToken: []
+      parameters:
+        - in: path
+          name: dashboardId
+          type: string
+          required: true
+          description: dashboard id
+      responses:
+        200:
+          $ref: "#/responses/dashboardUsersResponse"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Get dashboard users forbidden"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        404:
+          description: "Dashboard not found"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /dashboards/{dashboardId}/share:
+    post:
+      summary: Share or unshare dashboard with selected users
+      description: Share dashboard with selected users and/or remove dashboard access from other users
+      tags:
+        - Dashboards
+      operationId: manageDashboardSharing
+      security:
+        - AuthToken: []
+      parameters:
+        - in: path
+          name: dashboardId
+          type: string
+          required: true
+          description: dashboard id
+        - in: body
+          name: shareRequest
+          schema:
+            type: object
+            $ref: '#/definitions/dashboardShareRequest'
+          required: true
+          description: dashboard sharing request
+      responses:
+        200:
+          description: "OK"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Share dashboard forbidden"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        404:
+          description: "Dashboard not found"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /secured/dashboards/{dashboardId}:
+    get:
+      summary: Get dashboard
+      description: Gets dashboard by id
+      tags:
+        - Dashboards
+      operationId: securedGetDashboard
+      parameters:
+        - in: path
+          name: dashboardId
+          type: string
+          required: true
+          description: dashboard id
+      responses:
+        200:
+          $ref: "#/responses/dashboardResponse"
+        404:
+          description: "Dashboard not found"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /users/{userId}/dashboards:
+    get:
+      summary: Get user dashboards
+      description: Gets user dashboards
+      tags:
+        - Dashboards
+      operationId: getUserDashboards
+      security:
+        - AuthToken: []
+      parameters:
+        - in: path
+          name: userId
+          type: string
+          required: true
+          description: user id
+      responses:
+        200:
+          $ref: "#/responses/dashboardsListResponse"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Get user dashboards forbidden"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /secured/users/{userId}/reports/{reportId}/filters:
+    get:
+      summary: Get user report filters
+      description: Get user report filters or predefined filters if not exist
+      tags:
+        - Reports
+      operationId: securedGetUserReportFilters
+      parameters:
+        - in: path
+          name: reportId
+          type: string
+          required: true
+          description: report id
+        - in: path
+          name: userId
+          type: string
+          required: true
+          description: user id
+      responses:
+        200:
+          $ref: "#/responses/reportContentResponse"
+        401:
+          description: "Indicates that request was not authorized"
+        404:
+          description: "Report filter not found"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+  /reports/{reportId}/filters:
+    get:
+      summary: Get user report filters
+      description: Get user report filters or predefined filters if not exist
+      tags:
+        - Reports
+      operationId: getUserReportFilters
+      security:
+        - AuthToken: [ ]
+      parameters:
+        - in: path
+          name: reportId
+          type: string
+          required: true
+          description: report id
+      responses:
+        200:
+          $ref: "#/responses/reportContentResponse"
+        401:
+          description: "Indicates that request was not authorized"
+        404:
+          description: "Report filter not found"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+    put:
+      summary: Edit report filters
+      description: Edit user report's filter or creates new one if not exist
+      tags:
+        - Reports
+      operationId: editReportFilters
+      security:
+        - AuthToken: [ ]
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: object
+          required: true
+          description: filters for report
+        - in: path
+          name: reportId
+          type: string
+          required: true
+          description: report id
+      responses:
+        204:
+          description: "Indicates that report filter was successfully updated"
+        401:
+          description: "Indicates that request was not authorized"
+        404:
+          description: "Report not found"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+  /{reportId}/template:
+    get:
+      summary: Get user report template
+      description: Get user report template
+      tags:
+        - Reports
+      operationId: getUserReportTemplate
+      security:
+        - AuthToken: [ ]
+      parameters:
+        - in: path
+          name: reportId
+          type: string
+          required: true
+          description: report id
+      responses:
+        200:
+          $ref: "#/responses/reportTemplateResponse"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Get report template forbidden"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+  /secured/users/{userId}/reports/{reportId}/template:
+    get:
+      summary: Get user report template
+      description: Get user report template
+      tags:
+        - Reports
+      operationId: securedGetUserReportTemplate
+      parameters:
+        - in: path
+          name: reportId
+          type: string
+          required: true
+          description: report id
+        - in: path
+          name: userId
+          type: string
+          required: true
+          description: user id
+      responses:
+        200:
+          $ref: "#/responses/reportTemplateResponse"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Get report template forbidden"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+  /secured/auth/axxonnet:
+    get:
+      summary: Get authentication claims by token or user ID from AxxonNet
+      description: Returns AxxonData user authentication claims by token or user ID from AxxonNet
+      tags:
+        - Private
+      operationId: getAuthClaims
+      parameters:
+        - in: query
+          name: token
+          type: string
+          required: false
+          description: user or domain token from AxxonNet
+        - in: query
+          name: userId
+          type: integer
+          required: false
+          description: user ID at AxxonNet
+      responses:
+        200:
+          $ref: "#/responses/authClaimsResponse"
+        401:
+          description: "Authentication failed"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+  /domains/{domainId}/cameras:
+    get:
+      summary: Get cameras with detectors for specified domain
+      description: Gets cameras with detectors for specified domain
+      tags:
+        - Domains
+      operationId: getDomainCameras
+      security:
+        - AuthToken: [ ]
+      parameters:
+        - in: path
+          name: domainId
+          type: integer
+          format: int64
+          required: true
+          description: domain id
+      responses:
+        200:
+          $ref: "#/responses/domainCamerasResponse"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Get domain cameras forbidden"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /monitoring:
+    get:
+      summary: Get monitoring list
+      description: Gets monitoring list
+      tags:
+        - Monitoring
+      operationId: getMonitoringList
+      security:
+        - AuthToken: [ ]
+      responses:
+        200:
+          $ref: "#/responses/monitoringListResponse"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Get monitoring list forbidden"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+    post:
+      summary: Create monitoring
+      description: Creates a new monitoring
+      tags:
+        - Monitoring
+      operationId: createMonitoring
+      security:
+        - AuthToken: [ ]
+      parameters:
+        - in: body
+          name: monitoring
+          schema:
+            type: object
+            $ref: '#/definitions/monitoringParams'
+          required: true
+          description: monitoring parameters
+      responses:
+        200:
+          $ref: "#/responses/monitoringCreateResponse"
+        400:
+          description: "Bad request"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Create monitoring forbidden"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /monitoring/public:
+    get:
+      summary: Get public monitoring list
+      description: Gets public monitoring list
+      tags:
+        - Monitoring
+      operationId: getPublicMonitoringList
+      security:
+        - AuthToken: [ ]
+      responses:
+        200:
+          $ref: "#/responses/monitoringListResponse"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Get public monitoring list forbidden"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /monitoring/install:
+    post:
+      summary: Install monitoring
+      description: Installs public monitoring for user
+      tags:
+        - Monitoring
+      operationId: installMonitoring
+      security:
+        - AuthToken: [ ]
+      parameters:
+        - in: body
+          name: monitoring
+          schema:
+            type: object
+            properties:
+              monitoringId:
+                type: string
+            required:
+              - monitoringId
+          required: true
+          description: monitoring id
+      responses:
+        204:
+          description: "Monitoring successfully installed"
+        400:
+          description: "Bad request"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Install monitoring forbidden"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+
+  /monitoring/uninstall:
+    post:
+      summary: Uninstall monitoring
+      description: Uninstalls monitoring for user
+      tags:
+        - Monitoring
+      operationId: uninstallMonitoring
+      security:
+        - AuthToken: [ ]
+      parameters:
+        - in: body
+          name: monitoring
+          schema:
+            type: object
+            properties:
+              monitoringId:
+                type: string
+            required:
+              - monitoringId
+          required: true
+          description: monitoring id
+      responses:
+        204:
+          description: "Monitoring successfully uninstalled"
+        400:
+          description: "Bad request"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Uninstall monitoring forbidden"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        404:
+          description: "Monitoring not found"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /monitoring/{monitoringId}:
+    put:
+      summary: Update monitoring
+      description: Updates monitoring parameters
+      tags:
+        - Monitoring
+      operationId: updateMonitoring
+      security:
+        - AuthToken: [ ]
+      parameters:
+        - in: path
+          name: monitoringId
+          type: string
+          required: true
+          description: monitoring id
+        - in: body
+          name: monitoring
+          schema:
+            type: object
+            $ref: '#/definitions/monitoringParams'
+          required: true
+          description: monitoring parameters
+      responses:
+        200:
+          $ref: "#/responses/monitoringResponse"
+        400:
+          description: "Bad request"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Update monitoring forbidden"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        404:
+          description: "Monitoring not found"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+    delete:
+      summary: Delete monitoring
+      description: Deletes monitoring from user
+      tags:
+        - Monitoring
+      operationId: deleteMonitoring
+      security:
+        - AuthToken: [ ]
+      parameters:
+        - in: path
+          name: monitoringId
+          type: string
+          required: true
+          description: monitoring id
+      responses:
+        204:
+          description: "Monitoring successfully deleted"
+        401:
+          description: "Indicates that request was not authorized"
+        403:
+          description: "Delete monitoring forbidden"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        404:
+          description: "Monitoring not found"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+  /dashboards/parking/templates:
+    get:
+      summary: Get parking templates
+      description: Gets parking templates
+      tags:
+        - Dashboards
+      operationId: getParkingTemplates
+      security:
+        - AuthToken: []
+      responses:
+        200:
+          $ref: "#/responses/parkingTemplatesResponse"
+        401:
+          description: "Indicates that request was not authorized"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+    post:
+      summary: Create parking template
+      description: Creates a new parking template
+      tags:
+        - Dashboards
+      operationId: createParkingTemplate
+      security:
+        - AuthToken: []
+      parameters:
+        - in: body
+          name: parkingTemplate
+          schema:
+            type: object
+            $ref: "#/definitions/parkingTemplateParams"
+          required: true
+          description: parking template parameters
+      responses:
+        201:
+          description: "Parking template uuid"
+          schema:
+            type: string
+        401:
+          description: "Indicates that request was not authorized"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+    delete:
+      summary: Delete parking template
+      description: Deletes parking template
+      tags:
+        - Dashboards
+      operationId: deleteParkingTemplate
+      security:
+        - AuthToken: []
+      parameters:
+        - in: query
+          name: id
+          type: string
+          required: true
+          description: template id
+          format: uuid
+      responses:
+        204:
+          description: "Parking template successfully deleted"
+        401:
+          description: "Indicates that request was not authorized"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+    put:
+      summary: Update parking template
+      description: Updates parking template
+      tags:
+        - Dashboards
+      operationId: updateParkingTemplate
+      security:
+        - AuthToken: []
+      parameters:
+        - in: query
+          name: id
+          type: string
+          required: true
+          description: template id
+          format: uuid
+        - in: body
+          name: parkingTemplate
+          schema:
+            type: object
+            $ref: "#/definitions/parkingTemplateParams"
+          required: true
+          description: parking template parameters
+      responses:
+        204:
+          description: "Parking template successfully updated"
+        401:
+          description: "Indicates that request was not authorized"
+        500:
+          description: "Internal error during request processing"
+          schema:
+            type: object
+            $ref: "#/definitions/error"
+
+
+
+securityDefinitions:
+  AuthToken:
+    type: apiKey
+    in: header
+    name: Authorization
+
+definitions:
+  error:
+    description: "API call error result"
+    type: object
+    properties:
+      message:
+        type: string
+    required:
+      - message
+  userInfo:
+    description: "logged user info"
+    type: object
+    properties:
+      canCreateReports:
+        type: boolean
+      localMode:
+        type: boolean
+      userId:
+        type: string
+    required:
+      - canCreateReports
+      - localMode
+      - userId
+  shareTokenInfo:
+    description: "share token info"
+    type: object
+    properties:
+      shareToken:
+        type: string
+    required:
+      - shareToken
+  widget:
+    description: "Widget object"
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      description:
+        type: string
+      type:
+        type: string
+      properties:
+        type: object
+      needUpdate:
+        type: boolean
+    required:
+      - id
+      - name
+      - description
+      - type
+      - properties
+
+  widgetParams:
+    description: "Widget create/update parameters"
+    type: object
+    properties:
+      name:
+        type: string
+      description:
+        type: string
+      type:
+        type: string
+      properties:
+        type: object
+    required:
+      - name
+      - description
+      - type
+      - properties
+
+  widgetsList:
+    description: "Widgets objects list"
+    type: array
+    items:
+      $ref: "#/definitions/widget"
+
+  createReportParams:
+    description: "Report create parameters"
+    type: object
+    properties:
+      name:
+        type: string
+      content:
+        type: object
+      template:
+        type: string
+      presetId:
+        type: string
+        format: uuid
+      groupId:
+        type: string
+    required:
+      - name
+      - presetId
+
+  updateReportParams:
+    description: "Update report parameters"
+    type: object
+    properties:
+      name:
+        type: string
+      content:
+        type: object
+      template:
+        type: string
+      presetId:
+        type: string
+      groupId:
+        type: string
+    required:
+      - name
+
+  report:
+    description: "Report object"
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      content:
+        type: object
+      template:
+        type: string
+      presetId:
+        type: string
+      canBeUpdated:
+        type: boolean
+      canBeDeleted:
+        type: boolean
+      needUpdate:
+        type: boolean
+      groupId:
+        type: string
+      groupName:
+        type: string
+    required:
+      - id
+      - name
+      - content
+      - template
+      - canBeUpdated
+      - canBeDeleted
+
+  reportSummary:
+    description: "Report summary"
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      canBeUpdated:
+        type: boolean
+      canBeDeleted:
+        type: boolean
+      needUpdate:
+        type: boolean
+      presetId:
+        type: string
+      groupId:
+        type: string
+      groupName:
+        type: string
+    required:
+      - id
+      - name
+      - canBeUpdated
+      - canBeDeleted
+      - needUpdate
+
+  reportsSummaryList:
+    description: "Reports summary objects list"
+    type: array
+    items:
+      $ref: "#/definitions/reportSummary"
+
+  reportsList:
+    description: "Reports list"
+    type: array
+    items:
+      $ref: "#/definitions/report"
+
+  commonResponse:
+    description: "Backend service common response"
+    type: object
+    properties:
+      status:
+        type: integer
+      result:
+        type: object
+      error:
+        type: string
+
+  permissions:
+    description: "Permissions flags for role"
+    type: object
+    properties:
+      read:
+        type: boolean
+      update:
+        type: boolean
+      delete:
+        type: boolean
+
+  dashboardInfo:
+    description: "Dashboard info"
+    type: object
+    properties:
+      id:
+        type: string
+      title:
+        type: string
+      description:
+        type: string
+      tags:
+        type: string
+      lang:
+        type: string
+      revision:
+        type: string
+      forkId:
+        type: string
+      forkRevision:
+        type: string
+      public:
+        type: boolean
+      serviceMode:
+        type: boolean
+      ownerId:
+        type: string
+      ownerName:
+        type: string
+      downloads:
+        type: integer
+        format: int64
+      trend:
+        type: integer
+        format: int64
+    required:
+      - id
+      - title
+      - description
+      - tags
+      - lang
+      - revision
+      - serviceMode
+      - downloads
+      - trend
+
+  dashboardInfoList:
+    description: "Dashboard info objects list"
+    type: array
+    items:
+      $ref: "#/definitions/dashboardInfo"
+
+  dashboardList:
+    description: "Dashboard objects list"
+    type: array
+    items:
+      $ref: "#/definitions/dashboard"
+
+  monitoringList:
+    description: "Monitoring objects list"
+    type: array
+    items:
+      $ref: "#/definitions/monitoring"
+
+  domainCamerasList:
+    description: "Domain cameras list"
+    type: array
+    items:
+      $ref: "#/definitions/domainCamera"
+
+  domainCamera:
+    description: "Domain camera with detectors"
+    type: object
+    properties:
+      accessPoint:
+        type: string
+      detectors:
+        type: array
+        items:
+          type: string
+
+  dashboardParams:
+    description: "Dashboard create/update parameters"
+    type: object
+    properties:
+      title:
+        type: string
+      description:
+        type: string
+      tags:
+        type: string
+      lang:
+        type: string
+      version:
+        type: integer
+        format: int64
+      revision:
+        type: string
+      forkId:
+        type: string
+      forkRevision:
+        type: string
+      public:
+        type: boolean
+      serviceMode:
+        type: boolean
+      widgets:
+        type: object
+      layout:
+        type: object
+      style:
+        type: object
+      commonFilter:
+        type: boolean
+      commonFilterValue:
+        type: object
+    required:
+      - title
+      - description
+      - tags
+      - lang
+      - version
+      - revision
+  dashboard:
+    description: "Dashboard object"
+    type: object
+    properties:
+      id:
+        type: string
+      title:
+        type: string
+      description:
+        type: string
+      tags:
+        type: string
+      lang:
+        type: string
+      version:
+        type: integer
+        format: int64
+      revision:
+        type: string
+      forkId:
+        type: string
+      forkRevision:
+        type: string
+      public:
+        type: boolean
+      owner:
+        type: boolean
+      widgets:
+        type: object
+      layout:
+        type: object
+      style:
+        type: object
+      commonFilter:
+        type: boolean
+      commonFilterValue:
+        type: object
+      serviceMode:
+        type: boolean
+      installed:
+        type: boolean
+      updateInstalled:
+        type: boolean
+    required:
+      - id
+      - title
+      - description
+      - tags
+      - lang
+      - version
+      - revision
+      - owner
+      - serviceMode
+
+  monitoringParams:
+    description: "Monitoring create/update parameters"
+    type: object
+    properties:
+      title:
+        type: string
+      description:
+        type: string
+      layout:
+        type: object
+      widgets:
+        type: object
+      public:
+        type: boolean
+    required:
+      - title
+      - description
+  monitoring:
+    description: "Monitoring object"
+    type: object
+    properties:
+      id:
+        type: string
+      title:
+        type: string
+      description:
+        type: string
+      layout:
+        type: object
+      widgets:
+        type: object
+      public:
+        type: boolean
+    required:
+      - id
+      - title
+      - description
+
+  reports:
+    type: object
+    properties:
+      ids:
+        type: array
+        items:
+          type: string
+
+  dashboardUsers:
+    description: "Dashboard users list"
+    type: array
+    items:
+      type: integer
+      format: int64
+
+  dashboardShareRequest:
+    description: "Dashboard share request parameters"
+    type: object
+    properties:
+      shareWithUsers:
+        description: "User IDs to share dashboard with"
+        type: array
+        items:
+          type: integer
+          format: int64
+      removeFromUsers:
+        description: "User IDs to remove dashboard access from"
+        type: array
+        items:
+          type: integer
+          format: int64
+
+  authClaims:
+    type: object
+    properties:
+      userId:
+        type: string
+      userCloudId:
+        type: integer
+      teamId:
+        type: string
+      teamName:
+        type: string
+      teamCloudId:
+        type: integer
+      domainId:
+        type: integer
+      domains:
+        type: array
+        items:
+          type: integer
+      tokenType:
+        type: string
+      permissions:
+        type: object
+        properties:
+          canReports:
+            type: boolean
+          canViewDashboards:
+            type: boolean
+          canCreateDashboards:
+            type: boolean
+          canLoadDashboards:
+            type: boolean
+          canEditDashboards:
+            type: boolean
+          canExportDashboards:
+            type: boolean
+          canImportDashboards:
+            type: boolean
+          canShareDashboards:
+            type: boolean
+          canViewDashboardsInMarketplace:
+            type: boolean
+          canEditDashboardsInMarketplace:
+            type: boolean
+          canViewFullAudit:
+            type: boolean
+          canViewMonitoring:
+            type: boolean
+          canEditMonitoring:
+            type: boolean
+          canViewRecognitionLog:
+            type: boolean
+    required:
+      - teamId
+      - tokenType
+
+  parkingTemplateParams:
+    description: "Parking template create/update parameters"
+    type: object
+    properties:
+      name:
+        type: string
+      licensePlates:
+        type: array
+        items:
+          type: string
+      exitCameras:
+        type: array
+        items:
+          type: string
+      entryCameras:
+        type: array
+        items:
+          type: string
+      periodType:
+        type: string
+      periodFrom:
+        type: string
+      periodTo:
+        type: string
+
+  parkingTemplate:
+    description: "Parking template object"
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      licensePlates:
+        type: array
+        items:
+          type: string
+      exitCameras:
+        type: array
+        items:
+          type: string
+      entryCameras:
+        type: array
+        items:
+          type: string
+      periodType:
+        type: string
+      periodFrom:
+        type: string
+      periodTo:
+        type: string
+
+responses:
+  versionInfo:
+    description: "Indicates that was successfully returned version information from AxxonData"
+    schema:
+      type: object
+      properties:
+        planKey:
+          type: string
+        branchName:
+          type: string
+        buildNumber:
+          type: string
+        revisionNumber:
+          type: string
+  userInfoResponse:
+    description: "Logged user info"
+    schema:
+      type: object
+      $ref: "#/definitions/userInfo"
+  shareTokenResponse:
+    description: "Share token info"
+    schema:
+      type: object
+      $ref: "#/definitions/shareTokenInfo"
+  widgetResponse:
+    description: "Widget object"
+    schema:
+      type: object
+      $ref: "#/definitions/widget"
+  widgetsListResponse:
+    description: "Widgets list response"
+    schema:
+      type: object
+      $ref: "#/definitions/widgetsList"
+  reportResponse:
+    description: "Report object"
+    schema:
+      type: object
+      $ref: "#/definitions/report"
+  reportContentResponse:
+    description: "Report content"
+    schema:
+      type: object
+      $ref: "#/definitions/commonResponse"
+  reportTemplateResponse:
+    description: "Report template"
+    schema:
+      type: object
+      $ref: "#/definitions/commonResponse"
+  reportsSummaryListResponse:
+    description: "Reports summary list"
+    schema:
+      type: object
+      $ref: "#/definitions/reportsSummaryList"
+  reportsListResponse:
+    description: "Reports list"
+    schema:
+      type: object
+      $ref: "#/definitions/reportsList"
+  systemModeResponse:
+    description: "Contains information about mode of running system (local or cloud)"
+    schema:
+      type: object
+      properties:
+        mode:
+          type: string
+  dashboardsInfoListResponse:
+    description: "Dashboards info list"
+    schema:
+      type: object
+      properties:
+        result:
+          $ref: "#/definitions/dashboardInfoList"
+        total:
+          type: integer
+          format: int64
+  dashboardResponse:
+    description: "Dashboard object"
+    schema:
+      type: object
+      $ref: "#/definitions/dashboard"
+  dashboardsListResponse:
+    description: "Dashboards list"
+    schema:
+      type: object
+      $ref: "#/definitions/dashboardList"
+  authClaimsResponse:
+    description: "Authorization claims"
+    schema:
+      type: object
+      $ref: "#/definitions/authClaims"
+  domainCamerasResponse:
+    description: "Domain cameras"
+    schema:
+      type: object
+      $ref: "#/definitions/domainCamerasList"
+  monitoringListResponse:
+    description: "Monitoring list"
+    schema:
+      type: object
+      $ref: "#/definitions/monitoringList"
+  monitoringCreateResponse:
+    description: "Create monitoring object"
+    schema:
+      type: object
+      properties:
+        id:
+          type: string
+  monitoringResponse:
+    description: "Monitoring object"
+    schema:
+      type: object
+      $ref: "#/definitions/monitoring"
+  dashboardUsersResponse:
+    description: "Dashboard users"
+    schema:
+      type: object
+      $ref: "#/definitions/dashboardUsers"
+  parkingTemplatesResponse:
+    description: "Parking templates list"
+    schema:
+      type: array
+      items:
+        $ref: "#/definitions/parkingTemplate"
