@@ -43,6 +43,7 @@ Base URL for ac-backend builders: `https://{host}/api/v3/ac-backend`
 | `DomainsApi.regions` | GET | `/domains/regions` | `DomainRegions` |
 | `DomainsApi.webClientURL` | GET | `/public/domains/{domainId}/webclienturl` | `PublicWebClientURL` |
 | `DomainsApi.update` | PATCH | `/domains/{domainId}` | `Domain` |
+| `DomainsApi.sites` | GET | `/domains/{domainId}/sites` | `[CloudSite]` |
 | `DescriptionApi.about` | GET | `/about` | `OK` |
 | `DescriptionApi.settings` | GET | `/settings` | `Settings` |
 | `DiagnosticsApi.summary` | GET | `/diagnostics/summary` | `[DomainObjectsAmount]` |
@@ -92,6 +93,7 @@ Query models use typed enums (`EventTableName`, `EventFieldName`, `TimePeriodKin
 ### Models
 
 - **`DomainResponseItem` / `DomainResponse`** — domain list and detail wrappers with nested `Domain` and `Permission`.
+- **`CloudSite`** — cloud branch sites under a domain (`GET domains/{domainId}/sites`). Flat list with numeric ids; **not** VMS camera groups (`OneGroup` / `GET /v1/groups/list`).
 - **`DomainsListWithGroups`**, **`DomainGroup`**, **`DomainRegions`**, **`DomainVMSVersion`** — tree, regions, VMS versions.
 - **`UserWithPermissions`** — JWT `permission` string decoded to `[String: Bool]`; use `UserGlobalPermission` for known keys.
 - **`Permission`** — per-domain CRUD flags (distinct from global JWT permissions).
@@ -111,7 +113,10 @@ import OneCloud
 
 let request: Request<DomainResponse> = DomainsApi.list(limit: 50)
 let domain: Request<DomainResponseItem> = DomainsApi.get(domainId: 1274)
+let sites: Request<[CloudSite]> = DomainsApi.sites(domainId: 8)
 ```
+
+**Sites vs VMS groups:** `DomainsApi.sites` returns cloud branch entities ("Device groups" web cloud ui). VMS camera groups live on Native BL (`OneGroup`, `GET /v1/groups/list`).
 
 ### OneCloudData
 
@@ -251,6 +256,7 @@ let shareToken: Request<ShareToken> = BackendApi.shareToken()
 Sources/OneCloud/
 ├── API/           DomainsApi, DescriptionApi, DiagnosticsApi, …
 ├── Domain/        Domain, DomainResponseItem, DomainResponse, …
+├── Site/          CloudSite (read-only branch list)
 ├── Permission/    Permission (per-domain)
 ├── User/          UserWithPermissions, User, UserGlobalPermission
 ├── Streaming/     StreamingInfo

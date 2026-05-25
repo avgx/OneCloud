@@ -71,4 +71,11 @@ public enum DomainsApi {
     public static func update(domainId: Int64, body: UpdateDomainBody) -> Request<Domain> {
         Request(path: "domains/\(domainId)", method: .patch, body: body)
     }
+
+    /// GET /domains/{domainId}/sites — cloud branch list ("Device groups" in axxoncloud-ui).
+    ///
+    /// Read-only list; not VMS camera groups (`OneGroup`).
+    public static func sites(domainId: Int64) -> Request<[CloudSite]> {
+        Request(path: "domains/\(domainId)/sites", method: .get)
+    }
 }

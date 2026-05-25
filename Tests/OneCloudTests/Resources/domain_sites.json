@@ -1,0 +1,32 @@
+[
+  {
+    "id": 101,
+    "name": "Branch A",
+    "description": "Main office",
+    "address": "123 Street",
+    "contacts": "admin@example.com",
+    "archiveDepth": 30,
+    "camerasCount": {
+      "withConstRecord": 5,
+      "withFaceDetector": 2,
+      "withTracker": 1
+    },
+    "status": "active"
+  },
+  {
+    "id": 102,
+    "name": "Branch B",
+    "description": "",
+    "address": "",
+    "contacts": "",
+    "archiveDepth": 14,
+    "camerasCount": {
+      "withConstRecord": 0
+    },
+    "status": "error",
+    "error": {
+      "description": "Provisioning failed",
+      "key": "site.error.provisioning"
+    }
+  }
+]

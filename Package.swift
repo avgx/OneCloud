@@ -26,7 +26,7 @@ let package = Package(
         .package(url: "https://github.com/avgx/SafeEnum", from: "1.0.0"),
         .package(url: "https://github.com/avgx/EncodeDecode", from: "1.0.2"),
         .package(url: "https://github.com/auth0/JWTDecode.swift", from: "4.0.0"),
-        .package(url: "https://github.com/avgx/JSONValue", from: "1.0.0"),
+        .package(url: "https://github.com/avgx/JSONValue", from: "1.0.1"),
     ],
     targets: [
         .target(
