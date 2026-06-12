@@ -8,15 +8,15 @@ public struct Domain: Codable, Equatable, Sendable, Identifiable {
     public let domainId: Int64
     public let name: String
     public let createTime: String
-    public let emailLimit: Int64
-    public let eventLimit: Int64
+    public let emailLimit: Int64?
+    public let eventLimit: Int64?
     public let isService: Bool
     public let isVisible: Bool
     public let licenseType: SafeEnum<ProductType>?
-    public let mmSize: Int64
+    public let mmSize: Int64?
     public let status: SafeEnum<Status>
     public let type: SafeEnum<DomainType>
-    public let userId: Int64
+    public let userId: Int64?
 
     public let description: String?
     public let region: String?
@@ -93,6 +93,7 @@ extension Domain {
         case start = "11"
         case free = "12"
         case enterprise = "13"
+        case universe = "Universe"
     }
 
     /// Domain connectivity (`status`).

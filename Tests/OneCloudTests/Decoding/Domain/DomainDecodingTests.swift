@@ -19,6 +19,13 @@ struct DomainDecodingTests {
     #expect(list.domains[0].domainNodeId == nil)
   }
 
+    @Test("decode domains list with no userId on one domain")
+    func domainsNoUserId() throws {
+      let page = try FixtureLoader.decode(DomainResponse.self, resource: "domains_no_userId")
+      #expect(page.totalCount > 0)
+    }
+
+    
   @Test("decode domains list pagination page 0 limit 2")
   func domainsPagingPage0() throws {
     let page = try FixtureLoader.decode(DomainResponse.self, resource: "domains_list_page0_limit2")

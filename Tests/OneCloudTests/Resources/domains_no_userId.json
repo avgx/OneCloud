@@ -1,0 +1,77 @@
+{
+  "countInPage": 2,
+  "domains": [
+    {
+      "domain": {
+        "cloudAuthority": "tpan1",
+        "cloudConnKey": "12_3_xicxsg",
+        "connServerName": "DS-SVR4",
+        "createTime": "2023-02-15T22:48:47.644234Z",
+        "domainId": 12,
+        "emailLimit": 100,
+        "eventLimit": 10000,
+        "failoverURL": "//example.com/12_3_xicxsg/failover/",
+        "isService": false,
+        "isVisible": true,
+        "licenseStatus": "LS_OK",
+        "licenseType": "Universe",
+        "mmSize": 1073741824,
+        "name": "DSSVR1",
+        "publicArpURL": "example.com/12_3_xicxsg/",
+        "publicURL": "//example.com/12_3_xicxsg/webclient/",
+        "status": "online",
+        "type": "vms/on-site",
+        "userId": 5,
+        "webClientURL": "//example.com/12_3_xicxsg/webclient/",
+        "webConfiguratorURL": "//example.com/12_3_xicxsg/webclient/configurator/"
+      },
+      "isSynced": true,
+      "permission": {
+        "canBeDeleted": true,
+        "canBindLPRListToDomainNode": true,
+        "canManageLPRList": true,
+        "canManagePolicies": true,
+        "canManageRoles": true,
+        "canRename": true,
+        "canSupervisor": true,
+        "canViewLPRList": true,
+        "canViewVmsRoleNames": true,
+        "canViewWebClient": true,
+        "canWebConfigurator": true
+      }
+    },
+    {
+      "domain": {
+        "cloudAuthority": "tpan1",
+        "cloudConnKey": "56_0_rhtpmq",
+        "connServerName": "TPATD1",
+        "createTime": "2023-08-03T12:20:30.509289Z",
+        "domainId": 56,
+        "isService": true,
+        "isVisible": false,
+        "name": "ServiceDomain-HjCXHcolmw",
+        "publicArpURL": "example.com/56_0_rhtpmq/",
+        "publicURL": "//example.com/56_0_rhtpmq/webclient/",
+        "status": "online",
+        "type": "vms/on-site",
+        "webClientURL": "//example.com/56_0_rhtpmq/webclient/",
+        "webConfiguratorURL": "//example.com/56_0_rhtpmq/webclient/configurator/"
+      },
+      "isSynced": true,
+      "permission": {
+        "canBeDeleted": true,
+        "canBindLPRListToDomainNode": true,
+        "canManageLPRList": true,
+        "canManagePolicies": true,
+        "canManageRoles": true,
+        "canRename": true,
+        "canSupervisor": true,
+        "canViewLPRList": true,
+        "canViewVmsRoleNames": true,
+        "canViewWebClient": true,
+        "canWebConfigurator": true
+      }
+    }
+  ],
+  "totalCount": 2
+}
