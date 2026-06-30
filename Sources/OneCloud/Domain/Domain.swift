@@ -102,14 +102,11 @@ extension Domain {
         case offline
     }
 
-    /// Domain product type (`type`).
-    public enum DomainType: String, Codable, Hashable, Sendable {
-        case vmsOnSite = "vms/on-site"
-        case vmsManaged = "vms/managed"
-        case vmsIntellect = "vms/intellect"
-    }
-
     public var isOnline: Bool {
         status.value == .online
+    }
+    
+    public var isVMS: Bool {
+        [DomainType.vmsManaged, DomainType.vmsOnSite ].contains(self.type.value)
     }
 }
