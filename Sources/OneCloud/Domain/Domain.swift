@@ -93,6 +93,8 @@ extension Domain {
         case start = "11"
         case free = "12"
         case enterprise = "13"
+        case unified = "15"
+        case professional = "Professional"
         case universe = "Universe"
     }
 
